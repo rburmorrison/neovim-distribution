@@ -6,15 +6,18 @@ return {
     vim.o.timeoutlen = 300
   end,
   config = function()
-    vim.keymap.set("t", "<Esc>", "<cmd>ToggleTerm<cr>", { remap = true })
+    -- Terminal Toggle
+    vim.keymap.set("i", "<C-t>", "<cmd>ToggleTerm direction=float<cr>", { remap = true })
+    vim.keymap.set("n", "<C-t>", "<cmd>ToggleTerm direction=float<cr>", { remap = true })
+    vim.keymap.set("t", "<C-t>", "<cmd>ToggleTerm direction=float<cr>", { remap = true })
 
     local wk = require("which-key")
 
+    -- Normal Bindings
     wk.register({
       o = {
         name = "open",
-        p = { "<cmd>Neotree toggle<cr>", "Neo-tree" },
-        t = { "<cmd>ToggleTerm direction=float<cr>", "Neo-tree" },
+        t = { "<cmd>Neotree toggle<cr>", "Neo-tree" },
       },
       f = {
         name = "find",
@@ -25,6 +28,7 @@ return {
       }
     }, { prefix = "<leader>" })
 
+    -- LSP Bindings
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("UserLspConfig", {}),
       callback = function()
