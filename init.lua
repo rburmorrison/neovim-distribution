@@ -2,6 +2,8 @@
 
 vim.g.mapleader = " "
 
+vim.opt.colorcolumn = "80,120"
+
 vim.opt.number         = true
 vim.opt.relativenumber = true
 
