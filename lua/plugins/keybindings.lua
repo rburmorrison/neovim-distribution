@@ -45,7 +45,7 @@ return {
             a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
             R = { "<cmd>Telescope lsp_references theme=dropdown<cr>", "References" },
             f = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format" },
-            p = { "<cmd>Telescope diagnostics theme=dropdown<cr>", "Format" },
+            p = { "<cmd>Telescope diagnostics theme=dropdown<cr>", "Diagnostics" },
           },
         }, { prefix = "<leader>" })
       end

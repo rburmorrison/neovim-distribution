@@ -1,12 +1,28 @@
 return {
   { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
   {
-    "navarasu/onedark.nvim",
-    lazy = false,
+    "catppuccin/nvim",
+    name = "catppuccin",
     priority = 1000,
     config = function()
-      require("onedark").load()
+      require("catppuccin").setup({
+        flavour = "mocha"
+      })
+
+      vim.cmd.colorscheme "catppuccin"
     end
+  },
+  {
+    "norcalli/nvim-colorizer.lua",
+    main = "colorizer",
+    opts = {
+      "css",
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact",
+      "html"
+    }
   },
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -48,6 +64,11 @@ return {
   },
   {
     "lewis6991/gitsigns.nvim",
+    config = true
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
     config = true
   }
 }
