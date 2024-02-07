@@ -58,6 +58,12 @@ return {
     end
   },
   {
+    "aznhe21/actions-preview.nvim",
+    opts = {
+      backend = { "telescope" },
+    }
+  },
+  {
     "akinsho/toggleterm.nvim",
     version = "*",
     config = true
@@ -69,6 +75,15 @@ return {
   {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
+    config = true
+  },
+  {
+    "numToStr/Comment.nvim",
+    config = true
+  },
+  {
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     config = true
   }
 }
