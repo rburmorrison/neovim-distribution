@@ -4,5 +4,6 @@ return {
     event = "InsertEnter",
     config = true
   },
-  "tpope/vim-fugitive"
+  "tpope/vim-fugitive",
+  "tpope/vim-surround",
 }
