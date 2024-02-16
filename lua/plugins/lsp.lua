@@ -57,16 +57,16 @@ return {
           })
         end,
         ["rust_analyzer"] = function()
-          local lspconfig = require("lspconfig")
-          lspconfig.rust_analyzer.setup({
-            settings = {
-              ["rust-analyzer"] = {
-                check = {
-                  command = "clippy"
-                }
-              }
-            }
-          })
+          -- local lspconfig = require("lspconfig")
+          -- lspconfig.rust_analyzer.setup({
+          --   settings = {
+          --     ["rust-analyzer"] = {
+          --       check = {
+          --         command = "clippy"
+          --       }
+          --     }
+          --   }
+          -- })
         end,
         ["lua_ls"] = function()
           local lspconfig = require("lspconfig")
@@ -80,6 +80,24 @@ return {
             }
           }
         end,
+      }
+    end
+  },
+  {
+    "mrcjkb/rustaceanvim",
+    version ="^4",
+    ft = { "rust" },
+    config = function()
+      vim.g.rustaceanvim = {
+        server = {
+          default_settings = {
+            ["rust-analyzer"] = {
+              check = {
+                command = "clippy"
+              }
+            }
+          }
+        }
       }
     end
   }
