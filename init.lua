@@ -12,6 +12,7 @@ vim.opt.tabstop    = 2
 vim.opt.expandtab  = true
 
 vim.opt.undofile = true
+vim.opt.termguicolors = true
 
 -- LSP Floating Window Appearance
 
@@ -50,3 +51,5 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins")
 require("ft-settings")
+
+vim.cmd[[colorscheme tokyonight-storm]]

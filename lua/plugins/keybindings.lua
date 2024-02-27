@@ -17,7 +17,7 @@ return {
     wk.register({
       o = {
         name = "open",
-        t = { "<cmd>Neotree toggle<cr>", "Neo-tree" },
+        t = { "<cmd>NvimTreeToggle<cr>", "NvimTree" },
       },
       f = {
         name = "find",

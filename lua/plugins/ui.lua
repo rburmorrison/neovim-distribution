@@ -1,16 +1,10 @@
 return {
   { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
+    "folke/tokyonight.nvim",
+    lazy = false,
     priority = 1000,
-    config = function()
-      require("catppuccin").setup({
-        flavour = "mocha"
-      })
-
-      vim.cmd.colorscheme "catppuccin"
-    end
+    config = true
   },
   {
     "norcalli/nvim-colorizer.lua",
@@ -25,16 +19,35 @@ return {
     }
   },
   {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    opts = {
+      options = {
+        theme = "tokyonight"
+      }
+    }
+  },
+  {
+    "nvim-tree/nvim-tree.lua",
     dependencies = {
-      "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons",
-      "MunifTanjim/nui.nvim",
     },
     config = function()
-      require("neo-tree").setup({
-        window = {
+      vim.g.loaded_netrw = 1
+      vim.g.loaded_netrwPlugin = 1
+
+      -- Close the buffer when it's the last one.
+      vim.api.nvim_create_autocmd("BufEnter", {
+        nested = true,
+        callback = function()
+          if #vim.api.nvim_list_wins() == 1 and require("nvim-tree.utils").is_nvim_tree_buf() then
+            vim.cmd "quit"
+          end
+        end
+      })
+
+      require("nvim-tree").setup({
+        view = {
           width = 30
         }
       })
