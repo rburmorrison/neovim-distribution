@@ -6,4 +6,5 @@ return {
   },
   "tpope/vim-fugitive",
   "tpope/vim-surround",
+  "easymotion/vim-easymotion"
 }
