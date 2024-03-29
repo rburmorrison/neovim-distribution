@@ -57,16 +57,7 @@ return {
           })
         end,
         ["rust_analyzer"] = function()
-          -- local lspconfig = require("lspconfig")
-          -- lspconfig.rust_analyzer.setup({
-          --   settings = {
-          --     ["rust-analyzer"] = {
-          --       check = {
-          --         command = "clippy"
-          --       }
-          --     }
-          --   }
-          -- })
+          -- Disabled for rustaceon.nvim to work.
         end,
         ["lua_ls"] = function()
           local lspconfig = require("lspconfig")
