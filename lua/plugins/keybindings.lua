@@ -26,7 +26,24 @@ return {
         b = { "<cmd>Telescope buffers theme=dropdown<cr>", "Buffers" },
         h = { "<cmd>Telescope help_tags theme=dropdown<cr>", "Help Tags" },
       },
-      ["<leader>"] = { "<Plug>(easymotion-prefix)", "easymotion" }
+      h = {
+        name = "hop",
+        w = { "<cmd>HopWord<cr>", "Word" },
+        c = { "<cmd>HopChar1<cr>", "Character" },
+        b = { "<cmd>HopChar2<cr>", "Bigram" },
+        p = { "<cmd>HopPattern<cr>", "Bigram" },
+        l = { "<cmd>HopLineStart<cr>", "Line" },
+        a = { "<cmd>HopAnywhere<cr>", "Anywhere" },
+        m = {
+          name = "multi-window",
+          w = { "<cmd>HopWordMW<cr>", "Word" },
+          c = { "<cmd>HopChar1MW<cr>", "Character" },
+          b = { "<cmd>HopChar2MW<cr>", "Bigram" },
+          p = { "<cmd>HopPatternMW<cr>", "Bigram" },
+          l = { "<cmd>HopLineStartMW<cr>", "Line" },
+          a = { "<cmd>HopAnywhereMW<cr>", "Anywhere" },
+        }
+      }
     }, { prefix = "<leader>" })
 
     wk.register({

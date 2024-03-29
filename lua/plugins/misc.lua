@@ -6,5 +6,9 @@ return {
   },
   "tpope/vim-fugitive",
   "tpope/vim-surround",
-  "easymotion/vim-easymotion"
+  {
+    "phaazon/hop.nvim",
+    version = "v2",
+    config = true
+  }
 }
