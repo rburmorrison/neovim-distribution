@@ -53,21 +53,3 @@ require("lazy").setup("plugins")
 require("ft-settings")
 
 vim.cmd[[colorscheme tokyonight-storm]]
-
--- Inlay Hints
---
--- Inlay hints are available as of v0.10.0.
-
-if vim.fn.has("nvim-0.10") == 1 then
-  if true then
-    vim.api.nvim_create_autocmd("LspAttach", {
-      group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-      callback = function(args)
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
-        if client.server_capabilities.inlayHintProvider then
-          vim.lsp.inlay_hint.enable(args.buf, true)
-        end
-      end
-    })
-  end
-end

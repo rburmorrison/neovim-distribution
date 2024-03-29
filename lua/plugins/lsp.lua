@@ -53,7 +53,19 @@ return {
       require("mason-lspconfig").setup_handlers {
         function(server_name)
           require("lspconfig")[server_name].setup({
-            capabilities = capabilities
+            capabilities = capabilities,
+            on_attach = function(client, bufnr)
+              -- General Inlay Hints
+              --
+              -- Inlay hints are available as of v0.10.0, so if the LSP in
+              -- question supports them and NeoVim is a high enough version,
+              -- support them.
+              if client.server_capabilities.inlayHintProvider then
+                if vim.fn.has("nvim-0.10") == 1 then
+                  vim.lsp.inlay_hint.enable(bufnr, true)
+                end
+              end
+            end
           })
         end,
         ["rust_analyzer"] = function()
@@ -87,7 +99,14 @@ return {
                 command = "clippy"
               }
             }
-          }
+          },
+          on_attach = function(_, bufnr)
+              if vim.fn.has("nvim-0.10") == 1 then
+                -- We know Rust supports inlay hints already, so support them
+                -- if NeoVim does.
+                vim.lsp.inlay_hint.enable(bufnr, true)
+              end
+          end
         }
       }
     end
