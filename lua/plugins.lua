@@ -95,7 +95,7 @@ require("lazy").setup({
   -- Search & Menus {{{
   {
     "nvim-telescope/telescope.nvim",
-    tag = "0.1.5",
+    tag = "0.1.6",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       local actions = require("telescope.actions")
@@ -360,6 +360,5 @@ require("lazy").setup({
 })
 -- }}}
 
--- vim:set foldenable:
 -- vim:set foldlevel=1:
 -- vim:set foldmethod=marker:

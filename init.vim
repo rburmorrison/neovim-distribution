@@ -4,7 +4,12 @@ set relativenumber
 set undofile
 colorscheme sorbet
 
-if !has("nvim")
+if has("nvim")
+    " Treesitter folding for NeoVim.
+    set foldmethod=expr
+    set foldexpr=nvim_treesitter#foldexpr()
+    set nofoldenable
+elseif !has("nvim")
     " Many of these come from NeoVim's defaults, which can be found at
     " ":help vim_diff.txt" in NeoVim. 
 
@@ -45,12 +50,6 @@ augroup CustomFileTypeSettings
     " Languages accounted for: (aligned with autocmd calls below)
     "                c,cpp,rust,go,bash,javascript,typescript,python,ruby,sql,vim,lua,json,toml,yaml,markdown,gitcommit
 
-    " Foldable Languages
-    autocmd FileType c,cpp,rust,go,bash,javascript,typescript,python,ruby,sql,vim,lua,json,toml,yaml
-                \ setlocal nofoldenable       |
-                \ setlocal foldcolumn=2       |
-                \ setlocal foldmethod=syntax  |
-
     " Spell-Checked Files
     autocmd FileType c,cpp,rust,go,bash,javascript,typescript,python,ruby,sql,vim,lua,json,toml,yaml,markdown,gitcommit
                 \ setlocal spell
@@ -62,5 +61,4 @@ augroup CustomFileTypeSettings
 augroup END
 " }}}
 
-" vim:set foldenable:
 " vim:set foldmethod=marker:
