@@ -360,5 +360,6 @@ require("lazy").setup({
 })
 -- }}}
 
+-- vim:set foldenable:
 -- vim:set foldlevel=1:
 -- vim:set foldmethod=marker:

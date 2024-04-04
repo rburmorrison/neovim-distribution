@@ -61,4 +61,5 @@ augroup CustomFileTypeSettings
 augroup END
 " }}}
 
+" vim:set foldenable:
 " vim:set foldmethod=marker:
