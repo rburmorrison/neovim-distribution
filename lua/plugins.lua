@@ -180,14 +180,28 @@ require("lazy").setup({
           ['<C-d>'] = cmp.mapping.scroll_docs(4),
           ['<C-Space>'] = cmp.mapping.complete(),
           ['<C-e>'] = cmp.mapping.abort(),
-          ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+          ['<CR>'] = cmp.mapping.confirm({ select = true }),
         }),
         sources = cmp.config.sources({
           { name = 'nvim_lsp' },
           { name = 'vsnip' },
         }, {
           { name = "buffer" }
-        })
+        }),
+        formatting = {
+          format = function(_, vim_item)
+            -- This fixes menus that get too long and overflow. When it gets too
+            -- long, truncate it and add an ellipsis.
+            --
+            -- Derived from: https://github.com/hrsh7th/nvim-cmp/issues/1154#issuecomment-1872926479
+            local max_length = 42
+            local m = vim_item.menu or ""
+            if #m > max_length then
+              vim_item.menu = string.sub(m, 1, max_length) .. "..."
+            end
+            return vim_item
+          end,
+        },
       })
     end
   },
