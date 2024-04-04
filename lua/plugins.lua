@@ -161,9 +161,13 @@ require("lazy").setup({
 
       -- Snippets
       "hrsh7th/cmp-vsnip",
-      "hrsh7th/vim-vsnip"
+      "hrsh7th/vim-vsnip",
+
+      -- LSP Symbols
+      "onsails/lspkind.nvim"
     },
     config = function()
+      local lspkind = require('lspkind')
       local cmp = require("cmp")
       cmp.setup({
         snippet = {
@@ -189,18 +193,20 @@ require("lazy").setup({
           { name = "buffer" }
         }),
         formatting = {
-          format = function(_, vim_item)
-            -- This fixes menus that get too long and overflow. When it gets too
-            -- long, truncate it and add an ellipsis.
-            --
-            -- Derived from: https://github.com/hrsh7th/nvim-cmp/issues/1154#issuecomment-1872926479
-            local max_length = 42
-            local m = vim_item.menu or ""
-            if #m > max_length then
-              vim_item.menu = string.sub(m, 1, max_length) .. "..."
+          format = lspkind.cmp_format({
+            before = function (_, vim_item)
+              -- This fixes menus that get too long and overflow. When it gets too
+              -- long, truncate it and add an ellipsis.
+              --
+              -- Derived from: https://github.com/hrsh7th/nvim-cmp/issues/1154#issuecomment-1872926479
+              local max_length = 42
+              local m = vim_item.menu or ""
+              if #m > max_length then
+                vim_item.menu = string.sub(m, 1, max_length) .. "..."
+              end
+              return vim_item
             end
-            return vim_item
-          end,
+          })
         },
       })
     end
