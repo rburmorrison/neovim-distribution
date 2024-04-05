@@ -19,9 +19,10 @@ elseif !has("nvim")
     set smarttab
     set termguicolors
     set wildmenu
-endif
 
-packadd! justify
+    filetype plugin indent on
+    syntax enable
+endif
 " }}}
 
 " NeoVim Plugins Setup {{{
