@@ -194,6 +194,7 @@ require("lazy").setup({
         }),
         formatting = {
           format = lspkind.cmp_format({
+            mode = "symbol",
             before = function (_, vim_item)
               -- This fixes menus that get too long and overflow. When it gets too
               -- long, truncate it and add an ellipsis.
