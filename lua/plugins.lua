@@ -298,9 +298,9 @@ require("lazy").setup({
     end,
     config = function()
       -- Terminal Toggle
-      vim.keymap.set("i", "<C-t>", "<cmd>ToggleTerm direction=float<cr>", { remap = true })
-      vim.keymap.set("n", "<C-t>", "<cmd>ToggleTerm direction=float<cr>", { remap = true })
-      vim.keymap.set("t", "<C-t>", "<cmd>ToggleTerm direction=float<cr>", { remap = true })
+      vim.keymap.set("i", "<C-t>", "<cmd>ToggleTerm direction=float<cr>")
+      vim.keymap.set("n", "<C-t>", "<cmd>ToggleTerm direction=float<cr>")
+      vim.keymap.set("t", "<C-t>", "<cmd>ToggleTerm direction=float<cr>")
 
       local wk = require("which-key")
 
@@ -357,7 +357,7 @@ local wk = require("which-key")
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
   callback = function()
-    vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", { remap = true })
+    vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>")
 
     wk.register({
       g = {
