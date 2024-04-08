@@ -2,7 +2,6 @@
 set number
 set relativenumber
 set undofile
-colorscheme sorbet
 
 if has("nvim")
     " Treesitter folding for NeoVim.
