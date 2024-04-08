@@ -309,20 +309,8 @@ require("lazy").setup({
 
       local wk = require("which-key")
 
-      -- Normal Bindings
-      wk.register({
-        o = {
-          name = "open",
-          t = { "<cmd>NvimTreeToggle<cr>", "NvimTree" },
-        },
-        f = {
-          name = "find",
-          f = { "<cmd>Telescope find_files theme=dropdown<cr>", "Find Files" },
-          g = { "<cmd>Telescope live_grep theme=dropdown<cr>", "Live Grep" },
-          b = { "<cmd>Telescope buffers theme=dropdown<cr>", "Buffers" },
-          h = { "<cmd>Telescope help_tags theme=dropdown<cr>", "Help Tags" },
-        },
-        h = {
+      -- Shared Bindings
+      local hop_bindings = {
           name = "hop",
           w = { "<cmd>HopWord<cr>", "Word" },
           c = { "<cmd>HopChar1<cr>", "Character" },
@@ -340,8 +328,29 @@ require("lazy").setup({
             a = { "<cmd>HopAnywhereMW<cr>", "Anywhere" },
           }
         }
+
+      -- Normal Bindings
+      wk.register({
+        o = {
+          name = "open",
+          t = { "<cmd>NvimTreeToggle<cr>", "NvimTree" },
+        },
+        f = {
+          name = "find",
+          f = { "<cmd>Telescope find_files theme=dropdown<cr>", "Find Files" },
+          g = { "<cmd>Telescope live_grep theme=dropdown<cr>", "Live Grep" },
+          b = { "<cmd>Telescope buffers theme=dropdown<cr>", "Buffers" },
+          h = { "<cmd>Telescope help_tags theme=dropdown<cr>", "Help Tags" },
+        },
+        h = hop_bindings,
       }, { prefix = "<leader>" })
 
+      -- Visual Bindings
+      wk.register({
+        h = hop_bindings,
+      }, { prefix = "<leader>", mode = "v" })
+
+      -- Misc Bindings
       wk.register({
         g = {
           l = { "$", "Goto line end" },
