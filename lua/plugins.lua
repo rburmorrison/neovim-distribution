@@ -150,6 +150,9 @@ require("lazy").setup({
   -- }}}
 
   -- LSP {{{
+  -- NeoVim Configuration LSP Setup
+  { "folke/neodev.nvim", config = true },
+
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -219,6 +222,7 @@ require("lazy").setup({
       "williamboman/mason-lspconfig.nvim",
       "neovim/nvim-lspconfig",
       "hrsh7th/cmp-nvim-lsp",
+      "folke/neodev.nvim",
     },
     config = function()
       require("mason").setup()
