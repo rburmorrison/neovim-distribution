@@ -15,7 +15,11 @@ vim.opt.rtp:prepend(lazypath)
 -- }}}
 -- }}}
 
+-- User Options {{{
 vim.g.mapleader = " "
+
+local enable_copilot = true
+-- }}}
 
 -- Plugin Definitions {{{
 require("lazy").setup({
@@ -361,13 +365,17 @@ require("lazy").setup({
     end
   },
   -- }}}
+
+  -- Copilot {{{
+  { "github/copilot.vim", cond = enable_copilot },
+  -- }}}
 })
 -- }}}
 
 -- Post-Configuration {{{
--- LSP Bindings {{{
 local wk = require("which-key")
 
+-- LSP Bindings {{{
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
   callback = function()
@@ -396,6 +404,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
     }, { prefix = "<leader>" })
   end
 })
+-- }}}
+
+-- Copilot {{{
+if enable_copilot then
+  wk.register({
+    c = {
+      name = "copilot",
+      e = { "<cmd>Copilot enable<cr><cmd>Copilot status<cr>", "Enable" },
+      d = { "<cmd>Copilot disable<cr><cmd>Copilot status<cr>", "Disable" },
+      p = { "<cmd>Copilot panel<cr>", "Panel" },
+      s = { "<cmd>Copilot status<cr>", "Status" },
+    }
+  }, { prefix = "<leader>" })
+end
 -- }}}
 -- }}}
 
