@@ -1,6 +1,5 @@
 " Basic Settings {{{
 set number
-set relativenumber
 set undofile
 
 if has("nvim")
