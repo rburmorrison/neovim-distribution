@@ -249,7 +249,7 @@ require("lazy").setup({
               -- support them.
               if client.server_capabilities.inlayHintProvider then
                 if vim.fn.has("nvim-0.10") == 1 then
-                  vim.lsp.inlay_hint.enable(bufnr, true)
+                  vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
                 end
               end
             end,
@@ -288,7 +288,7 @@ require("lazy").setup({
             if vim.fn.has("nvim-0.10") == 1 then
               -- We know Rust supports inlay hints already, so support them
               -- if NeoVim does.
-              vim.lsp.inlay_hint.enable(bufnr, true)
+              vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
             end
           end,
         },
