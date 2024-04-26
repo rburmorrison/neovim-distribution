@@ -100,13 +100,6 @@ require("lazy").setup({
   { "lukas-reineke/indent-blankline.nvim", main = "ibl", config = true },
 
   { "lewis6991/gitsigns.nvim", config = true },
-  
-  {
-    "rcarriga/nvim-notify",
-    config = function()
-      vim.notify = require("notify")
-    end,
-  },
   -- }}}
 
   -- Search & Menus {{{
