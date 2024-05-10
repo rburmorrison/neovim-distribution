@@ -87,6 +87,7 @@ require("lazy").setup({
           "yaml",
           "markdown",
           "gitignore",
+          "proto",
         },
         highlight = {
           enable = true,
