@@ -40,12 +40,6 @@ require("lazy").setup({
     version = "v2",
     config = true
   },
-
-  {
-    "stevearc/oil.nvim",
-    config = true,
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-  },
   -- }}}
 
   -- Aesthetic Plugins {{{
