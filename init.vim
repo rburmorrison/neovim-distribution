@@ -1,7 +1,6 @@
-" User Settings {{{
+" User settings
 let mapleader = " "
 let enable_github_copilot = 1
-" }}}
 
 " Basic Settings {{{
 set number
