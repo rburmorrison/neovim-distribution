@@ -81,5 +81,6 @@ augroup CustomFileTypeSettings
 augroup END
 " }}}
 
+" vim:set nowrap:
 " vim:set foldenable:
 " vim:set foldmethod=marker:
