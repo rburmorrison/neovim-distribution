@@ -1,3 +1,8 @@
+" User Settings {{{
+let mapleader = " "
+let enable_github_copilot = 1
+" }}}
+
 " Basic Settings {{{
 set number
 set undofile
