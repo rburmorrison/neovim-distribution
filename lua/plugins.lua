@@ -183,15 +183,15 @@ require("lazy").setup({
           documentation = cmp.config.window.bordered(),
         },
         mapping = cmp.mapping.preset.insert({
-          ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-d>'] = cmp.mapping.scroll_docs(4),
-          ['<C-Space>'] = cmp.mapping.complete(),
-          ['<C-e>'] = cmp.mapping.abort(),
-          ['<CR>'] = cmp.mapping.confirm({ select = true }),
+          ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-d>"] = cmp.mapping.scroll_docs(4),
+          ["<C-Space>"] = cmp.mapping.complete(),
+          ["<C-e>"] = cmp.mapping.abort(),
+          ["<CR>"] = cmp.mapping.confirm({ select = true }),
         }),
         sources = cmp.config.sources({
-          { name = 'nvim_lsp' },
-          { name = 'vsnip' },
+          { name = "nvim_lsp" },
+          { name = "vsnip" },
         }, {
           { name = "buffer" }
         }),
@@ -359,6 +359,14 @@ require("lazy").setup({
         }
       })
     end
+  },
+  -- }}}
+
+  -- Language-Specific {{{
+  {
+    "saecki/crates.nvim",
+    tag = "stable",
+    config = true,
   },
   -- }}}
 
