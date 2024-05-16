@@ -30,7 +30,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end
 })
 
--- crates.vim
+-- crates.nvim
 local crates = require('crates')
 
 vim.api.nvim_create_autocmd("BufRead", {
