@@ -42,3 +42,30 @@ if vim.g.enable_github_copilot == 1 then
     }
   }, { prefix = "<leader>" })
 end
+
+-- crates.nvim
+if vim.g.enable_crates_nvim == 1 then
+  local crates = require('crates')
+
+  vim.api.nvim_create_autocmd("BufRead", {
+    pattern = "Cargo.toml",
+    callback = function(args)
+      wk.register({
+        r = {
+          name = "crates",
+          t = { crates.toggle, "Toggle" },
+          r = { crates.reload, "Reload" },
+          v = { crates.show_versions_popup, "Show Versions" },
+          f = { crates.show_features_popup, "Show Features" },
+          d = { crates.show_dependencies_popup, "Show Dependencies" },
+          e = { crates.expand_plain_crate_to_inline_table, "Expand Crate" },
+          E = { crates.extract_crate_into_table, "Extract Crate" },
+          u = { crates.update_crate,  "Update Crate" },
+          a = { crates.update_all_crates, "Update All Crates" },
+          U = { crates.upgrade_crate, "Upgrade Crate" },
+          A = { crates.upgrade_all_crates, "Upgrade All Crates" },
+        },
+      }, { prefix = "<leader>", bufnr = args.bufnr })
+    end,
+  })
+end
