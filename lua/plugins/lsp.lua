@@ -19,6 +19,16 @@ return {
       "onsails/lspkind.nvim"
     },
     config = function()
+      local sources = {
+        { name = "nvim_lsp" },
+        { name = "vsnip" },
+        { name = "buffer" },
+      }
+
+      if vim.g.enable_crates_nvim == 1 then
+        table.insert(sources, { name = "crates" })
+      end
+
       local lspkind = require('lspkind')
       local cmp = require("cmp")
       cmp.setup({
@@ -38,11 +48,7 @@ return {
           ["<C-e>"] = cmp.mapping.abort(),
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
         }),
-        sources = cmp.config.sources({
-          { name = "nvim_lsp" },
-          { name = "vsnip" },
-          { name = "buffer" },
-        }),
+        sources = cmp.config.sources(sources),
         formatting = {
           format = lspkind.cmp_format({
             mode = "symbol",
