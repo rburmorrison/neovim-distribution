@@ -5,7 +5,7 @@ return {
       require("mini.align").setup()
       require("mini.pairs").setup()
       require("mini.surround").setup()
-      require("mini.indentscope").setup()
+      require("mini.comment").setup()
     end
   }
 }
