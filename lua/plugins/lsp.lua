@@ -41,8 +41,8 @@ return {
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
           { name = "vsnip" },
-        }, {
-          { name = "buffer" }
+          { name = "crates" },
+          { name = "buffer" },
         }),
         formatting = {
           format = lspkind.cmp_format({
@@ -61,6 +61,14 @@ return {
             end
           })
         },
+      })
+
+      -- Setup vim-dadbod
+      cmp.setup.filetype({ "sql" }, {
+        sources = {
+          { name = "vim-dadbod-completion" },
+          { name = "buffer" },
+        }
       })
     end
   },
