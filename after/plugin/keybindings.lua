@@ -30,7 +30,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end
 })
 
--- GitHub Copilot
+-- GitHub Copilot Bindings
 if vim.g.enable_github_copilot == 1 then
   wk.register({
     c = {
@@ -43,7 +43,7 @@ if vim.g.enable_github_copilot == 1 then
   }, { prefix = "<leader>" })
 end
 
--- crates.nvim
+-- crates.nvim Bindings
 if vim.g.enable_crates_nvim == 1 then
   local crates = require('crates')
 
@@ -70,7 +70,7 @@ if vim.g.enable_crates_nvim == 1 then
   })
 end
 
--- DAP
+-- DAP Bindings
 local dap = require("dap")
 
 wk.register({
@@ -93,3 +93,58 @@ wk.register({
     },
   }
 }, { prefix = "<leader>" })
+
+-- ToggleTerm Bindings
+vim.keymap.set("i", "<C-t>", "<cmd>ToggleTerm direction=float<cr>")
+vim.keymap.set("n", "<C-t>", "<cmd>ToggleTerm direction=float<cr>")
+vim.keymap.set("t", "<C-t>", "<cmd>ToggleTerm direction=float<cr>")
+
+-- Hop Bindings
+local hop_bindings = {
+  name = "hop",
+  w = { "<cmd>HopWord<cr>", "Word" },
+  c = { "<cmd>HopChar1<cr>", "Character" },
+  b = { "<cmd>HopChar2<cr>", "Bigram" },
+  p = { "<cmd>HopPattern<cr>", "Bigram" },
+  l = { "<cmd>HopLineStart<cr>", "Line" },
+  a = { "<cmd>HopAnywhere<cr>", "Anywhere" },
+  m = {
+    name = "multi-window",
+    w = { "<cmd>HopWordMW<cr>", "Word" },
+    c = { "<cmd>HopChar1MW<cr>", "Character" },
+    b = { "<cmd>HopChar2MW<cr>", "Bigram" },
+    p = { "<cmd>HopPatternMW<cr>", "Bigram" },
+    l = { "<cmd>HopLineStartMW<cr>", "Line" },
+    a = { "<cmd>HopAnywhereMW<cr>", "Anywhere" },
+  }
+}
+
+-- General Normal-Mode Bindings
+wk.register({
+  o = {
+    name = "open",
+    t = { "<cmd>NvimTreeToggle<cr>", "NvimTree" },
+  },
+  f = {
+    name = "find",
+    f = { "<cmd>Telescope find_files theme=dropdown<cr>", "Find Files" },
+    g = { "<cmd>Telescope live_grep theme=dropdown<cr>", "Live Grep" },
+    b = { "<cmd>Telescope buffers theme=dropdown<cr>", "Buffers" },
+    h = { "<cmd>Telescope help_tags theme=dropdown<cr>", "Help Tags" },
+  },
+  h = hop_bindings,
+}, { prefix = "<leader>" })
+
+-- General Visual-Mode Bindings
+wk.register({
+  h = hop_bindings,
+}, { prefix = "<leader>", mode = "v" })
+
+-- Helix-Like Bindings
+wk.register({
+  g = {
+    l = { "$", "Line End" },
+    s = { "^", "Line Start" },
+    h = { "0", "Column 0" },
+  }
+})
