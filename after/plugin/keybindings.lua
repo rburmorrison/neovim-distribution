@@ -69,3 +69,27 @@ if vim.g.enable_crates_nvim == 1 then
     end,
   })
 end
+
+-- DAP
+local dap = require("dap")
+
+wk.register({
+  d = {
+    name = "debug",
+    b = { dap.toggle_breakpoint, "Toggle Breakpoint" },
+    i = { "<cmd>lua require('dapui').eval(nil, { enter = true })<cr>", "Inspect" },
+    c = { dap.continue, "Continue" },
+    C = { dap.run_to_cursor, "Run To Cursor" },
+    I = { dap.step_into, "Step Into" },
+    n = { dap.step_over, "Step Over" },
+    O = { dap.step_out, "Step Out" },
+    r = { dap.restart, "Restart" },
+    t = { dap.terminate, "Terminate" },
+    l = { dap.run_last, "Run Last" },
+    u = {
+      name = "ui",
+      o = { require("dapui").open, "Open" },
+      c = { require("dapui").close, "Close" },
+    },
+  }
+}, { prefix = "<leader>" })
