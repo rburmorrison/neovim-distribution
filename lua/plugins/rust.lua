@@ -6,8 +6,8 @@ return {
     opts = {
       popup = {
         autofocus = true,
-      }
-    }
+      },
+    },
   },
 
   {
