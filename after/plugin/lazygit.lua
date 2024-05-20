@@ -10,9 +10,11 @@ if vim.fn.executable("lazygit") == 1 then
     hidden = true,
     on_open = function(term)
       vim.cmd("startinsert!")
-      vim.api.nvim_buf_set_keymap(term.bufnr, "i", "<C-g>", "<cmd>close<CR>", { noremap = true, silent = true, })
-      vim.api.nvim_buf_set_keymap(term.bufnr, "n", "<C-g>", "<cmd>close<CR>", { noremap = true, silent = true, })
-      vim.api.nvim_buf_set_keymap(term.bufnr, "t", "<C-g>", "<cmd>close<CR>", { noremap = true, silent = true, })
+
+      local opts = { noremap = true, silent = true };
+      vim.api.nvim_buf_set_keymap(term.bufnr, "i", "<C-g>", "<cmd>close<CR>", opts)
+      vim.api.nvim_buf_set_keymap(term.bufnr, "n", "<C-g>", "<cmd>close<CR>", opts)
+      vim.api.nvim_buf_set_keymap(term.bufnr, "t", "<C-g>", "<cmd>close<CR>", opts)
     end,
   })
 
