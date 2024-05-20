@@ -2,3 +2,4 @@
 indent_style = space
 indent_size = 2
 trailing_table_separator = always
+quote_style = double

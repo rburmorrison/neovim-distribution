@@ -45,7 +45,7 @@ end
 
 -- crates.nvim Bindings
 if vim.g.enable_crates_nvim == 1 then
-  local crates = require('crates')
+  local crates = require("crates")
 
   vim.api.nvim_create_autocmd("BufRead", {
     pattern = "Cargo.toml",

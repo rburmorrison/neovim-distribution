@@ -25,13 +25,14 @@ return {
       local primary_sources = {
         { name = "nvim_lsp", },
         { name = "vsnip", },
+        { name = "path", },
       }
 
       if vim.g.enable_crates_nvim == 1 then
         table.insert(primary_sources, { name = "crates", })
       end
 
-      local lspkind = require('lspkind')
+      local lspkind = require("lspkind")
       local cmp = require("cmp")
       cmp.setup({
         snippet = {
