@@ -1,6 +1,9 @@
 return {
   -- NeoVim Configuration LSP Setup
-  { "folke/neodev.nvim", config = true },
+  {
+    "folke/neodev.nvim",
+    config = true,
+  },
 
   {
     "hrsh7th/nvim-cmp",
@@ -16,17 +19,17 @@ return {
       "hrsh7th/vim-vsnip",
 
       -- LSP Symbols
-      "onsails/lspkind.nvim"
+      "onsails/lspkind.nvim",
     },
     config = function()
       local sources = {
-        { name = "nvim_lsp" },
-        { name = "vsnip" },
-        { name = "buffer" },
+        { name = "nvim_lsp", },
+        { name = "vsnip", },
+        { name = "buffer", },
       }
 
       if vim.g.enable_crates_nvim == 1 then
-        table.insert(sources, { name = "crates" })
+        table.insert(sources, { name = "crates", })
       end
 
       local lspkind = require('lspkind')
@@ -35,7 +38,7 @@ return {
         snippet = {
           expand = function(args)
             vim.fn["vsnip#anonymous"](args.body)
-          end
+          end,
         },
         window = {
           completion = cmp.config.window.bordered(),
@@ -46,13 +49,14 @@ return {
           ["<C-d>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping.abort(),
-          ["<CR>"] = cmp.mapping.confirm({ select = true }),
+          ["<CR>"] = cmp.mapping.confirm({ select = true, }),
         }),
         sources = cmp.config.sources(sources),
+        ---@diagnostic disable-next-line: missing-fields
         formatting = {
           format = lspkind.cmp_format({
             mode = "symbol",
-            before = function (_, vim_item)
+            before = function(_, vim_item)
               -- This fixes menus that get too long and overflow. When it gets too
               -- long, truncate it and add an ellipsis.
               --
@@ -63,19 +67,19 @@ return {
                 vim_item.menu = string.sub(m, 1, max_length) .. "..."
               end
               return vim_item
-            end
-          })
+            end,
+          }),
         },
       })
 
       -- Setup vim-dadbod
-      cmp.setup.filetype({ "sql" }, {
+      cmp.setup.filetype({ "sql", }, {
         sources = {
-          { name = "vim-dadbod-completion" },
-          { name = "buffer" },
-        }
+          { name = "vim-dadbod-completion", },
+          { name = "buffer", },
+        },
       })
-    end
+    end,
   },
 
   {
@@ -96,7 +100,7 @@ return {
       --
       -- See ":help mason-lspconfig-automatic-server-setup".
       require("mason-lspconfig").setup_handlers({
-        function (server_name) -- default handler
+        function(server_name) -- default handler
           require("lspconfig")[server_name].setup({
             capabilities = capabilities,
             on_attach = function(client, bufnr)
@@ -107,7 +111,7 @@ return {
               -- support them.
               if client.server_capabilities.inlayHintProvider then
                 if vim.fn.has("nvim-0.10") == 1 then
-                  vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+                  vim.lsp.inlay_hint.enable(true, { bufnr = bufnr, })
                 end
               end
             end,
@@ -121,12 +125,12 @@ return {
           lspconfig.lua_ls.setup({
             settings = {
               Lua = {
-                diagnostics = { globals = { "vim" } },
+                diagnostics = { globals = { "vim", }, },
               },
             },
           })
         end,
       })
-    end
+    end,
   },
 }

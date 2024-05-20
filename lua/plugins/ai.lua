@@ -1,3 +1,6 @@
 return {
-  { "github/copilot.vim", cond = vim.g.enable_github_copilot == 1 },
+  {
+    "github/copilot.vim",
+    cond = vim.g.enable_github_copilot == 1,
+  },
 }

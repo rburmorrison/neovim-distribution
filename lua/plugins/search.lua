@@ -2,31 +2,31 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.6",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = { "nvim-lua/plenary.nvim", },
     config = function()
       local actions = require("telescope.actions")
       require("telescope").setup({
         defaults = {
           mappings = {
             i = {
-              ["<ESC>"] = actions.close
-            }
-          }
-        }
+              ["<ESC>"] = actions.close,
+            },
+          },
+        },
       })
-    end
+    end,
   },
 
   {
     "aznhe21/actions-preview.nvim",
     opts = {
-      backend = { "telescope" },
-    }
+      backend = { "telescope", },
+    },
   },
 
   {
     "nvim-tree/nvim-tree.lua",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = { "nvim-tree/nvim-web-devicons", },
     config = function()
       vim.g.loaded_netrw = 1
       vim.g.loaded_netrwPlugin = 1
@@ -41,16 +41,16 @@ return {
           if #vim.api.nvim_list_wins() == 1 and require("nvim-tree.utils").is_nvim_tree_buf() then
             vim.cmd("quit")
           end
-        end
+        end,
       })
 
-      require("nvim-tree").setup({ view = { width = 30 } })
-    end
+      require("nvim-tree").setup({ view = { width = 30, }, })
+    end,
   },
 
   {
     "folke/trouble.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = true
+    dependencies = { "nvim-tree/nvim-web-devicons", },
+    config = true,
   },
 }

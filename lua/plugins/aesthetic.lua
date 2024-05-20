@@ -1,7 +1,7 @@
 return {
   {
     "nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = { "nvim-tree/nvim-web-devicons", },
     config = true,
   },
 
@@ -12,11 +12,12 @@ return {
       vim.cmd("colorscheme kanagawa")
     end,
   },
-  
+
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = function()
+      ---@diagnostic disable-next-line: missing-fields
       require("nvim-treesitter.configs").setup({
         ensure_installed = {
           "c",
@@ -47,9 +48,20 @@ return {
     end,
   },
 
-  { "akinsho/toggleterm.nvim", version = "*", config = true },
-  
-  { "lukas-reineke/indent-blankline.nvim", main = "ibl", config = true },
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    config = true,
+  },
 
-  { "lewis6991/gitsigns.nvim", config = true },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    config = true,
+  },
+
+  {
+    "lewis6991/gitsigns.nvim",
+    config = true,
+  },
 }
