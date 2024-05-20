@@ -22,14 +22,13 @@ return {
       "onsails/lspkind.nvim",
     },
     config = function()
-      local sources = {
+      local primary_sources = {
         { name = "nvim_lsp", },
         { name = "vsnip", },
-        { name = "buffer", },
       }
 
       if vim.g.enable_crates_nvim == 1 then
-        table.insert(sources, { name = "crates", })
+        table.insert(primary_sources, { name = "crates", })
       end
 
       local lspkind = require('lspkind')
@@ -51,7 +50,10 @@ return {
           ["<C-e>"] = cmp.mapping.abort(),
           ["<CR>"] = cmp.mapping.confirm({ select = true, }),
         }),
-        sources = cmp.config.sources(sources),
+        sources = cmp.config.sources(
+          primary_sources,
+          { { name = "buffer", }, }
+        ),
         ---@diagnostic disable-next-line: missing-fields
         formatting = {
           format = lspkind.cmp_format({
@@ -61,7 +63,7 @@ return {
               -- long, truncate it and add an ellipsis.
               --
               -- Derived from: https://github.com/hrsh7th/nvim-cmp/issues/1154#issuecomment-1872926479
-              local max_length = 42
+              local max_length = 32
               local m = vim_item.menu or ""
               if #m > max_length then
                 vim_item.menu = string.sub(m, 1, max_length) .. "..."
