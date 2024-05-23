@@ -124,6 +124,11 @@ wk.register({
   o = {
     name = "open",
     t = { "<cmd>NvimTreeToggle<cr>", "NvimTree", },
+    m = {
+      name = "mini map",
+      m = { MiniMap.toggle, "Open", },
+      r = { MiniMap.refresh, "Refresh", },
+    },
   },
   f = {
     name = "find",
