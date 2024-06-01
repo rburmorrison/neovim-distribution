@@ -1,6 +1,7 @@
 return {
   {
-    "github/copilot.vim",
-    cond = vim.g.enable_github_copilot == 1,
+    "Exafunction/codeium.vim",
+    event = "BufEnter",
+    cond = vim.g.enable_codium == 1,
   },
 }

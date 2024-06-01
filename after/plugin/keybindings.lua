@@ -30,19 +30,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
--- GitHub Copilot Bindings
-if vim.g.enable_github_copilot == 1 then
-  wk.register({
-    c = {
-      name = "copilot",
-      e = { "<cmd>Copilot enable<cr><cmd>Copilot status<cr>", "Enable", },
-      d = { "<cmd>Copilot disable<cr><cmd>Copilot status<cr>", "Disable", },
-      p = { "<cmd>Copilot panel<cr>", "Panel", },
-      s = { "<cmd>Copilot status<cr>", "Status", },
-    },
-  }, { prefix = "<leader>", })
-end
-
 -- crates.nvim Bindings
 if vim.g.enable_crates_nvim == 1 then
   local crates = require("crates")
