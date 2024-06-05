@@ -16,6 +16,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
+    version = "^v0.9",
     config = function()
       ---@diagnostic disable-next-line: missing-fields
       require("nvim-treesitter.configs").setup({
