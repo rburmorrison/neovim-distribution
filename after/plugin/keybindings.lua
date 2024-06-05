@@ -116,6 +116,12 @@ wk.register({
       m = { MiniMap.toggle, "Open", },
       r = { MiniMap.refresh, "Refresh", },
     },
+    s = {
+      name = "spectre",
+      s = { "<cmd>lua require('spectre').toggle()<CR>", "Toggle", },
+      w = { "<cmd>lua require('spectre').open_visual({select_word=true})<CR>", "Search Current Word", },
+      f = { "<cmd>lua require('spectre').open_file_search({select_word=true})<CR>", "Search Current File", },
+    },
   },
   f = {
     name = "find",
@@ -142,13 +148,3 @@ local bindings = {
 }
 wk.register(bindings, { mode = "n", })
 wk.register(bindings, { mode = "v", })
-
--- Spectre
-wk.register({
-  s = {
-    name = "spectre",
-    s = { "<cmd>lua require('spectre').toggle()<CR>", "Toggle", },
-    w = { "<cmd>lua require('spectre').open_visual({select_word=true})<CR>", "Search Current Word", },
-    f = { "<cmd>lua require('spectre').open_file_search({select_word=true})<CR>", "Search Current File", },
-  },
-}, { prefix = "<leader>", })
