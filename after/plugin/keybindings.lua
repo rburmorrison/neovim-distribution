@@ -133,10 +133,12 @@ wk.register({
 }, { prefix = "<leader>", mode = "v", })
 
 -- Helix-Like Bindings
-wk.register({
+local bindings = {
   g = {
     l = { "$", "Line End", },
     s = { "^", "Line Start", },
     h = { "0", "Column 0", },
   },
-})
+}
+wk.register(bindings, { mode = "n", })
+wk.register(bindings, { mode = "v", })
