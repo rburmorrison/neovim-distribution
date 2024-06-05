@@ -149,6 +149,6 @@ wk.register({
     name = "spectre",
     s = { "<cmd>lua require('spectre').toggle()<CR>", "Toggle", },
     w = { "<cmd>lua require('spectre').open_visual({select_word=true})<CR>", "Search Current Word", },
-    f = { "<cmd>lua require('spectre').open_file_search({select_word=true})<CR>", "Search on Current File", },
+    f = { "<cmd>lua require('spectre').open_file_search({select_word=true})<CR>", "Search Current File", },
   },
 }, { prefix = "<leader>", })

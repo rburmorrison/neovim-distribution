@@ -2,7 +2,6 @@
 " -- User Settings -- "
 " ------------------- "
 let mapleader = " "
-let enable_codium = 1
 let enable_crates_nvim = 1
 
 " Basic Settings {{{
