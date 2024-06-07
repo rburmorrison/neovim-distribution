@@ -23,8 +23,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
         a = { "<cmd>lua require(\"actions-preview\").code_actions()<cr>", "Code Action", },
         R = { "<cmd>Telescope lsp_references theme=dropdown<cr>", "References", },
         f = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format", },
-        d = { "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", "Document Diagnostics", },
-        D = { "<cmd>Trouble diagnostics toggle<cr>", "Workspace Diagnostics", },
+        d = { "<cmd>Trouble diagnostics open focus=true filter.buf=0<cr>", "Document Diagnostics", },
+        D = { "<cmd>Trouble diagnostics open focus=true<cr>", "Workspace Diagnostics", },
       },
     }, { prefix = "<leader>", })
   end,
