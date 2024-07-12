@@ -86,26 +86,6 @@ vim.keymap.set("i", "<C-t>", "<cmd>ToggleTerm direction=float<cr>")
 vim.keymap.set("n", "<C-t>", "<cmd>ToggleTerm direction=float<cr>")
 vim.keymap.set("t", "<C-t>", "<cmd>ToggleTerm direction=float<cr>")
 
--- Hop Bindings
-local hop_bindings = {
-  name = "hop",
-  w = { "<cmd>HopWord<cr>", "Word", },
-  c = { "<cmd>HopChar1<cr>", "Character", },
-  b = { "<cmd>HopChar2<cr>", "Bigram", },
-  p = { "<cmd>HopPattern<cr>", "Bigram", },
-  l = { "<cmd>HopLineStart<cr>", "Line", },
-  a = { "<cmd>HopAnywhere<cr>", "Anywhere", },
-  m = {
-    name = "multi-window",
-    w = { "<cmd>HopWordMW<cr>", "Word", },
-    c = { "<cmd>HopChar1MW<cr>", "Character", },
-    b = { "<cmd>HopChar2MW<cr>", "Bigram", },
-    p = { "<cmd>HopPatternMW<cr>", "Bigram", },
-    l = { "<cmd>HopLineStartMW<cr>", "Line", },
-    a = { "<cmd>HopAnywhereMW<cr>", "Anywhere", },
-  },
-}
-
 -- General Normal-Mode Bindings
 wk.register({
   o = {
@@ -132,19 +112,3 @@ wk.register({
   },
   h = hop_bindings,
 }, { prefix = "<leader>", })
-
--- General Visual-Mode Bindings
-wk.register({
-  h = hop_bindings,
-}, { prefix = "<leader>", mode = "v", })
-
--- Helix-Like Bindings
-local bindings = {
-  g = {
-    l = { "$", "Line End", },
-    s = { "^", "Line Start", },
-    h = { "0", "Column 0", },
-  },
-}
-wk.register(bindings, { mode = "n", })
-wk.register(bindings, { mode = "v", })

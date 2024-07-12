@@ -1,10 +1,5 @@
 return {
-  {
-    "phaazon/hop.nvim",
-    version = "v2",
-    config = true,
-  },
-
+  { "tpope/vim-surround", },
   {
     "nvim-pack/nvim-spectre",
     dependencies = { "nvim-lua/plenary.nvim", },
