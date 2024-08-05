@@ -30,7 +30,7 @@ if vim.g.enable_crates_nvim == 1 then
     callback = function(args)
       wk.add({
         buffer = args.buf,
-        { "<leader>r",  group = "crates"},
+        { "<leader>r",  group = "crates", },
         { "<leader>rt", crates.toggle,                             desc = "Toggle", },
         { "<leader>rr", crates.reload,                             desc = "Reload", },
         { "<leader>rv", crates.show_versions_popup,                desc = "Show Versions", },
@@ -75,13 +75,10 @@ vim.keymap.set("t", "<C-t>", "<cmd>ToggleTerm direction=float<cr>")
 -- General Normal-Mode Bindings
 wk.add({
   { "<leader>f",   group = "find", },
-  { "<leader>fb",  "<cmd>Telescope buffers theme=dropdown<cr>",                            desc = "Buffers", },
-  { "<leader>ff",  "<cmd>Telescope find_files theme=dropdown<cr>",                         desc = "Find Files", },
-  { "<leader>fg",  "<cmd>Telescope live_grep theme=dropdown<cr>",                          desc = "Live Grep", },
-  { "<leader>fh",  "<cmd>Telescope help_tags theme=dropdown<cr>",                          desc = "Help Tags", },
+  { "<leader>fb",  "<cmd>Telescope buffers theme=dropdown<cr>",    desc = "Buffers", },
+  { "<leader>ff",  "<cmd>Telescope find_files theme=dropdown<cr>", desc = "Find Files", },
+  { "<leader>fg",  "<cmd>Telescope live_grep theme=dropdown<cr>",  desc = "Live Grep", },
+  { "<leader>fh",  "<cmd>Telescope help_tags theme=dropdown<cr>",  desc = "Help Tags", },
   { "<leader>o",   group = "open", },
-  { "<leader>om",  group = "mini map", },
-  { "<leader>omm", MiniMap.toggle,                                                         desc = "Open", },
-  { "<leader>omr", MiniMap.refresh,                                                        desc = "Refresh", },
-  { "<leader>ot",  "<cmd>NvimTreeToggle<cr>",                                              desc = "NvimTree", },
+  { "<leader>ot",  "<cmd>NvimTreeToggle<cr>",                      desc = "NvimTree", },
 })

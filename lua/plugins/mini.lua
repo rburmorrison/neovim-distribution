@@ -5,7 +5,6 @@ return {
       require("mini.align").setup()
       require("mini.pairs").setup()
       require("mini.comment").setup()
-      require("mini.map").setup()
     end,
   },
 }
