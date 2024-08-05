@@ -74,11 +74,11 @@ vim.keymap.set("t", "<C-t>", "<cmd>ToggleTerm direction=float<cr>")
 
 -- General Normal-Mode Bindings
 wk.add({
-  { "<leader>f",   group = "find", },
-  { "<leader>fb",  "<cmd>Telescope buffers theme=dropdown<cr>",    desc = "Buffers", },
-  { "<leader>ff",  "<cmd>Telescope find_files theme=dropdown<cr>", desc = "Find Files", },
-  { "<leader>fg",  "<cmd>Telescope live_grep theme=dropdown<cr>",  desc = "Live Grep", },
-  { "<leader>fh",  "<cmd>Telescope help_tags theme=dropdown<cr>",  desc = "Help Tags", },
-  { "<leader>o",   group = "open", },
-  { "<leader>ot",  "<cmd>NvimTreeToggle<cr>",                      desc = "NvimTree", },
+  { "<leader>f",  group = "find", },
+  { "<leader>fb", "<cmd>Telescope buffers theme=dropdown<cr>",    desc = "Buffers", },
+  { "<leader>ff", "<cmd>Telescope find_files theme=dropdown<cr>", desc = "Find Files", },
+  { "<leader>fg", "<cmd>Telescope live_grep theme=dropdown<cr>",  desc = "Live Grep", },
+  { "<leader>fh", "<cmd>Telescope help_tags theme=dropdown<cr>",  desc = "Help Tags", },
+  { "<leader>o",  group = "open", },
+  { "<leader>ot", "<cmd>NvimTreeToggle<cr>",                      desc = "NvimTree", },
 })
