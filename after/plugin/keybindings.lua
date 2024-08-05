@@ -83,9 +83,5 @@ wk.add({
   { "<leader>om",  group = "mini map", },
   { "<leader>omm", MiniMap.toggle,                                                         desc = "Open", },
   { "<leader>omr", MiniMap.refresh,                                                        desc = "Refresh", },
-  { "<leader>os",  group = "spectre", },
-  { "<leader>osf", "<cmd>lua require('spectre').open_file_search({select_word=true})<CR>", desc = "Search Current File", },
-  { "<leader>oss", "<cmd>lua require('spectre').toggle()<CR>",                             desc = "Toggle", },
-  { "<leader>osw", "<cmd>lua require('spectre').open_visual({select_word=true})<CR>",      desc = "Search Current Word", },
   { "<leader>ot",  "<cmd>NvimTreeToggle<cr>",                                              desc = "NvimTree", },
 })
