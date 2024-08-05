@@ -6,27 +6,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
   callback = function()
     vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>")
 
-    wk.register({
-      g = {
-        D = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Goto Declaration", },
-        d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Goto Definition", },
-      },
+    wk.add({
+      { "<leader>l",  group = "lsp", },
+      { "<leader>ls", "<cmd>Telescope lsp_document_symbols theme=dropdown<cr>",    desc = "Document Symbols", },
+      { "<leader>lS", "<cmd>Telescope lsp_workspace_symbols theme=dropdown<cr>",   desc = "Workspace Symbols", },
+      { "<leader>li", "<cmd>Telescope lsp_implementations theme=dropdown<cr>",     desc = "Implementations", },
+      { "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>",                         desc = "Rename", },
+      { "<leader>la", "<cmd>lua require(\"actions-preview\").code_actions()<cr>",  desc = "Code Action", },
+      { "<leader>lR", "<cmd>Telescope lsp_references theme=dropdown<cr>",          desc = "References", },
+      { "<leader>lf", "<cmd>lua vim.lsp.buf.format()<cr>",                         desc = "Format", },
+      { "<leader>ld", "<cmd>Trouble diagnostics open focus=true filter.buf=0<cr>", desc = "Document Diagnostics", },
+      { "<leader>lD", "<cmd>Trouble diagnostics open focus=true<cr>",              desc = "Workspace Diagnostics", },
     })
-
-    wk.register({
-      l = {
-        name = "lsp",
-        s = { "<cmd>Telescope lsp_document_symbols theme=dropdown<cr>", "Document Symbols", },
-        S = { "<cmd>Telescope lsp_workspace_symbols theme=dropdown<cr>", "Workspace Symbols", },
-        i = { "<cmd>Telescope lsp_implementations theme=dropdown<cr>", "Implementations", },
-        r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename", },
-        a = { "<cmd>lua require(\"actions-preview\").code_actions()<cr>", "Code Action", },
-        R = { "<cmd>Telescope lsp_references theme=dropdown<cr>", "References", },
-        f = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format", },
-        d = { "<cmd>Trouble diagnostics open focus=true filter.buf=0<cr>", "Document Diagnostics", },
-        D = { "<cmd>Trouble diagnostics open focus=true<cr>", "Workspace Diagnostics", },
-      },
-    }, { prefix = "<leader>", })
   end,
 })
 
@@ -37,22 +28,21 @@ if vim.g.enable_crates_nvim == 1 then
   vim.api.nvim_create_autocmd("BufRead", {
     pattern = "Cargo.toml",
     callback = function(args)
-      wk.register({
-        r = {
-          name = "crates",
-          t = { crates.toggle, "Toggle", },
-          r = { crates.reload, "Reload", },
-          v = { crates.show_versions_popup, "Show Versions", },
-          f = { crates.show_features_popup, "Show Features", },
-          d = { crates.show_dependencies_popup, "Show Dependencies", },
-          e = { crates.expand_plain_crate_to_inline_table, "Expand Crate", },
-          E = { crates.extract_crate_into_table, "Extract Crate", },
-          u = { crates.update_crate, "Update Crate", },
-          a = { crates.update_all_crates, "Update All Crates", },
-          U = { crates.upgrade_crate, "Upgrade Crate", },
-          A = { crates.upgrade_all_crates, "Upgrade All Crates", },
-        },
-      }, { prefix = "<leader>", bufnr = args.bufnr, })
+      wk.add({
+        buffer = args.buf,
+        { "<leader>r",  group = "crates"},
+        { "<leader>rt", crates.toggle,                             desc = "Toggle", },
+        { "<leader>rr", crates.reload,                             desc = "Reload", },
+        { "<leader>rv", crates.show_versions_popup,                desc = "Show Versions", },
+        { "<leader>rf", crates.show_features_popup,                desc = "Show Features", },
+        { "<leader>rd", crates.show_dependencies_popup,            desc = "Show Dependencies", },
+        { "<leader>re", crates.expand_plain_crate_to_inline_table, desc = "Expand Crate", },
+        { "<leader>rE", crates.extract_crate_into_table,           desc = "Extract Crate", },
+        { "<leader>ru", crates.update_crate,                       desc = "Update Crate", },
+        { "<leader>ra", crates.update_all_crates,                  desc = "Update All Crates", },
+        { "<leader>rU", crates.upgrade_crate,                      desc = "Upgrade Crate", },
+        { "<leader>rA", crates.upgrade_all_crates,                 desc = "Upgrade All Crates", },
+      })
     end,
   })
 end
@@ -60,26 +50,22 @@ end
 -- DAP Bindings
 local dap = require("dap")
 
-wk.register({
-  d = {
-    name = "debug",
-    b = { dap.toggle_breakpoint, "Toggle Breakpoint", },
-    i = { "<cmd>lua require('dapui').eval(nil, { enter = true })<cr>", "Inspect", },
-    c = { dap.continue, "Continue", },
-    C = { dap.run_to_cursor, "Run To Cursor", },
-    I = { dap.step_into, "Step Into", },
-    n = { dap.step_over, "Step Over", },
-    O = { dap.step_out, "Step Out", },
-    r = { dap.restart, "Restart", },
-    t = { dap.terminate, "Terminate", },
-    l = { dap.run_last, "Run Last", },
-    u = {
-      name = "ui",
-      o = { require("dapui").open, "Open", },
-      c = { require("dapui").close, "Close", },
-    },
-  },
-}, { prefix = "<leader>", })
+wk.add({
+  { "<leader>d",   group = "debug", },
+  { "<leader>db",  dap.toggle_breakpoint,                                       desc = "Toggle Breakpoint", },
+  { "<leader>di",  "<cmd>lua require('dapui').eval(nil, { enter = true })<cr>", desc = "Inspect", },
+  { "<leader>dc",  dap.continue,                                                desc = "Continue", },
+  { "<leader>dC",  dap.run_to_cursor,                                           desc = "Run To Cursor", },
+  { "<leader>dI",  dap.step_into,                                               desc = "Step Into", },
+  { "<leader>dn",  dap.step_over,                                               desc = "Step Over", },
+  { "<leader>dO",  dap.step_out,                                                desc = "Step Out", },
+  { "<leader>dr",  dap.restart,                                                 desc = "Restart", },
+  { "<leader>dt",  dap.terminate,                                               desc = "Terminate", },
+  { "<leader>dl",  dap.run_last,                                                desc = "Run Last", },
+  { "<leader>du",  group = "ui", },
+  { "<leader>duo", require("dapui").open,                                       desc = "Open", },
+  { "<leader>duc", require("dapui").close,                                      desc = "Close", },
+})
 
 -- ToggleTerm Bindings
 vim.keymap.set("i", "<C-t>", "<cmd>ToggleTerm direction=float<cr>")
@@ -87,28 +73,19 @@ vim.keymap.set("n", "<C-t>", "<cmd>ToggleTerm direction=float<cr>")
 vim.keymap.set("t", "<C-t>", "<cmd>ToggleTerm direction=float<cr>")
 
 -- General Normal-Mode Bindings
-wk.register({
-  o = {
-    name = "open",
-    t = { "<cmd>NvimTreeToggle<cr>", "NvimTree", },
-    m = {
-      name = "mini map",
-      m = { MiniMap.toggle, "Open", },
-      r = { MiniMap.refresh, "Refresh", },
-    },
-    s = {
-      name = "spectre",
-      s = { "<cmd>lua require('spectre').toggle()<CR>", "Toggle", },
-      w = { "<cmd>lua require('spectre').open_visual({select_word=true})<CR>", "Search Current Word", },
-      f = { "<cmd>lua require('spectre').open_file_search({select_word=true})<CR>", "Search Current File", },
-    },
-  },
-  f = {
-    name = "find",
-    f = { "<cmd>Telescope find_files theme=dropdown<cr>", "Find Files", },
-    g = { "<cmd>Telescope live_grep theme=dropdown<cr>", "Live Grep", },
-    b = { "<cmd>Telescope buffers theme=dropdown<cr>", "Buffers", },
-    h = { "<cmd>Telescope help_tags theme=dropdown<cr>", "Help Tags", },
-  },
-  h = hop_bindings,
-}, { prefix = "<leader>", })
+wk.add({
+  { "<leader>f",   group = "find", },
+  { "<leader>fb",  "<cmd>Telescope buffers theme=dropdown<cr>",                            desc = "Buffers", },
+  { "<leader>ff",  "<cmd>Telescope find_files theme=dropdown<cr>",                         desc = "Find Files", },
+  { "<leader>fg",  "<cmd>Telescope live_grep theme=dropdown<cr>",                          desc = "Live Grep", },
+  { "<leader>fh",  "<cmd>Telescope help_tags theme=dropdown<cr>",                          desc = "Help Tags", },
+  { "<leader>o",   group = "open", },
+  { "<leader>om",  group = "mini map", },
+  { "<leader>omm", MiniMap.toggle,                                                         desc = "Open", },
+  { "<leader>omr", MiniMap.refresh,                                                        desc = "Refresh", },
+  { "<leader>os",  group = "spectre", },
+  { "<leader>osf", "<cmd>lua require('spectre').open_file_search({select_word=true})<CR>", desc = "Search Current File", },
+  { "<leader>oss", "<cmd>lua require('spectre').toggle()<CR>",                             desc = "Toggle", },
+  { "<leader>osw", "<cmd>lua require('spectre').open_visual({select_word=true})<CR>",      desc = "Search Current Word", },
+  { "<leader>ot",  "<cmd>NvimTreeToggle<cr>",                                              desc = "NvimTree", },
+})
