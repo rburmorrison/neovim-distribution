@@ -1,6 +1,12 @@
 return {
   {
     "nvim-telescope/telescope.nvim",
+    keys = {
+      { "<leader>fb", "<cmd>Telescope buffers theme=dropdown<cr>",    desc = "Buffers", },
+      { "<leader>ff", "<cmd>Telescope find_files theme=dropdown<cr>", desc = "Find Files", },
+      { "<leader>fg", "<cmd>Telescope live_grep theme=dropdown<cr>",  desc = "Live Grep", },
+      { "<leader>fh", "<cmd>Telescope help_tags theme=dropdown<cr>",  desc = "Help Tags", },
+    },
     tag = "0.1.6",
     dependencies = { "nvim-lua/plenary.nvim", },
     config = function()
@@ -26,6 +32,9 @@ return {
 
   {
     "nvim-tree/nvim-tree.lua",
+    keys = {
+      { "<leader>ot", "<cmd>NvimTreeToggle<cr>", desc = "NvimTree" }
+    },
     dependencies = { "nvim-tree/nvim-web-devicons", },
     config = function()
       vim.g.loaded_netrw = 1

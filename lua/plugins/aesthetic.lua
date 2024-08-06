@@ -54,6 +54,11 @@ return {
 
   {
     "akinsho/toggleterm.nvim",
+    keys = {
+      { "<C-t>", "<cmd>ToggleTerm direction=float<cr>", mode = "i" },
+      { "<C-t>", "<cmd>ToggleTerm direction=float<cr>", mode = "n" },
+      { "<C-t>", "<cmd>ToggleTerm direction=float<cr>", mode = "t" },
+    },
     version = "*",
     config = true,
   },

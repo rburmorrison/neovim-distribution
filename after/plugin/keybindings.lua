@@ -67,18 +67,8 @@ wk.add({
   { "<leader>duc", require("dapui").close,                                      desc = "Close", },
 })
 
--- ToggleTerm Bindings
-vim.keymap.set("i", "<C-t>", "<cmd>ToggleTerm direction=float<cr>")
-vim.keymap.set("n", "<C-t>", "<cmd>ToggleTerm direction=float<cr>")
-vim.keymap.set("t", "<C-t>", "<cmd>ToggleTerm direction=float<cr>")
-
--- General Normal-Mode Bindings
+-- Group Definitions
 wk.add({
   { "<leader>f",  group = "find", },
-  { "<leader>fb", "<cmd>Telescope buffers theme=dropdown<cr>",    desc = "Buffers", },
-  { "<leader>ff", "<cmd>Telescope find_files theme=dropdown<cr>", desc = "Find Files", },
-  { "<leader>fg", "<cmd>Telescope live_grep theme=dropdown<cr>",  desc = "Live Grep", },
-  { "<leader>fh", "<cmd>Telescope help_tags theme=dropdown<cr>",  desc = "Help Tags", },
   { "<leader>o",  group = "open", },
-  { "<leader>ot", "<cmd>NvimTreeToggle<cr>",                      desc = "NvimTree", },
 })
