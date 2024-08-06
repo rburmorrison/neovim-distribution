@@ -2,6 +2,7 @@
 " -- User Settings -- "
 " ------------------- "
 let mapleader = " "
+let maplocalleader = ","
 let enable_crates_nvim = 1
 
 " Basic Settings {{{
