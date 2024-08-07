@@ -47,26 +47,6 @@ if vim.g.enable_crates_nvim == 1 then
   })
 end
 
--- DAP Bindings
-local dap = require("dap")
-
-wk.add({
-  { "<leader>d",   group = "debug", },
-  { "<leader>db",  dap.toggle_breakpoint,                                       desc = "Toggle Breakpoint", },
-  { "<leader>di",  "<cmd>lua require('dapui').eval(nil, { enter = true })<cr>", desc = "Inspect", },
-  { "<leader>dc",  dap.continue,                                                desc = "Continue", },
-  { "<leader>dC",  dap.run_to_cursor,                                           desc = "Run To Cursor", },
-  { "<leader>dI",  dap.step_into,                                               desc = "Step Into", },
-  { "<leader>dn",  dap.step_over,                                               desc = "Step Over", },
-  { "<leader>dO",  dap.step_out,                                                desc = "Step Out", },
-  { "<leader>dr",  dap.restart,                                                 desc = "Restart", },
-  { "<leader>dt",  dap.terminate,                                               desc = "Terminate", },
-  { "<leader>dl",  dap.run_last,                                                desc = "Run Last", },
-  { "<leader>du",  group = "ui", },
-  { "<leader>duo", require("dapui").open,                                       desc = "Open", },
-  { "<leader>duc", require("dapui").close,                                      desc = "Close", },
-})
-
 -- Group Definitions
 wk.add({
   { "<leader>f",  group = "find", },
