@@ -46,9 +46,3 @@ if vim.g.enable_crates_nvim == 1 then
     end,
   })
 end
-
--- Group Definitions
-wk.add({
-  { "<leader>f",  group = "find", },
-  { "<leader>o",  group = "open", },
-})
