@@ -7,7 +7,7 @@ return {
       { "<leader>fg", "<cmd>Telescope live_grep theme=dropdown<cr>",  desc = "Live Grep", },
       { "<leader>fh", "<cmd>Telescope help_tags theme=dropdown<cr>",  desc = "Help Tags", },
     },
-    tag = "0.1.6",
+    tag = "0.1.8",
     dependencies = { "nvim-lua/plenary.nvim", },
     config = function()
       local actions = require("telescope.actions")
