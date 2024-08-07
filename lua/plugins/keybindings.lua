@@ -9,6 +9,9 @@ return {
     config = function ()
       local wk = require("which-key")
 
+      -----------------------
+      -- Group Definitions --
+      -----------------------
       wk.add({
         { "<leader>f",  group = "find", },
         { "<leader>o",  group = "open", },
