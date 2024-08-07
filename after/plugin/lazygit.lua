@@ -12,17 +12,17 @@ if vim.fn.executable("lazygit") == 1 then
       vim.cmd("startinsert!")
 
       local opts = { noremap = true, silent = true };
-      vim.api.nvim_buf_set_keymap(term.bufnr, "i", "<C-g>", "<cmd>close<CR>", opts)
-      vim.api.nvim_buf_set_keymap(term.bufnr, "n", "<C-g>", "<cmd>close<CR>", opts)
-      vim.api.nvim_buf_set_keymap(term.bufnr, "t", "<C-g>", "<cmd>close<CR>", opts)
+      vim.api.nvim_buf_set_keymap(term.bufnr, "i", "<C-g>", "<cmd>close<cr>", opts)
+      vim.api.nvim_buf_set_keymap(term.bufnr, "n", "<C-g>", "<cmd>close<cr>", opts)
+      vim.api.nvim_buf_set_keymap(term.bufnr, "t", "<C-g>", "<cmd>close<cr>", opts)
     end,
   })
 
-  function _lazygit_toggle()
+  function LazygitToggle()
     lazygit:toggle()
   end
 
-  vim.keymap.set("i", "<C-g>", "<cmd>lua _lazygit_toggle()<CR>")
-  vim.keymap.set("n", "<C-g>", "<cmd>lua _lazygit_toggle()<CR>")
-  vim.keymap.set("t", "<C-g>", "<cmd>lua _lazygit_toggle()<CR>")
+  vim.keymap.set("i", "<C-g>", "<cmd>lua LazygitToggle()<cr>")
+  vim.keymap.set("n", "<C-g>", "<cmd>lua LazygitToggle()<cr>")
+  vim.keymap.set("t", "<C-g>", "<cmd>lua LazygitToggle()<cr>")
 end
