@@ -55,30 +55,82 @@ endif
 augroup CustomFileTypeSettings
     autocmd!
 
-    " Reasonable Defaults
-    autocmd FileType *
-                \ setlocal colorcolumn=81,121 |
-                \ setlocal expandtab          |
-                \ setlocal shiftwidth=2       |
-                \ setlocal tabstop=2          |
-                \ setlocal textwidth=80       |
+    " ------------------------- "
+    " -- Reasonable Defaults -- "
+    " ------------------------- "
+
+    function! ConfigDefaults()
+        setlocal colorcolumn=81,121
+        setlocal expandtab
+        setlocal shiftwidth=2
+        setlocal tabstop=2
+        setlocal textwidth=80
+    endfunction
+
+    autocmd FileType * call ConfigDefaults()
 
     " Language-specific settings are defined below. This is done with autocmd in
     " order to avoid some complications that occur when sourcing the NeoVim
     " configuration from `~/.vimrc`, as well as to avoid repeating files in the
     " `ftplugin` directory.
-    "
-    " Languages accounted for: (aligned with autocmd calls below)
-    "                c,cpp,rust,go,bash,javascript,typescript,python,ruby,sql,vim,lua,json,toml,yaml,markdown,gitcommit
 
-    " Spell-Checked Files
-    autocmd FileType c,cpp,rust,go,bash,javascript,typescript,python,ruby,sql,vim,lua,json,toml,yaml,markdown,gitcommit
-                \ setlocal spell
+    " -------------------- "
+    " -- Spell Checking -- "
+    " -------------------- "
 
-    " Four-Width Indent Files
-    autocmd FileType c,cpp,rust,go,bash,python,sql,vim
-                \ setlocal shiftwidth=4 |
-                \ setlocal tabstop=4    |
+    let spell_checked =
+                \ [
+                \   "bash",
+                \   "c",
+                \   "clojure",
+                \   "cpp",
+                \   "gitcommit",
+                \   "go",
+                \   "javascript",
+                \   "json",
+                \   "lua",
+                \   "markdown",
+                \   "python",
+                \   "ruby",
+                \   "rust",
+                \   "sql",
+                \   "toml",
+                \   "typescript",
+                \   "yaml",
+                \ ]
+
+    function! ConfigSpelling()
+        setlocal spell
+    endfunction
+
+    for ft in spell_checked
+        execute "autocmd FileType " . ft . " call ConfigSpelling()"
+    endfor
+
+    " ------------------------ "
+    " -- Four-Width Indents -- "
+    " ------------------------ "
+
+    let four_width =
+                \ [
+                \   "bash",
+                \   "c",
+                \   "cpp",
+                \   "go",
+                \   "python",
+                \   "rust",
+                \   "sql",
+                \   "vim",
+                \ ]
+
+    function! ConfigFourWidth()
+        setlocal shiftwidth=4
+        setlocal tabstop=4
+    endfunction
+
+    for ft in four_width
+        execute "autocmd FileType " . ft . " call ConfigFourWidth()"
+    endfor
 augroup END
 " }}}
 
