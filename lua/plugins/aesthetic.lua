@@ -1,11 +1,60 @@
 return {
   {
-    "folke/tokyonight.nvim",
-    lazy = false,
+    "catppuccin/nvim",
+    name = "catppuccin",
     priority = 1000,
-    opts = {},
     config = function()
-      vim.cmd [[colorscheme tokyonight]]
+      vim.cmd [[colorscheme catppuccin]]
+    end,
+  },
+
+  {
+    "uga-rosa/ccc.nvim",
+    keys = {
+      { "<leader>cc", "<cmd>CccConvert<cr>", mode = "n", desc = "Color Convert", },
+      { "<leader>cp", "<cmd>CccPick<cr>",    mode = "n", desc = "Color Picker", },
+    },
+    lazy = false,
+    version = "*",
+    config = function()
+      local ccc = require("ccc")
+      local output = ccc.output
+      local picker = ccc.picker
+
+      require("ccc").setup({
+        highlighter = {
+          auto_enable = true,
+          lsp = true,
+        },
+        convert = {
+          { picker.hex,     output.css_rgb, },
+          { picker.css_rgb, output.hex, },
+        },
+      })
+    end,
+  },
+
+  {
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons", },
+    opts = {
+      options = { theme = "catppuccin", },
+    },
+  },
+
+  {
+    "j-hui/fidget.nvim",
+    version = "*",
+    opts = {},
+  },
+
+  {
+    "goolord/alpha-nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons", },
+    config = function()
+      local startify = require("alpha.themes.startify")
+      startify.file_icons.provider = "devicons"
+      require("alpha").setup(startify.config)
     end,
   },
 

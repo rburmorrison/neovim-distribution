@@ -6,6 +6,11 @@ return {
     config = function()
       vim.g.rustaceanvim = {
         server = {
+          default_settings = {
+            ["rust-analyzer"] = {
+              check = { command = "check", },
+            },
+          },
           on_attach = function(_, bufnr)
             vim.lsp.inlay_hint.enable(true, { bufnr = bufnr, })
           end,
