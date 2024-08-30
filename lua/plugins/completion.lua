@@ -23,7 +23,6 @@ return {
 
   {
     "neovim/nvim-lspconfig",
-    build = ":COQdeps",
     lazy = false,
     dependencies = {
       { "hrsh7th/cmp-nvim-lsp", },
