@@ -1,16 +1,6 @@
 # Vim/NeoVim Configuration
 
-This is primarily a NeoVim configuration that is compatible with Vim. In order
-to use the configuration, add the following to your `~/.vimrc` after installing.
-
-```
-source ~/.config/nvim/init.vim
-```
-
-The runtime does not need to be modified since all Vim-specific logic is handled
-in `init.vim`, including file-specific settings.
-
-**Note:** Last tested with NeoVim v0.10.0-nightly.
+**Note:** Last tested with NeoVim v0.10.1.
 
 ## Installing
 
