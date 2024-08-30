@@ -81,34 +81,8 @@ return {
           "lua_ls",
           "rust_analyzer",
           "emmet_language_server",
-          "jinja_lsp",
         },
       })
-
-      ---------------
-      -- Jinja LSP --
-      ---------------
-
-      local lspconfig = require("lspconfig")
-      local lspconfig_configs = require("lspconfig.configs")
-
-      if not lspconfig_configs.jinja_lsp then
-        lspconfig_configs.jinja_lsp = {
-          default_config = {
-            name = "jinja-lsp",
-            cmd = { "jinja-lsp", },
-            filetypes = { "htmldjango", "rust", },
-            root_dir = function(fname)
-              return lspconfig.util.find_git_ancestor(fname)
-            end,
-            init_options = {
-              templates = "./templates",
-              backend = { "./src", },
-              lang = "rust",
-            },
-          },
-        }
-      end
 
       ----------------------------
       -- Automatic Server Setup --
