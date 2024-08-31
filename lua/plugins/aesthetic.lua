@@ -7,7 +7,6 @@ return {
       gitsigns = true,
       beacon = true,
       barbar = true,
-      colorful_winsep = { enabled = true, color = "yellow", },
       fidget = true,
       mason = true,
       lsp_trouble = true,
