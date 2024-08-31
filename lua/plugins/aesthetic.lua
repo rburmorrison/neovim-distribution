@@ -144,6 +144,7 @@ return {
         "python",
         "regex",
         "rust",
+        "scss",
         "sql",
         "toml",
         "typescript",
