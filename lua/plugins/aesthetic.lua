@@ -3,9 +3,63 @@ return {
     "catppuccin/nvim",
     name = "catppuccin",
     priority = 1000,
+    opts = {
+      gitsigns = true,
+      beacon = true,
+      barbar = true,
+      colorful_winsep = { enabled = true, color = "yellow", },
+      fidget = true,
+      mason = true,
+      lsp_trouble = true,
+      which_key = true,
+    },
     config = function()
       vim.cmd [[colorscheme catppuccin]]
     end,
+  },
+
+  { "danilamihailov/beacon.nvim", },
+
+  { "HiPhish/rainbow-delimiters.nvim", },
+
+  {
+    "rasulomaroff/reactive.nvim",
+    opts = {
+      load = { "catppuccin-mocha-cursor", "catppuccin-mocha-cursorline", },
+      builtin = {
+        cursorline = true,
+        cursor = true,
+        modemsg = true,
+      },
+    },
+  },
+
+  {
+    "romgrk/barbar.nvim",
+    dependencies = {
+      "lewis6991/gitsigns.nvim",
+      "nvim-tree/nvim-web-devicons",
+    },
+    init = function() vim.g.barbar_auto_setup = false end,
+    opts = {},
+    version = "^1.0.0", -- optional: only update when a new 1.x version is released
+  },
+
+  {
+    "nvim-zh/colorful-winsep.nvim",
+    config = true,
+    event = { "WinLeave", },
+  },
+
+  {
+    "utilyre/barbecue.nvim",
+    name = "barbecue",
+    version = "*",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons",
+    },
+    opts = {},
   },
 
   {
