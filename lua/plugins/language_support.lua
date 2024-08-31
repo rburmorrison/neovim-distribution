@@ -191,9 +191,11 @@ return {
       require("mason").setup()
       require("mason-lspconfig").setup({
         ensure_installed = {
+          "cssls",
+          "emmet_language_server",
+          "html",
           "lua_ls",
           "rust_analyzer",
-          "emmet_language_server",
         },
       })
 
