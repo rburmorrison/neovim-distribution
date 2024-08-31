@@ -43,6 +43,7 @@ return {
     keys = {
       { "gt", "<cmd>BufferNext<cr>",     mode = "n", desc = "Next Tab", },
       { "gT", "<cmd>BufferPrevious<cr>", mode = "n", desc = "Previous Tab", },
+      { "gp", "<cmd>BufferPick<cr>", mode = "n", desc = "Pick Buffer", },
     },
     init = function() vim.g.barbar_auto_setup = false end,
     opts = {},
