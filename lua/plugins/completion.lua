@@ -61,6 +61,10 @@ return {
           ["<C-e>"] = cmp.mapping.abort(),
           ["<CR>"] = cmp.mapping.confirm({ select = true, }),
         }),
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
         sources = cmp.config.sources({
           { name = "nvim_lsp", },
           { name = "vsnip", },
@@ -80,6 +84,28 @@ return {
           }),
         },
       })
+
+      --------------------------
+      -- Border Configuration --
+      --------------------------
+
+      local border = {
+        { "╭", "FloatBorder", },
+        { "─", "FloatBorder", },
+        { "╮", "FloatBorder", },
+        { "│", "FloatBorder", },
+        { "╯", "FloatBorder", },
+        { "─", "FloatBorder", },
+        { "╰", "FloatBorder", },
+        { "│", "FloatBorder", },
+      }
+
+      local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+      function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+        opts = opts or {}
+        opts.border = opts.border or border
+        return orig_util_open_floating_preview(contents, syntax, opts, ...)
+      end
 
       -----------------------
       -- LSP Configuration --
