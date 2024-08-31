@@ -30,22 +30,21 @@ return {
     "neovim/nvim-lspconfig",
     lazy = false,
     dependencies = {
-      { "hrsh7th/cmp-nvim-lsp", },
-      { "hrsh7th/cmp-buffer", },
-      { "hrsh7th/cmp-path", },
-      { "hrsh7th/cmp-cmdline", },
-      { "hrsh7th/nvim-cmp", },
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-cmdline",
+      "hrsh7th/nvim-cmp",
 
-      { "hrsh7th/cmp-vsnip", },
-      { "hrsh7th/vim-vsnip", },
+      "hrsh7th/cmp-vsnip",
+      "hrsh7th/vim-vsnip",
 
-      { "williamboman/mason.nvim", },
-      { "williamboman/mason-lspconfig.nvim", },
-      { "mrcjkb/rustaceanvim", },
+      "onsails/lspkind.nvim",
+
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+      "mrcjkb/rustaceanvim",
     },
-    init = function()
-      vim.g.coq_settings = { auto_start = true, }
-    end,
     config = function()
       local cmp = require("cmp")
 
@@ -54,10 +53,6 @@ return {
           expand = function(args)
             vim.fn["vsnip#anonymous"](args.body)
           end,
-        },
-        window = {
-          completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered(),
         },
         mapping = cmp.mapping.preset.insert({
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
@@ -74,6 +69,16 @@ return {
         }, {
           { name = "path", },
         }),
+        formatting = {
+          format = require("lspkind").cmp_format({
+            mode = "symbol",
+            maxwidth = 32,
+            before = function(_, vim_item)
+              vim_item.menu = ""
+              return vim_item
+            end,
+          }),
+        },
       })
 
       -----------------------
@@ -112,6 +117,11 @@ return {
         end,
         ["rust_analyzer"] = function()
           -- Disabled in favor of rustaceanvim.
+        end,
+        ["html"] = function()
+          require("lspconfig").html.setup({
+            filetypes = { "html", "htmldjango", },
+          })
         end,
       })
     end,
