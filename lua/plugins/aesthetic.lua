@@ -4,17 +4,43 @@ return {
     name = "catppuccin",
     priority = 1000,
     opts = {
-      gitsigns = true,
-      beacon = true,
       barbar = true,
-      fidget = true,
-      mason = true,
+      beacon = true,
+      gitsigns = true,
       lsp_trouble = true,
+      mason = true,
+      noice = true,
       which_key = true,
     },
     config = function()
       vim.cmd [[colorscheme catppuccin]]
     end,
+  },
+
+  -- lazy.nvim
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {
+      lsp = {
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true,
+        },
+      },
+      presets = {
+        bottom_search = true,
+        command_palette = true,
+        long_message_to_split = true,
+        inc_rename = false,
+        lsp_doc_border = false,
+      },
+    },
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
   },
 
   { "danilamihailov/beacon.nvim", },
@@ -93,12 +119,6 @@ return {
     opts = {
       options = { theme = "catppuccin", },
     },
-  },
-
-  {
-    "j-hui/fidget.nvim",
-    version = "*",
-    opts = {},
   },
 
   {
