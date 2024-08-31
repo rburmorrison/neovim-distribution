@@ -62,3 +62,11 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.shiftwidth = 4
   end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "rust,markdown",
+  group = vim.api.nvim_create_augroup("TextwidthSettings", {}),
+  callback = function()
+    vim.opt_local.textwidth = 80
+  end,
+})
