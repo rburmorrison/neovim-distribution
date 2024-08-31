@@ -4,43 +4,17 @@ return {
     name = "catppuccin",
     priority = 1000,
     opts = {
-      barbar = true,
-      beacon = true,
       gitsigns = true,
-      lsp_trouble = true,
+      beacon = true,
+      barbar = true,
+      fidget = true,
       mason = true,
-      noice = true,
+      lsp_trouble = true,
       which_key = true,
     },
     config = function()
       vim.cmd [[colorscheme catppuccin]]
     end,
-  },
-
-  -- lazy.nvim
-  {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    opts = {
-      lsp = {
-        override = {
-          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-          ["vim.lsp.util.stylize_markdown"] = true,
-          ["cmp.entry.get_documentation"] = true,
-        },
-      },
-      presets = {
-        bottom_search = true,
-        command_palette = true,
-        long_message_to_split = true,
-        inc_rename = false,
-        lsp_doc_border = false,
-      },
-    },
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
-    },
   },
 
   { "danilamihailov/beacon.nvim", },
@@ -61,9 +35,14 @@ return {
 
   {
     "romgrk/barbar.nvim",
+    lazy = false,
     dependencies = {
       "lewis6991/gitsigns.nvim",
       "nvim-tree/nvim-web-devicons",
+    },
+    keys = {
+      { "gt", "<cmd>BufferNext<cr>",     mode = "n", desc = "Next Tab", },
+      { "gT", "<cmd>BufferPrevious<cr>", mode = "n", desc = "Previous Tab", },
     },
     init = function() vim.g.barbar_auto_setup = false end,
     opts = {},
@@ -119,6 +98,12 @@ return {
     opts = {
       options = { theme = "catppuccin", },
     },
+  },
+
+  {
+    "j-hui/fidget.nvim",
+    version = "*",
+    opts = {},
   },
 
   {
