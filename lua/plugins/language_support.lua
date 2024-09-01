@@ -138,7 +138,11 @@ return {
             mode = "symbol",
             maxwidth = 32,
             before = function(_, vim_item)
-              vim_item.menu = ""
+              local max_length = 32
+              local m = vim_item.menu or ""
+              if #m > max_length then
+                vim_item.menu = string.sub(m, 1, max_length) .. "..."
+              end
               return vim_item
             end,
           }),
