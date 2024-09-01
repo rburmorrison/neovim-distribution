@@ -31,7 +31,7 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead", }, {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "lua,rust,sh,html,markdown,html,css,javascript,typescript",
+  pattern = "lua,rust,sh,html,markdown,html,css,javascript,typescript,htmldjango,scss,sass",
   group = vim.api.nvim_create_augroup("VisualSettings", {}),
   callback = function()
     vim.opt_local.number = true
