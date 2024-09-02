@@ -201,6 +201,7 @@ return {
           "html",
           "lua_ls",
           "rust_analyzer",
+          "taplo",
         },
       })
 
