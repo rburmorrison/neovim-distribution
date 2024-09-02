@@ -74,29 +74,11 @@ return {
   },
 
   {
-    "uga-rosa/ccc.nvim",
-    keys = {
-      { "<leader>cc", "<cmd>CccConvert<cr>", mode = "n", desc = "Color Convert", },
-      { "<leader>cp", "<cmd>CccPick<cr>",    mode = "n", desc = "Color Picker", },
+    "brenoprata10/nvim-highlight-colors",
+    opts = {
+      render = "virtual",
+      virtual_symbol = "",
     },
-    lazy = false,
-    version = "*",
-    config = function()
-      local ccc = require("ccc")
-      local output = ccc.output
-      local picker = ccc.picker
-
-      require("ccc").setup({
-        highlighter = {
-          auto_enable = true,
-          lsp = true,
-        },
-        convert = {
-          { picker.hex,     output.css_rgb, },
-          { picker.css_rgb, output.hex, },
-        },
-      })
-    end,
   },
 
   {
