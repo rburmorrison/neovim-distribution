@@ -68,6 +68,7 @@ return {
       "saadparwaiz1/cmp_luasnip",
 
       "onsails/lspkind.nvim",
+      "brenoprata10/nvim-highlight-colors",
 
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
@@ -134,18 +135,31 @@ return {
           { name = "path", },
         }),
         formatting = {
-          format = require("lspkind").cmp_format({
-            mode = "symbol",
-            maxwidth = 32,
-            before = function(_, vim_item)
-              local max_length = 32
-              local m = vim_item.menu or ""
-              if #m > max_length then
-                vim_item.menu = string.sub(m, 1, max_length) .. "..."
-              end
-              return vim_item
-            end,
-          }),
+          format = function(entry, vim_item)
+            local color_item = require("nvim-highlight-colors").format(entry, { kind = vim_item.kind, })
+
+            ---@diagnostic disable-next-line: redefined-local
+            local vim_item = require("lspkind").cmp_format({
+              mode = "symbol",
+              maxwidth = 32,
+              ---@diagnostic disable-next-line: redefined-local
+              before = function(_, vim_item)
+                local max_length = 32
+                local m = vim_item.menu or ""
+                if #m > max_length then
+                  vim_item.menu = string.sub(m, 1, max_length) .. "..."
+                end
+                return vim_item
+              end,
+            })(entry, vim_item)
+
+            if color_item.abbr_hl_group then
+              vim_item.kind_hl_group = color_item.abbr_hl_group
+              vim_item.kind = color_item.abbr
+            end
+
+            return vim_item
+          end,
         },
       })
 
