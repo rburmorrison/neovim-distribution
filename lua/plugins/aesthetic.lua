@@ -40,6 +40,11 @@ return {
     },
   },
 
+  {
+    "karb94/neoscroll.nvim",
+    opts = {},
+  },
+
   { "danilamihailov/beacon.nvim", },
 
   { "HiPhish/rainbow-delimiters.nvim", },
