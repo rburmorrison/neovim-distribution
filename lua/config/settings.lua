@@ -22,16 +22,42 @@ vim.wo.foldlevel = 99
 -- FileType Settings --
 -----------------------
 
+local html_settings_patterns = {
+  "*.html",
+  "*.j2",
+  "*.jinja",
+  "*.jinja2",
+}
+
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead", }, {
-  pattern = "*.html,*.j2,*.jinja,*.jinja2",
+  pattern = table.concat(html_settings_patterns, ","),
   group = vim.api.nvim_create_augroup("HTMLSettings", {}),
   callback = function()
     vim.opt_local.ft = "htmldjango"
   end,
 })
 
+local visual_settings_patterns = {
+  "css",
+  "html",
+  "html",
+  "htmldjango",
+  "javascript",
+  "json",
+  "lua",
+  "markdown",
+  "rust",
+  "sass",
+  "scss",
+  "sh",
+  "toml",
+  "typescript",
+  "yaml",
+  "zsh",
+}
+
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "lua,rust,sh,html,markdown,html,css,javascript,typescript,htmldjango,scss,sass",
+  pattern = table.concat(visual_settings_patterns, ","),
   group = vim.api.nvim_create_augroup("VisualSettings", {}),
   callback = function()
     vim.opt_local.number = true
@@ -39,16 +65,28 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+local spell_checked_settings_patterns = {
+  "html",
+  "htmldjango",
+  "markdown",
+}
+
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "markdown,html",
+  pattern = table.concat(spell_checked_settings_patterns, ","),
   group = vim.api.nvim_create_augroup("SpellCheckedSettings", {}),
   callback = function()
     vim.opt_local.spell = true
   end,
 })
 
+local large_indent_settings_languages = {
+  "c",
+  "cpp",
+  "rust",
+}
+
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "rust,c,cpp",
+  pattern = table.concat(large_indent_settings_languages, ","),
   group = vim.api.nvim_create_augroup("LargeIndentSettings", {}),
   callback = function()
     vim.opt_local.expandtab = true
@@ -57,8 +95,12 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+local real_tab_settings_patterns = {
+  "make",
+}
+
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "make",
+  pattern = table.concat(real_tab_settings_patterns, ","),
   group = vim.api.nvim_create_augroup("RealTabSettings", {}),
   callback = function()
     vim.opt_local.expandtab = false
@@ -67,9 +109,14 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+local text_width_settings_patterns = {
+  "markdown",
+  "rust",
+}
+
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "rust,markdown",
-  group = vim.api.nvim_create_augroup("TextwidthSettings", {}),
+  pattern = table.concat(text_width_settings_patterns, ","),
+  group = vim.api.nvim_create_augroup("TextWidthSettings", {}),
   callback = function()
     vim.opt_local.textwidth = 80
   end,
