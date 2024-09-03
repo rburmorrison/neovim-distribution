@@ -89,25 +89,30 @@ return {
 
   {
     "nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons", },
-    opts = {
-      options = { theme = "catppuccin", },
-      sections = {
-        lualine_c = {
-          {
-            require("noice").api.status.command.get,
-            cond = require("noice").api.status.command.has,
-            color = { fg = "#f9e2af", },
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+      "folke/noice.nvim",
+    },
+    config = function()
+      require("lualine").setup({
+        options = { theme = "catppuccin", },
+        sections = {
+          lualine_c = {
+            {
+              require("noice").api.status.command.get,
+              cond = require("noice").api.status.command.has,
+              color = { fg = "#f9e2af", },
+            },
+          },
+          lualine_x = {
+            "encoding",
+            "fileformat",
+            "filetype",
+            "filename",
           },
         },
-        lualine_x = {
-          "encoding",
-          "fileformat",
-          "filetype",
-          "filename",
-        },
-      },
-    },
+      })
+    end,
   },
 
   {
