@@ -3,6 +3,19 @@ return {
   "tpope/vim-commentary",
 
   {
+    "NeogitOrg/neogit",
+    keys = {
+      { "<C-g>", "<cmd>lua require('neogit').open()<cr>", mode = "n", desc = "Neogit", },
+    },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+    opts = {},
+  },
+
+  {
     "echasnovski/mini.align",
     version = "*",
     opts = {},
