@@ -92,6 +92,21 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons", },
     opts = {
       options = { theme = "catppuccin", },
+      sections = {
+        lualine_c = {
+          {
+            require("noice").api.status.command.get,
+            cond = require("noice").api.status.command.has,
+            color = { fg = "#f9e2af", },
+          },
+        },
+        lualine_x = {
+          "encoding",
+          "fileformat",
+          "filetype",
+          "filename",
+        },
+      },
     },
   },
 
