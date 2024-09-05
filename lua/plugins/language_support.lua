@@ -210,12 +210,14 @@ return {
       require("mason-lspconfig").setup({
         ensure_installed = {
           "bashls",
+          "biome",
           "cssls",
           "emmet_language_server",
           "html",
           "lua_ls",
           "rust_analyzer",
           "taplo",
+          "tsserver",
         },
       })
 
