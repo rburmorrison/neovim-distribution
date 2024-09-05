@@ -156,7 +156,7 @@ return {
         "yaml",
       },
       highlight = {
-        enabled = true,
+        enable = true,
         additional_vim_regex_highlighting = true,
       },
     },
