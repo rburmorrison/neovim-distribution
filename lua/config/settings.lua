@@ -39,6 +39,7 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead", }, {
 
 local visual_settings_patterns = {
   "css",
+  "gitignore",
   "html",
   "html",
   "htmldjango",
