@@ -5,7 +5,7 @@ return {
   {
     "NeogitOrg/neogit",
     keys = {
-      { "<C-g>", "<cmd>lua require('neogit').open()<cr>", mode = "n", desc = "Neogit", },
+      { "<leader>og", "<cmd>lua require('neogit').open()<cr>", mode = "n", desc = "Neogit", },
     },
     dependencies = {
       "nvim-lua/plenary.nvim",

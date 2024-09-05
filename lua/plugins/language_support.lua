@@ -1,3 +1,10 @@
+local border = "rounded"
+
+local handlers = {
+  ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border, }),
+  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border, }),
+}
+
 return {
   {
     "mrcjkb/rustaceanvim",
@@ -6,6 +13,7 @@ return {
     config = function()
       vim.g.rustaceanvim = {
         server = {
+          handlers = handlers,
           default_settings = {
             ["rust-analyzer"] = {
               check = { command = "check", },
@@ -180,33 +188,14 @@ return {
         matching = { disallow_symbol_nonprefix_matching = false, },
       })
 
-      --------------------------
-      -- Border Configuration --
-      --------------------------
-
-      local border = {
-        { "╭", "FloatBorder", },
-        { "─", "FloatBorder", },
-        { "╮", "FloatBorder", },
-        { "│", "FloatBorder", },
-        { "╯", "FloatBorder", },
-        { "─", "FloatBorder", },
-        { "╰", "FloatBorder", },
-        { "│", "FloatBorder", },
-      }
-
-      local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
-      function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-        opts = opts or {}
-        opts.border = opts.border or border
-        return orig_util_open_floating_preview(contents, syntax, opts, ...)
-      end
-
       -----------------------
       -- LSP Configuration --
       -----------------------
 
-      require("mason").setup()
+      require("mason").setup({
+        ui = { border = border, },
+      })
+
       require("mason-lspconfig").setup({
         ensure_installed = {
           "bashls",
@@ -216,7 +205,6 @@ return {
           "html",
           "lua_ls",
           "rust_analyzer",
-          "taplo",
           "tsserver",
         },
       })
@@ -224,17 +212,22 @@ return {
       ----------------------------
       -- Automatic Server Setup --
       ----------------------------
+      require("lspconfig.ui.windows").default_options = {
+        border = border,
+      }
 
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       require("mason-lspconfig").setup_handlers({
         function(server_name)
           require("lspconfig")[server_name].setup({
             capabilities = capabilities,
+            handlers = handlers,
           })
         end,
         ["lua_ls"] = function()
           require("lspconfig").lua_ls.setup({
             capabilities = capabilities,
+            handlers = handlers,
             settings = {
               Lua = {
                 diagnostics = { globals = { "vim", }, },
@@ -247,7 +240,9 @@ return {
         end,
         ["html"] = function()
           require("lspconfig").html.setup({
+            capabilities = capabilities,
             filetypes = { "html", "htmldjango", },
+            handlers = handlers,
           })
         end,
       })
