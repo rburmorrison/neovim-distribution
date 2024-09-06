@@ -5,7 +5,7 @@ return {
   {
     "NeogitOrg/neogit",
     keys = {
-      { "<leader>og", "<cmd>lua require('neogit').open()<cr>", mode = "n", desc = "Neogit", },
+      { "<leader>gg", "<cmd>lua require('neogit').open()<cr>", desc = "Neogit", },
     },
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -29,7 +29,7 @@ return {
       { "echasnovski/mini.icons", opts = {}, },
     },
     keys = {
-      { "<leader>oo", "<cmd>lua require('oil').toggle_float()<cr>", mode = "n", desc = "Open Oil", },
+      { "<leader>oo", "<cmd>lua require('oil').toggle_float()<cr>", desc = "Open Oil", },
     },
   },
 }

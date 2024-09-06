@@ -94,7 +94,12 @@ return {
         sections = {
           lualine_c = {
             {
+              -- These lints are disabled since the key config is pulled from
+              -- Noice itself.
+
+              ---@diagnostic disable-next-line: undefined-field
               require("noice").api.status.command.get,
+              ---@diagnostic disable-next-line: undefined-field
               cond = require("noice").api.status.command.has,
               color = { fg = "#f9e2af", },
             },
