@@ -4,7 +4,10 @@ return {
 
   {
     "MagicDuck/grug-far.nvim",
-    opts = {},
+    opts = {
+      windowCreationCommand = "tabnew",
+      startInInsertMode = false,
+    },
   },
 
   {
