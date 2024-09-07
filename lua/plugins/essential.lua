@@ -10,15 +10,18 @@ return {
       vim.api.nvim_create_autocmd("FileType", {
         pattern = "http",
         group = vim.api.nvim_create_augroup("RestNvim", {}),
-        callback = function ()
-          vim.keymap.set("n", "<leader>rr", "<cmd>Rest run<cr>", { buffer = true })
-        end
+        callback = function()
+          vim.keymap.set("n", "<leader>rr", "<cmd>Rest run<cr>", { buffer = true, })
+        end,
       })
     end,
   },
 
   {
     "MagicDuck/grug-far.nvim",
+    keys = {
+      { "<leader>ss", "<cmd>GrugFar<cr>", desc = "Grug Far", },
+    },
     opts = {
       windowCreationCommand = "tabnew",
       startInInsertMode = false,
