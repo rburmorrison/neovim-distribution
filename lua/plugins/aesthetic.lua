@@ -176,6 +176,10 @@ return {
       { "<C-t>", "<cmd>ToggleTerm direction=float<cr>", mode = "n", desc = "Toggle floating terminal", },
       { "<C-t>", "<cmd>ToggleTerm direction=float<cr>", mode = "t", desc = "Toggle floating terminal", },
     },
-    opts = {},
+    opts = {
+      float_opts = {
+        border = "rounded",
+      },
+    },
   },
 }

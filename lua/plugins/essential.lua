@@ -11,7 +11,7 @@ return {
         pattern = "http",
         group = vim.api.nvim_create_augroup("RestNvim", {}),
         callback = function()
-          vim.keymap.set("n", "<leader>rr", "<cmd>Rest run<cr>", { buffer = true, })
+          vim.keymap.set("n", "<leader>rr", "<cmd>Rest run<cr>", { desc = "Run", buffer = true, })
         end,
       })
     end,

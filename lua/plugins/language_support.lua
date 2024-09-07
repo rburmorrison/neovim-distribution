@@ -218,6 +218,8 @@ return {
           "emmet_language_server",
           "html",
           "lua_ls",
+          "pyright",
+          "ruff",
           "rust_analyzer",
           "tsserver",
         },

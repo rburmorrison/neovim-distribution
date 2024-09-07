@@ -48,6 +48,7 @@ local visual_settings_patterns = {
   "json",
   "lua",
   "markdown",
+  "python",
   "rust",
   "sass",
   "scss",
@@ -84,6 +85,7 @@ vim.api.nvim_create_autocmd("FileType", {
 local large_indent_settings_languages = {
   "c",
   "cpp",
+  "python",
   "rust",
 }
 
