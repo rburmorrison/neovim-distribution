@@ -43,6 +43,7 @@ local visual_settings_patterns = {
   "html",
   "html",
   "htmldjango",
+  "http",
   "javascript",
   "json",
   "lua",
@@ -120,5 +121,12 @@ vim.api.nvim_create_autocmd("FileType", {
   group = vim.api.nvim_create_augroup("TextWidthSettings", {}),
   callback = function()
     vim.opt_local.textwidth = 80
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "json", },
+  callback = function()
+    vim.api.nvim_set_option_value("formatprg", "jq", { scope = "local", })
   end,
 })
