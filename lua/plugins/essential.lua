@@ -3,6 +3,11 @@ return {
   "tpope/vim-commentary",
 
   {
+    "MagicDuck/grug-far.nvim",
+    opts = {},
+  },
+
+  {
     "NeogitOrg/neogit",
     keys = {
       { "<leader>gg", "<cmd>lua require('neogit').open()<cr>", desc = "Neogit", },
