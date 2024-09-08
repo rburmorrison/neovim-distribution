@@ -219,8 +219,6 @@ return {
           "html",
           "jsonls",
           "lua_ls",
-          "pyright",
-          "ruff",
           "rust_analyzer",
           "taplo",
           "tsserver",
@@ -230,6 +228,7 @@ return {
       ----------------------------
       -- Automatic Server Setup --
       ----------------------------
+
       require("lspconfig.ui.windows").default_options = {
         border = border,
       }
