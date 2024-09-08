@@ -74,6 +74,12 @@ return {
   { "Bilal2453/luvit-meta", lazy = true, },
 
   {
+    "MeanderingProgrammer/render-markdown.nvim",
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' },
+    opts = {},
+  },
+
+  {
     "neovim/nvim-lspconfig",
     lazy = false,
     dependencies = {
@@ -219,6 +225,7 @@ return {
           "html",
           "jsonls",
           "lua_ls",
+          "marksman",
           "rust_analyzer",
           "taplo",
           "tsserver",
