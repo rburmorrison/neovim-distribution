@@ -34,7 +34,9 @@ return {
       "nvim-lua/plenary.nvim",
       "antoinemadec/FixCursorHold.nvim",
       "nvim-treesitter/nvim-treesitter",
+
       "mrcjkb/rustaceanvim",
+      "nvim-neotest/neotest-python",
     },
     keys = {
       { "<leader>tt",  "<cmd>lua require('neotest').run.run()<cr>",                        desc = "Run Closest Test", },
@@ -49,6 +51,7 @@ return {
       require("neotest").setup({
         adapters = {
           require("rustaceanvim.neotest"),
+          require("neotest-python"),
         },
       })
     end,
@@ -75,7 +78,7 @@ return {
 
   {
     "MeanderingProgrammer/render-markdown.nvim",
-    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' },
+    dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons", },
     opts = {},
   },
 
@@ -218,6 +221,7 @@ return {
 
       require("mason-lspconfig").setup({
         ensure_installed = {
+          "basedpyright",
           "bashls",
           "biome",
           "cssls",
@@ -226,6 +230,7 @@ return {
           "jsonls",
           "lua_ls",
           "marksman",
+          "ruff",
           "rust_analyzer",
           "taplo",
           "tsserver",
@@ -267,6 +272,15 @@ return {
             capabilities = capabilities,
             filetypes = { "html", "htmldjango", },
             handlers = handlers,
+          })
+        end,
+        ["basedpyright"] = function()
+          require("lspconfig").basedpyright.setup({
+            capabilities = capabilities,
+            handlers = handlers,
+            on_attach = function(_, bufnr)
+              vim.lsp.inlay_hint.enable(true, { bufnr = bufnr, })
+            end,
           })
         end,
       })
