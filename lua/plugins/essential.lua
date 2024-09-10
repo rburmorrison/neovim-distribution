@@ -19,11 +19,11 @@ return {
 
   {
     "MagicDuck/grug-far.nvim",
+    lazy = false,
     keys = {
       { "<leader>ss", "<cmd>GrugFar<cr>", desc = "Grug Far", },
     },
     opts = {
-      windowCreationCommand = "tabnew",
       startInInsertMode = false,
     },
   },
