@@ -144,7 +144,6 @@ return {
         "gitignore",
         "html",
         "htmldjango",
-        "http",
         "javascript",
         "json",
         "lua",
