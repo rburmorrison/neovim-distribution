@@ -36,7 +36,7 @@ return {
               },
               {
                 "<leader>lR",
-                "<cmd>lua require('telescope.builtin').lsp_references theme=dropdown<cr>",
+                "<cmd>lua require('telescope.builtin').lsp_references()<cr>",
                 desc = "References",
               },
               {
