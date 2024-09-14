@@ -27,6 +27,17 @@ return {
   },
 
   {
+    "gbprod/substitute.nvim",
+    keys = {
+      { "s",  "<cmd>lua require('substitute').operator()<cr>", },
+      { "ss", "<cmd>lua require('substitute').line()<cr>", },
+      { "S",  "<cmd>lua require('substitute').eol()<cr>", },
+      { "s",  "<cmd>lua require('substitute').visual()<cr>",   mode = "x", },
+    },
+    opts = {},
+  },
+
+  {
     "echasnovski/mini.align",
     version = "*",
     opts = {},

@@ -64,7 +64,6 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = table.concat(visual_settings_patterns, ","),
   group = vim.api.nvim_create_augroup("VisualSettings", {}),
   callback = function()
-    vim.opt_local.number = true
     vim.opt_local.colorcolumn = "81,121"
   end,
 })

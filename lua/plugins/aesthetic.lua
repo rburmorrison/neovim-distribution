@@ -3,17 +3,32 @@ return {
     "catppuccin/nvim",
     name = "catppuccin",
     priority = 1000,
-    opts = {
-      gitsigns = true,
-      beacon = true,
-      noice = true,
-      mason = true,
-      lsp_trouble = true,
-      which_key = true,
-    },
     config = function()
+      require("catppuccin").setup({
+        integrations = {
+          beacon = true,
+          colorful_winsep = { enabled = true, color = "yellow", },
+          gitsigns = true,
+          indent_blankline = { enabled = true, scope_color = "yellow", colored_indent_levels = true, },
+          lsp_trouble = true,
+          mason = true,
+          noice = true,
+          rainbow_delimiters = true,
+          render_markdown = true,
+          which_key = true,
+        },
+      })
+
       vim.cmd [[colorscheme catppuccin]]
     end,
+  },
+
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    ---@module "ibl"
+    ---@type ibl.config
+    opts = {},
   },
 
   {

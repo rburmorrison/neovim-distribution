@@ -16,6 +16,7 @@ return {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
         callback = function()
           require("which-key").add({
+            { "<leader>z", "<cmd>set number!<cr>", desc = "Toggle Line Numbers", },
             { "<leader>o", group = "open", },
             {
               { "<leader>l", group = "lsp", },
