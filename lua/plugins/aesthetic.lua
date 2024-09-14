@@ -6,7 +6,9 @@ return {
     config = function()
       require("catppuccin").setup({
         integrations = {
+          alpha = true,
           beacon = true,
+          cmp = true,
           colorful_winsep = { enabled = true, color = "yellow", },
           gitsigns = true,
           indent_blankline = { enabled = true, scope_color = "yellow", colored_indent_levels = true, },
@@ -14,7 +16,9 @@ return {
           mason = true,
           noice = true,
           rainbow_delimiters = true,
+          render_markdown = true,
           which_key = true,
+          neotest = true,
         },
       })
 
