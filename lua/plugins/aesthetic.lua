@@ -72,6 +72,22 @@ return {
   },
 
   {
+    "hedyhli/outline.nvim",
+    config = function()
+      require("outline").setup({})
+
+      vim.api.nvim_create_autocmd("LspAttach", {
+        group = vim.api.nvim_create_augroup("OutlineNvim", {}),
+        callback = function()
+          require("which-key").add({
+            { "<leader>lo", "<cmd>Outline<cr>", buffer = true, desc = "Toggle Outline", },
+          })
+        end,
+      })
+    end,
+  },
+
+  {
     "nvim-zh/colorful-winsep.nvim",
     event = { "WinLeave", },
     opts = {},
