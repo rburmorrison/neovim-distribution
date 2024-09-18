@@ -9,7 +9,7 @@ return {
           alpha = true,
           beacon = true,
           cmp = true,
-          colorful_winsep = { enabled = true, color = "blue", },
+          colorful_winsep = { enabled = true, color = "mauve", },
           gitsigns = true,
           indent_blankline = { enabled = true, scope_color = "mauve", colored_indent_levels = true, },
           lsp_trouble = true,
