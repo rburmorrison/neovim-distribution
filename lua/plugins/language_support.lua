@@ -16,7 +16,7 @@ return {
           handlers = handlers,
           default_settings = {
             ["rust-analyzer"] = {
-              check = { command = "check", },
+              check = { command = "clippy", },
             },
           },
           on_attach = function(_, bufnr)
