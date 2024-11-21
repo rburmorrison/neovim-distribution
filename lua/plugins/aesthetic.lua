@@ -193,6 +193,7 @@ return {
         "sql",
         "toml",
         "typescript",
+        "typst",
         "vim",
         "vimdoc",
         "yaml",
