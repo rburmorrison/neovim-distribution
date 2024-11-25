@@ -233,6 +233,7 @@ return {
           "ruff",
           "rust_analyzer",
           "taplo",
+          "tinymist",
           "ts_ls",
         },
       })
