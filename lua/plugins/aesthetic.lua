@@ -181,6 +181,7 @@ return {
         "htmldjango",
         "javascript",
         "json",
+        "just",
         "lua",
         "make",
         "markdown",
