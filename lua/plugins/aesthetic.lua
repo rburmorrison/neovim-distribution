@@ -179,6 +179,7 @@ return {
         "gitignore",
         "html",
         "htmldjango",
+        "hurl",
         "javascript",
         "json",
         "just",
