@@ -82,11 +82,12 @@ return {
           })
 
           require("which-key").add({
+            { "<leader>h",  group = "Hurl", },
             { "<leader>hR", "<cmd>HurlRunner<CR>",        buffer = true, desc = "Run all requests", },
             { "<leader>hr", "<cmd>HurlRunnerAt<CR>",      buffer = true, desc = "Run current request", },
             { "<leader>hA", "<cmd>HurlRunnerToEntry<CR>", buffer = true, desc = "Run requests above", },
             { "<leader>hB", "<cmd>HurlRunnerToEnd<CR>",   buffer = true, desc = "Run requests below", },
-            { "<leader>hm", "<cmd>HurlToggleMode<CR>",    buffer = true, desc = "Hurl Toggle Mode", },
+            { "<leader>hm", "<cmd>HurlToggleMode<CR>",    buffer = true, desc = "Toggle Hurl output mode", },
             { "<leader>hv", "<cmd>HurlVerbose<CR>",       buffer = true, desc = "Run request in verbose mode", },
             { "<leader>hV", "<cmd>HurlVeryVerbose<CR>",   buffer = true, desc = "Run API in very verbose mode", },
             { "<leader>hr", ":HurlRunner<CR>",            buffer = true, desc = "Run Selected Requests",        mode = "v", },
