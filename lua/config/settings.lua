@@ -1,9 +1,3 @@
--------------
--- Globals --
--------------
-
-vim.g.artificial_intelligence_enabled = true
-
 ---------------------
 -- Default Options --
 ---------------------
