@@ -14,10 +14,10 @@ return {
     },
     opts = {
       strategies = {
-        inline = { adapter = "openai", },
-        chat = { adapter = "openai", },
-        agent = { adapter = "openai", },
-        cmd = { adapter = "openai", },
+        inline = { adapter = "anthropic", },
+        chat = { adapter = "anthropic", },
+        agent = { adapter = "anthropic", },
+        cmd = { adapter = "anthropic", },
       },
     },
   },
