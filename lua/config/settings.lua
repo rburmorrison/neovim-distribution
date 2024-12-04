@@ -2,12 +2,14 @@
 -- Globals --
 -------------
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = ","
+vim.g.artificial_intelligence_enabled = true
 
 ---------------------
 -- Default Options --
 ---------------------
+
+vim.g.mapleader = " "
+vim.g.maplocalleader = ","
 
 vim.opt.undofile = true
 vim.opt.expandtab = true
