@@ -19,7 +19,11 @@ return {
         agent = { adapter = "anthropic", },
         cmd = { adapter = "anthropic", },
       },
+      display = {
+        action_palette = {
+          provider = "telescope",
+        },
+      },
     },
   },
 }
-
