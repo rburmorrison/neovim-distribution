@@ -15,9 +15,9 @@ return {
     },
     opts = {
       strategies = {
-        inline = { adapter = "anthropic", },
+        inline = { adapter = "openai", },
         chat = {
-          adapter = "anthropic",
+          adapter = "openai",
           slash_commands = {
             ["buffer"] = { opts = { provider = "telescope", }, },
             ["file"] = { opts = { provider = "telescope", }, },
@@ -25,8 +25,8 @@ return {
             ["symbols"] = { opts = { provider = "telescope", }, },
           },
         },
-        agent = { adapter = "anthropic", },
-        cmd = { adapter = "anthropic", },
+        agent = { adapter = "openai", },
+        cmd = { adapter = "openai", },
       },
       display = {
         action_palette = {
