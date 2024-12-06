@@ -24,11 +24,14 @@ return {
           Commit = function(prt, params)
             local diff_output = vim.fn.system("git diff --no-ext-diff --staged")
             local chat_prompt = string.format([[
-              You are an expert at the Conventional Commit format. Take the diff below, and
-              output a text block of the suggested conventional commit block. Give no additional
-              output other than the resulting block. The only time you should add any extra words
-              is if the diff is empty. In that case, provide a short message for the user so they
-              know what happened. Perhaps suggest they should stage their changes first.
+              You are an expert at the Conventional Commit format. Take the diff
+              below, and output a text block of the suggested conventional
+              commit block. Give no additional output other than the resulting
+              block. If there should be a body, format in a markdown list with
+              no additional header. The only time you should add any extra words
+              is if the diff is empty. In that case, provide a short message for
+              the user so they know what happened and suggest they should stage
+              their changes first.
 
               Here is the diff:
 

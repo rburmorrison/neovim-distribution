@@ -12,12 +12,17 @@ return {
       },
     },
     config = function()
+      local wk = require("which-key")
+
+      wk.add({
+        { "<leader>z", "<cmd>set number!<cr>", desc = "Toggle Line Numbers", },
+        { "<leader>o", group = "open", },
+      })
+
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
         callback = function()
-          require("which-key").add({
-            { "<leader>L", "<cmd>set number!<cr>", desc = "Toggle Line Numbers", },
-            { "<leader>o", group = "open", },
+          wk.add({
             {
               { "<leader>l", group = "lsp", },
               {
