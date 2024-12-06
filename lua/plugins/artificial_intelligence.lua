@@ -15,6 +15,7 @@ return {
     },
     config = function()
       require("parrot").setup {
+        user_input_ui = "buffer",
         providers = {
           openai = {
             api_key = os.getenv "OPENAI_API_KEY",
