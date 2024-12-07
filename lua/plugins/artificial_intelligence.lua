@@ -23,7 +23,8 @@ return {
         },
         hooks = {
           Commit = function(prt, params)
-            local diff_output = vim.fn.system("git diff --no-ext-diff --staged")
+            local diff_output = vim.fn.system("git diff --no-color --no-ext-diff --staged")
+            local log_output = vim.fn.system("git log --no-color -5")
             local chat_prompt = string.format([[
               You are an expert at the Conventional Commit format. Take the diff
               below, and output a text block of the suggested conventional
@@ -39,7 +40,17 @@ return {
               ```diff
               %s
               ```
-            ]], diff_output)
+
+              Additionally, for your context, here are up to the last five
+              commits:
+
+              ```text
+              %s
+              ```
+
+              Do your best to maintain a similar format and consistent level of
+              detail based on any previous commits, if any.
+            ]], diff_output, log_output)
 
             local model = prt.get_model("command")
             prt.Prompt(params, prt.ui.Target.new, model, nil, chat_prompt)
