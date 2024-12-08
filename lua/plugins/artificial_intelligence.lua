@@ -50,6 +50,11 @@ return {
 
               Do your best to maintain a similar format and consistent level of
               detail based on any previous commits, if any.
+
+              Finally, in the case where there are no logs at all from previous
+              commits, make the header "Initial Commit" along with the body.
+              This is the one and only case where the conventional commit format
+              does not need to be followed.
             ]], diff_output, log_output)
 
             local model = prt.get_model("command")
