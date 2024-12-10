@@ -24,7 +24,6 @@ return {
         hooks = {
           Commit = function(prt, params)
             local diff_output = vim.fn.system("git diff --no-color --no-ext-diff --staged")
-            local log_output = vim.fn.system("git log --no-color -5")
             local chat_prompt = string.format([[
               You are an expert at the Conventional Commit format. Take the diff
               below, and output a text block of the suggested conventional
@@ -41,21 +40,33 @@ return {
               %s
               ```
 
-              Additionally, for your context, here are up to the last five
-              commits:
+              An example output would be in the form of:
 
-              ```text
-              %s
+              ```
+              <CATEGORY>: <SUMMARY>
+
+              - <DETAIL_ONE>
+              - <DETAIL_TWO>
               ```
 
-              Do your best to maintain a similar format and consistent level of
-              detail based on any previous commits, if any.
+              Both `<CATEGORY>` and `<SUMMARY>` should be all lowercase, while
+              each `<DETAIL_X>` should start with a captital letter and end with
+              a period. Add as many detail bullets as required to get a full
+              picture of the diff.
 
-              Finally, in the case where there are no logs at all from previous
-              commits, make the header "Initial Commit" along with the body.
-              This is the one and only case where the conventional commit format
-              does not need to be followed.
-            ]], diff_output, log_output)
+              Valid categories are:
+
+              - fix (a bug fix)
+              - feat (a new feature)
+              - chore (an update to the environment, updating dependencies, etc.)
+              - refactor (organization changes that neither fix bugs nor add features)
+              - build (updates to the build system)
+              - test (changes or additions to tests)
+              - doc (documentation changes)
+
+              Dont include scopes, and don't include text in the body outside
+              of the details list.
+            ]], diff_output)
 
             local model = prt.get_model("command")
             prt.Prompt(params, prt.ui.Target.new, model, nil, chat_prompt)
