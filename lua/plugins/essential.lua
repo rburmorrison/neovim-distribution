@@ -11,6 +11,11 @@ return {
       { "<leader>fb", function() MiniPick.builtin.buffers() end,    desc = "Buffers", },
       { "<leader>fh", function() MiniPick.builtin.help() end,       desc = "Help Tags", },
       { "<leader>go", function() MiniDiff.toggle_overlay(0) end,    desc = "Toggle Diff Overlay", },
+      { "<leader>gA", "<cmd>Git add -A<cr>",                        desc = "Stage All Files", },
+      { "<leader>gm", "<cmd>Git commit<cr>",                        desc = "Commit", },
+      { "<leader>gP", "<cmd>Git push<cr>",                          desc = "Push to Remove", },
+      { "<leader>gp", "<cmd>Git pull<cr>",                          desc = "Pull from Remote", },
+      { "<leader>gs", "<cmd>Git status<cr>",                        desc = "Get the Status", },
     },
     config = function()
       require("mini.align").setup()
