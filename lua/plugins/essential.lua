@@ -11,11 +11,20 @@ return {
       { "<leader>fb", function() MiniPick.builtin.buffers() end,    desc = "Buffers", },
       { "<leader>fh", function() MiniPick.builtin.help() end,       desc = "Help Tags", },
       { "<leader>go", function() MiniDiff.toggle_overlay(0) end,    desc = "Toggle Diff Overlay", },
-      { "<leader>gA", "<cmd>Git add -A<cr>",                        desc = "Stage All Files", },
-      { "<leader>gm", "<cmd>Git commit<cr>",                        desc = "Commit", },
-      { "<leader>gP", "<cmd>Git push<cr>",                          desc = "Push to Remove", },
-      { "<leader>gp", "<cmd>Git pull<cr>",                          desc = "Pull from Remote", },
-      { "<leader>gs", "<cmd>Git status<cr>",                        desc = "Get the Status", },
+      {
+        "<leader>gA",
+        function()
+          vim.cmd("Git add --all")
+          Snacks.notifier.notify("(mini.git) All Files Staged", "info")
+        end,
+        desc = "Git Add All",
+      },
+      { "<leader>gc", "<cmd>Git commit<cr>", desc = "Git Commit", },
+      { "<leader>gl", "<cmd>Git log<cr>",    desc = "Git Log", },
+      { "<leader>gr", "<cmd>Git reset<cr>",  desc = "Git Reset", },
+      { "<leader>gP", "<cmd>Git push<cr>",   desc = "Git Push", },
+      { "<leader>gp", "<cmd>Git pull<cr>",   desc = "Git Pull", },
+      { "<leader>gs", "<cmd>Git status<cr>", desc = "Git Status", },
     },
     config = function()
       require("mini.align").setup()
