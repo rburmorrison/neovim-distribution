@@ -23,9 +23,25 @@ return {
       require("mini.jump2d").setup()
       require("mini.move").setup()
       require("mini.operators").setup()
-      require("mini.pick").setup()
       require("mini.splitjoin").setup()
       require("mini.surround").setup()
+
+      -- Center the Mini Pick Window
+      local win_config = function()
+        height = math.floor(0.618 * vim.o.lines)
+        width = math.floor(0.618 * vim.o.columns)
+        return {
+          anchor = "NW",
+          height = height,
+          width = width,
+          row = math.floor(0.5 * (vim.o.lines - height)),
+          col = math.floor(0.5 * (vim.o.columns - width)),
+        }
+      end
+
+      require("mini.pick").setup({
+        window = { config = win_config, },
+      })
 
       -- Hook Snacks Rename to Mini Files
       vim.api.nvim_create_autocmd("User", {
