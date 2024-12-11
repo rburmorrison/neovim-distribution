@@ -60,7 +60,12 @@ return {
   {
     "olrtg/nvim-emmet",
     config = function()
-      vim.keymap.set({ "n", "v", }, "<leader>xe", require("nvim-emmet").wrap_with_abbreviation)
+      vim.keymap.set(
+        { "n", "v", },
+        "<leader>xe",
+        require("nvim-emmet").wrap_with_abbreviation,
+        { desc = "Expand Emmet Expression", }
+      )
     end,
   },
 
@@ -78,7 +83,7 @@ return {
 
   {
     "MeanderingProgrammer/render-markdown.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons", },
+    dependencies = { "nvim-treesitter/nvim-treesitter", },
     ft = { "markdown", "codecompanion", },
     opts = {},
   },

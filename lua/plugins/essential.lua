@@ -1,6 +1,124 @@
 return {
-  "tpope/vim-surround",
-  "tpope/vim-commentary",
+  {
+    "echasnovski/mini.nvim",
+    version = false,
+    lazy = false,
+    keys = {
+      { "<leader>of", function() MiniFiles.open() end,              desc = "MiniFiles", },
+      { "<leader>ff", function() MiniPick.builtin.files() end,      desc = "Find Files", },
+      { "<leader>fr", function() MiniExtra.pickers.registers() end, desc = "Find Register", },
+      { "<leader>fg", function() MiniPick.builtin.grep_live() end,  desc = "Live Grep", },
+      { "<leader>fb", function() MiniPick.builtin.buffers() end,    desc = "Buffers", },
+      { "<leader>fh", function() MiniPick.builtin.help() end,       desc = "Help Tags", },
+      { "<leader>go", function() MiniDiff.toggle_overlay(0) end,    desc = "Toggle Diff Overlay", },
+    },
+    config = function()
+      require("mini.align").setup()
+      require("mini.bracketed").setup()
+      require("mini.comment").setup()
+      require("mini.diff").setup()
+      require("mini.extra").setup()
+      require("mini.files").setup()
+      require("mini.git").setup()
+      require("mini.jump2d").setup()
+      require("mini.move").setup()
+      require("mini.operators").setup()
+      require("mini.pick").setup()
+      require("mini.splitjoin").setup()
+      require("mini.surround").setup()
+
+      -- Hook Snacks Rename to Mini Files
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "MiniFilesActionRename",
+        callback = function(event)
+          Snacks.rename.on_rename_file(event.data.from, event.data.to)
+        end,
+      })
+
+      -- Extra AI Textobjects
+      local gen_ai_spec = require("mini.extra").gen_ai_spec
+      require("mini.ai").setup({
+        custom_textobjects = {
+          B = gen_ai_spec.buffer(),
+          D = gen_ai_spec.diagnostic(),
+          I = gen_ai_spec.indent(),
+          L = gen_ai_spec.line(),
+          N = gen_ai_spec.number(),
+        },
+      })
+
+      -- Configure Highlight Patterns
+      local hipatterns = require("mini.hipatterns")
+      hipatterns.setup({
+        highlighters = {
+          fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme", },
+          hack  = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack", },
+          todo  = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo", },
+          note  = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote", },
+        },
+      })
+
+      -- Keybinding Hints
+      local miniclue = require("mini.clue")
+      miniclue.setup({
+        triggers = {
+          -- Leader triggers
+          { mode = "n", keys = "<Leader>", },
+          { mode = "x", keys = "<Leader>", },
+
+          -- Built-in completion
+          { mode = "i", keys = "<C-x>", },
+
+          -- `g` key
+          { mode = "n", keys = "g", },
+          { mode = "x", keys = "g", },
+
+          -- Marks
+          { mode = "n", keys = "'", },
+          { mode = "n", keys = "`", },
+          { mode = "x", keys = "'", },
+          { mode = "x", keys = "`", },
+
+          -- Registers
+          { mode = "n", keys = '"', },
+          { mode = "x", keys = '"', },
+          { mode = "i", keys = "<C-r>", },
+          { mode = "c", keys = "<C-r>", },
+
+          -- Window commands
+          { mode = "n", keys = "<C-w>", },
+
+          -- `z` key
+          { mode = "n", keys = "z", },
+          { mode = "x", keys = "z", },
+        },
+
+        clues = {
+          -- Custom Clues
+          { mode = "n", keys = "<leader>b", desc = "+buffer", },
+          { mode = "n", keys = "<leader>x", desc = "+emmet", },
+          { mode = "n", keys = "<leader>f", desc = "+find", },
+          { mode = "n", keys = "<leader>g", desc = "+git", },
+          { mode = "n", keys = "<leader>h", desc = "+hurl", },
+          { mode = "n", keys = "<leader>l", desc = "+lsp", },
+          { mode = "n", keys = "<leader>t", desc = "+neotest", },
+          { mode = "n", keys = "<leader>o", desc = "+open", },
+          { mode = "n", keys = "<leader>p", desc = "+parrot", },
+          { mode = "n", keys = "<leader>s", desc = "+search", },
+
+          -- Builtin Clues
+          miniclue.gen_clues.builtin_completion(),
+          miniclue.gen_clues.g(),
+          miniclue.gen_clues.marks(),
+          miniclue.gen_clues.registers(),
+          miniclue.gen_clues.windows(),
+          miniclue.gen_clues.z(),
+        },
+      })
+
+      vim.ui.select = MiniPick.ui_select
+    end,
+  },
 
   -- Configured according to the documentation from snacks.nvim.
   {
@@ -14,7 +132,7 @@ return {
           ft = "snacks_terminal",
           size = { height = 0.4, },
           title = "%{b:snacks_terminal.id}: %{b:term_title}",
-          filter = function(_buf, win)
+          filter = function(_, win)
             return vim.w[win].snacks_win
                 and vim.w[win].snacks_win.position == pos
                 and vim.w[win].snacks_win.relative == "editor"
@@ -32,8 +150,8 @@ return {
     keys = {
       { "<leader>n",  function() Snacks.notifier.show_history() end, desc = "Notification History", },
       { "<leader>go", function() Snacks.gitbrowse() end,             desc = "Git Browse",           mode = { "n", "v", }, },
+      { "<leader>gb", function() Snacks.git.blame_line() end,        desc = "Git Blame Line", },
       { "<C-t>",      function() Snacks.terminal.toggle() end,       desc = "Toggle Terminal",      mode = { "n", "t", }, },
-      { "<leader>lM", function() Snacks.rename.rename_file() end,    desc = "Rename File", },
       { "<leader>z",  function() Snacks.zen.zen() end,               desc = "Zen Mode", },
       { "<leader>bd", function() Snacks.bufdelete() end,             desc = "Buffer Delete", },
       { "<leader>S",  function() Snacks.scratch() end,               desc = "Scratch", },
@@ -48,7 +166,7 @@ return {
         notifier = { enabled = true, },
         quickfile = { enabled = true, },
         scroll = { enabled = true, },
-        statuscolumn = { enabled = false, },
+        statuscolumn = { enabled = true, },
         words = { enabled = true, },
       })
 
@@ -101,59 +219,6 @@ return {
   },
 
   {
-    "MagicDuck/grug-far.nvim",
-    cmd = { "GrugFar", },
-    keys = {
-      { "<leader>ss", "<cmd>GrugFar<cr>", desc = "Grug Far", },
-    },
-    opts = {
-      startInInsertMode = false,
-    },
-  },
-
-  {
-    "NeogitOrg/neogit",
-    keys = {
-      { "<leader>gg", "<cmd>lua require('neogit').open()<cr>", desc = "Neogit", },
-    },
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "sindrets/diffview.nvim",
-      "nvim-telescope/telescope.nvim",
-    },
-    opts = {},
-  },
-
-  {
-    "gbprod/substitute.nvim",
-    keys = {
-      { "s",  "<cmd>lua require('substitute').operator()<cr>", },
-      { "ss", "<cmd>lua require('substitute').line()<cr>", },
-      { "S",  "<cmd>lua require('substitute').eol()<cr>", },
-      { "s",  "<cmd>lua require('substitute').visual()<cr>",   mode = "x", },
-    },
-    opts = {},
-  },
-
-  {
-    "echasnovski/mini.align",
-    version = "*",
-    opts = {},
-  },
-
-  {
-    "stevearc/oil.nvim",
-    lazy = false,
-    opts = {},
-    dependencies = {
-      { "echasnovski/mini.icons", opts = {}, },
-    },
-    keys = {
-      { "<leader>oo", "<cmd>lua require('oil').toggle_float()<cr>", desc = "Open Oil", },
-    },
-  },
-
-  {
     "jellydn/hurl.nvim",
     dependencies = {
       "MunifTanjim/nui.nvim",
@@ -161,9 +226,11 @@ return {
       "nvim-treesitter/nvim-treesitter",
     },
     config = function()
+      -- Bindings get put here since hurl.nvim needs to load before the filetype
+      -- autocmd can trigger.
       vim.api.nvim_create_autocmd("FileType", {
         pattern = "hurl",
-        group = vim.api.nvim_create_augroup("VisualSettings", {}),
+        group = vim.api.nvim_create_augroup("HurlSetup", {}),
         callback = function()
           require("hurl").setup({
             debug = false,
@@ -179,17 +246,63 @@ return {
             },
           })
 
-          require("which-key").add({
-            { "<leader>h",  group = "Hurl", },
-            { "<leader>hR", "<cmd>HurlRunner<CR>",        buffer = true, desc = "Run all requests", },
-            { "<leader>hr", "<cmd>HurlRunnerAt<CR>",      buffer = true, desc = "Run current request", },
-            { "<leader>hA", "<cmd>HurlRunnerToEntry<CR>", buffer = true, desc = "Run requests above", },
-            { "<leader>hB", "<cmd>HurlRunnerToEnd<CR>",   buffer = true, desc = "Run requests below", },
-            { "<leader>hm", "<cmd>HurlToggleMode<CR>",    buffer = true, desc = "Toggle Hurl output mode", },
-            { "<leader>hv", "<cmd>HurlVerbose<CR>",       buffer = true, desc = "Run request in verbose mode", },
-            { "<leader>hV", "<cmd>HurlVeryVerbose<CR>",   buffer = true, desc = "Run API in very verbose mode", },
-            { "<leader>hr", ":HurlRunner<CR>",            buffer = true, desc = "Run Selected Requests",        mode = "v", },
-          })
+          -- Normal Mode Bindings
+          vim.keymap.set(
+            "n",
+            "<leader>hR",
+            "<cmd>HurlRunner<CR>",
+            { buffer = true, desc = "Run all requests", }
+          )
+
+          vim.keymap.set(
+            "n",
+            "<leader>hr",
+            "<cmd>HurlRunnerAt<CR>",
+            { buffer = true, desc = "Run current request", }
+          )
+
+          vim.keymap.set(
+            "n",
+            "<leader>hA",
+            "<cmd>HurlRunnerToEntry<CR>",
+            { buffer = true, desc = "Run requests above", }
+          )
+
+          vim.keymap.set(
+            "n",
+            "<leader>hB",
+            "<cmd>HurlRunnerToEnd<CR>",
+            { buffer = true, desc = "Run requests below", }
+          )
+
+          vim.keymap.set(
+            "n",
+            "<leader>hm",
+            "<cmd>HurlToggleMode<CR>",
+            { buffer = true, desc = "Toggle Hurl output mode", }
+          )
+
+          vim.keymap.set(
+            "n",
+            "<leader>hv",
+            "<cmd>HurlVerbose<CR>",
+            { buffer = true, desc = "Run request in verbose mode", }
+          )
+
+          vim.keymap.set(
+            "n",
+            "<leader>hV",
+            "<cmd>HurlVeryVerbose<CR>",
+            { buffer = true, desc = "Run API in very verbose mode", }
+          )
+
+          -- Visual Mode Bindings
+          vim.keymap.set(
+            "v",
+            "<leader>hr",
+            ":HurlRunner<CR>",
+            { buffer = true, desc = "Run Selected Requests", }
+          )
         end,
       })
     end,

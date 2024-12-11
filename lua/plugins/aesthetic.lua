@@ -9,14 +9,11 @@ return {
           beacon = true,
           cmp = true,
           colorful_winsep = { enabled = true, color = "mauve", },
-          gitsigns = true,
-          lsp_trouble = true,
           mason = true,
           neotest = true,
           rainbow_delimiters = true,
           render_markdown = true,
           snacks = true,
-          which_key = true,
         },
       })
 
@@ -38,22 +35,6 @@ return {
         modemsg = true,
       },
     },
-  },
-
-  {
-    "hedyhli/outline.nvim",
-    config = function()
-      require("outline").setup({})
-
-      vim.api.nvim_create_autocmd("LspAttach", {
-        group = vim.api.nvim_create_augroup("OutlineNvim", {}),
-        callback = function()
-          require("which-key").add({
-            { "<leader>lo", "<cmd>Outline<cr>", buffer = true, desc = "Toggle Outline", },
-          })
-        end,
-      })
-    end,
   },
 
   {
@@ -100,12 +81,6 @@ return {
         },
       })
     end,
-  },
-
-  {
-    "lewis6991/gitsigns.nvim",
-    verison = "*",
-    opts = {},
   },
 
   {
