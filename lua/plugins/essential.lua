@@ -32,13 +32,22 @@ return {
       require("mini.comment").setup()
       require("mini.diff").setup()
       require("mini.extra").setup()
-      require("mini.files").setup()
       require("mini.git").setup()
       require("mini.jump2d").setup()
       require("mini.move").setup()
       require("mini.operators").setup()
       require("mini.splitjoin").setup()
       require("mini.surround").setup()
+
+      -- Alaways Use Go In/Out Plus
+      require("mini.files").setup({
+        mappings = {
+          go_in = "",
+          go_in_plus = "l",
+          go_out = "",
+          go_out_plus = "h",
+        },
+      })
 
       -- Center the Mini Pick Window
       local win_config = function()
