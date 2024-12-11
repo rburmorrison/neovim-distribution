@@ -15,7 +15,7 @@ return {
       local wk = require("which-key")
 
       wk.add({
-        { "<leader>z", "<cmd>set number!<cr>", desc = "Toggle Line Numbers", },
+        { "<leader>L", "<cmd>set number!<cr>", desc = "Toggle Line Numbers", },
         { "<leader>o", group = "open", },
       })
 

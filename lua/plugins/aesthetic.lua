@@ -6,56 +6,22 @@ return {
     config = function()
       require("catppuccin").setup({
         integrations = {
-          alpha = true,
           beacon = true,
           cmp = true,
           colorful_winsep = { enabled = true, color = "mauve", },
           gitsigns = true,
-          indent_blankline = { enabled = true, scope_color = "mauve", colored_indent_levels = true, },
           lsp_trouble = true,
           mason = true,
-          noice = true,
+          neotest = true,
           rainbow_delimiters = true,
           render_markdown = true,
+          snacks = true,
           which_key = true,
-          neotest = true,
         },
       })
 
       vim.cmd [[colorscheme catppuccin]]
     end,
-  },
-
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
-    ---@module "ibl"
-    ---@type ibl.config
-    opts = {},
-  },
-
-  {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    opts = {
-      lsp = {
-        override = {
-          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-          ["vim.lsp.util.stylize_markdown"] = true,
-          ["cmp.entry.get_documentation"] = true,
-        },
-      },
-      presets = {
-        bottom_search = true,
-        command_palette = true,
-        long_message_to_split = true,
-        inc_rename = false,
-        lsp_doc_border = true,
-      },
-    },
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-    },
   },
 
   { "danilamihailov/beacon.nvim", },
@@ -150,16 +116,6 @@ return {
   },
 
   {
-    "goolord/alpha-nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons", },
-    config = function()
-      local startify = require("alpha.themes.startify")
-      startify.file_icons.provider = "devicons"
-      require("alpha").setup(startify.config)
-    end,
-  },
-
-  {
     "lewis6991/gitsigns.nvim",
     verison = "*",
     opts = {},
@@ -203,21 +159,6 @@ return {
       highlight = {
         enable = true,
         additional_vim_regex_highlighting = true,
-      },
-    },
-  },
-
-  {
-    "akinsho/toggleterm.nvim",
-    version = "*",
-    keys = {
-      { "<C-t>", "<cmd>ToggleTerm direction=float<cr>", mode = "i", desc = "Toggle floating terminal", },
-      { "<C-t>", "<cmd>ToggleTerm direction=float<cr>", mode = "n", desc = "Toggle floating terminal", },
-      { "<C-t>", "<cmd>ToggleTerm direction=float<cr>", mode = "t", desc = "Toggle floating terminal", },
-    },
-    opts = {
-      float_opts = {
-        border = "rounded",
       },
     },
   },
