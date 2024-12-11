@@ -10,7 +10,7 @@ return {
       { "<leader>fg", function() MiniPick.builtin.grep_live() end,  desc = "Live Grep", },
       { "<leader>fb", function() MiniPick.builtin.buffers() end,    desc = "Buffers", },
       { "<leader>fh", function() MiniPick.builtin.help() end,       desc = "Help Tags", },
-      { "<leader>go", function() MiniDiff.toggle_overlay(0) end,    desc = "Toggle Diff Overlay", },
+      { "<leader>go", function() MiniDiff.toggle_overlay(0) end,    desc = "Git Diff Overlay", },
       {
         "<leader>gA",
         function()
@@ -179,7 +179,7 @@ return {
     lazy = false,
     keys = {
       { "<leader>n",  function() Snacks.notifier.show_history() end, desc = "Notification History", },
-      { "<leader>go", function() Snacks.gitbrowse() end,             desc = "Git Browse",           mode = { "n", "v", }, },
+      { "<leader>gO", function() Snacks.gitbrowse() end,             desc = "Git Browse",           mode = { "n", "v", }, },
       { "<leader>gb", function() Snacks.git.blame_line() end,        desc = "Git Blame Line", },
       { "<C-t>",      function() Snacks.terminal.toggle() end,       desc = "Toggle Terminal",      mode = { "n", "t", }, },
       { "<leader>z",  function() Snacks.zen.zen() end,               desc = "Zen Mode", },
