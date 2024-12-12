@@ -11,20 +11,13 @@ return {
       { "<leader>fb", function() MiniPick.builtin.buffers() end,    desc = "Buffers", },
       { "<leader>fh", function() MiniPick.builtin.help() end,       desc = "Help Tags", },
       { "<leader>go", function() MiniDiff.toggle_overlay(0) end,    desc = "Git Diff Overlay", },
-      {
-        "<leader>gA",
-        function()
-          vim.cmd("Git add --all")
-          Snacks.notifier.notify("(mini.git) All Files Staged", "info")
-        end,
-        desc = "Git Add All",
-      },
-      { "<leader>gc", "<cmd>Git commit<cr>", desc = "Git Commit", },
-      { "<leader>gl", "<cmd>Git log<cr>",    desc = "Git Log", },
-      { "<leader>gr", "<cmd>Git reset<cr>",  desc = "Git Reset", },
-      { "<leader>gP", "<cmd>Git push<cr>",   desc = "Git Push", },
-      { "<leader>gp", "<cmd>Git pull<cr>",   desc = "Git Pull", },
-      { "<leader>gs", "<cmd>Git status<cr>", desc = "Git Status", },
+      { "<leader>gA", "<cmd>Git add --all --verbose<cr>",           desc = "Git Add All", },
+      { "<leader>gc", "<cmd>Git commit<cr>",                        desc = "Git Commit", },
+      { "<leader>gl", "<cmd>Git log<cr>",                           desc = "Git Log", },
+      { "<leader>gr", "<cmd>Git reset<cr>",                         desc = "Git Reset", },
+      { "<leader>gP", "<cmd>Git push<cr>",                          desc = "Git Push", },
+      { "<leader>gp", "<cmd>Git pull<cr>",                          desc = "Git Pull", },
+      { "<leader>gs", "<cmd>Git status<cr>",                        desc = "Git Status", },
     },
     config = function()
       require("mini.align").setup()
@@ -36,6 +29,7 @@ return {
       require("mini.jump2d").setup()
       require("mini.move").setup()
       require("mini.operators").setup()
+      require("mini.pick").setup()
       require("mini.splitjoin").setup()
       require("mini.surround").setup()
 
@@ -47,23 +41,6 @@ return {
           go_out = "",
           go_out_plus = "h",
         },
-      })
-
-      -- Center the Mini Pick Window
-      local win_config = function()
-        local height = math.floor(0.618 * vim.o.lines)
-        local width = math.floor(0.618 * vim.o.columns)
-        return {
-          anchor = "NW",
-          height = height,
-          width = width,
-          row = math.floor(0.5 * (vim.o.lines - height)),
-          col = math.floor(0.5 * (vim.o.columns - width)),
-        }
-      end
-
-      require("mini.pick").setup({
-        window = { config = win_config, },
       })
 
       -- Hook Snacks Rename to Mini Files
@@ -90,10 +67,11 @@ return {
       local hipatterns = require("mini.hipatterns")
       hipatterns.setup({
         highlighters = {
-          fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme", },
-          hack  = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack", },
-          todo  = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo", },
-          note  = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote", },
+          fixme     = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme", },
+          hack      = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack", },
+          todo      = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo", },
+          note      = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote", },
+          hex_color = hipatterns.gen_highlighter.hex_color(),
         },
       })
 
