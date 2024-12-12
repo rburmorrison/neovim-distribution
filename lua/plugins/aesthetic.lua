@@ -17,7 +17,7 @@ return {
         },
       })
 
-      vim.cmd [[colorscheme catppuccin]]
+      vim.cmd("colorscheme catppuccin")
     end,
   },
 
@@ -59,19 +59,17 @@ return {
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },
-    config = function()
-      require("lualine").setup({
-        options = { theme = "catppuccin", },
-        sections = {
-          lualine_x = {
-            "encoding",
-            "fileformat",
-            "filetype",
-            "filename",
-          },
+    opts = {
+      options = { theme = "catppuccin", },
+      sections = {
+        lualine_x = {
+          "encoding",
+          "fileformat",
+          "filetype",
+          "filename",
         },
-      })
-    end,
+      },
+    },
   },
 
   {
