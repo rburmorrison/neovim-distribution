@@ -28,36 +28,6 @@ return {
   },
 
   {
-    "nvim-neotest/neotest",
-    dependencies = {
-      "nvim-neotest/nvim-nio",
-      "nvim-lua/plenary.nvim",
-      "antoinemadec/FixCursorHold.nvim",
-      "nvim-treesitter/nvim-treesitter",
-
-      "mrcjkb/rustaceanvim",
-      "nvim-neotest/neotest-python",
-    },
-    keys = {
-      { "<leader>tt",  "<cmd>lua require('neotest').run.run()<cr>",                        desc = "Run Closest Test", },
-      { "<leader>tq",  "<cmd>lua require('neotest').run.stop<cr>",                         desc = "Stop Closes Test", },
-      { "<leader>tf",  "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>",      desc = "Run File Tests", },
-      { "<leader>ts",  "<cmd>lua require('neotest').summary.toggle()<cr>",                 desc = "Toggle Summary", },
-      { "<leader>tw",  "<cmd>lua require('neotest').watch.toggle(vim.fn.expand('%'))<cr>", desc = "Toggle Watch", },
-      { "<leader>too", "<cmd>lua require('neotest').output.open()<cr>",                    desc = "Open Test Output", },
-      { "<leader>top", "<cmd>lua require('neotest').output_panel.toggle()<cr>",            desc = "Toggle Output Panel", },
-    },
-    config = function()
-      require("neotest").setup({
-        adapters = {
-          require("rustaceanvim.neotest"),
-          require("neotest-python"),
-        },
-      })
-    end,
-  },
-
-  {
     "olrtg/nvim-emmet",
     ft = { "html", "htmldjango", },
     keys = {
