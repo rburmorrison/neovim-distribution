@@ -36,9 +36,9 @@ return {
       -- Alaways Use Go In/Out Plus
       require("mini.files").setup({
         mappings = {
-          go_in = "",
+          go_in = "L",
           go_in_plus = "l",
-          go_out = "",
+          go_out = "H",
           go_out_plus = "h",
         },
       })
@@ -242,86 +242,29 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
     },
-    config = function()
-      -- Bindings get put here since hurl.nvim needs to load before the filetype
-      -- autocmd can trigger.
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = "hurl",
-        group = vim.api.nvim_create_augroup("HurlSetup", {}),
-        callback = function()
-          require("hurl").setup({
-            debug = false,
-            show_notification = false,
-            mode = "popup",
-            formatters = {
-              json = { "jq", }, -- Make sure you have install jq in your system, e.g: brew install jq
-            },
-            mappings = {
-              close = "q",          -- Close the response popup or split view
-              next_panel = "<C-n>", -- Move to the next response popup window
-              prev_panel = "<C-p>", -- Move to the previous response popup window
-            },
-          })
-
-          -- Normal Mode Bindings
-          vim.keymap.set(
-            "n",
-            "<leader>hR",
-            "<cmd>HurlRunner<CR>",
-            { buffer = true, desc = "Run all requests", }
-          )
-
-          vim.keymap.set(
-            "n",
-            "<leader>hr",
-            "<cmd>HurlRunnerAt<CR>",
-            { buffer = true, desc = "Run current request", }
-          )
-
-          vim.keymap.set(
-            "n",
-            "<leader>hA",
-            "<cmd>HurlRunnerToEntry<CR>",
-            { buffer = true, desc = "Run requests above", }
-          )
-
-          vim.keymap.set(
-            "n",
-            "<leader>hB",
-            "<cmd>HurlRunnerToEnd<CR>",
-            { buffer = true, desc = "Run requests below", }
-          )
-
-          vim.keymap.set(
-            "n",
-            "<leader>hm",
-            "<cmd>HurlToggleMode<CR>",
-            { buffer = true, desc = "Toggle Hurl output mode", }
-          )
-
-          vim.keymap.set(
-            "n",
-            "<leader>hv",
-            "<cmd>HurlVerbose<CR>",
-            { buffer = true, desc = "Run request in verbose mode", }
-          )
-
-          vim.keymap.set(
-            "n",
-            "<leader>hV",
-            "<cmd>HurlVeryVerbose<CR>",
-            { buffer = true, desc = "Run API in very verbose mode", }
-          )
-
-          -- Visual Mode Bindings
-          vim.keymap.set(
-            "v",
-            "<leader>hr",
-            ":HurlRunner<CR>",
-            { buffer = true, desc = "Run Selected Requests", }
-          )
-        end,
-      })
-    end,
+    ft = "hurl",
+    keys = {
+      { "<leader>hR", "<cmd>HurlRunner<cr>",        desc = "Run all requests",             ft = "hurl", },
+      { "<leader>hr", "<cmd>HurlRunnerAt<cr>",      desc = "Run current request",          ft = "hurl", },
+      { "<leader>hA", "<cmd>HurlRunnerToEntry<cr>", desc = "Run requests above",           ft = "hurl", },
+      { "<leader>hB", "<cmd>HurlRunnerToEnd<cr>",   desc = "Run requests below",           ft = "hurl", },
+      { "<leader>hm", "<cmd>HurlToggleMode<cr>",    desc = "Toggle Hurl output mode",      ft = "hurl", },
+      { "<leader>hv", "<cmd>HurlVerbose<cr>",       desc = "Run request in verbose mode",  ft = "hurl", },
+      { "<leader>hV", "<cmd>HurlVeryVerbose<cr>",   desc = "Run API in very verbose mode", ft = "hurl", },
+      { "<leader>hr", ":HurlRunner<cr>",            desc = "Run Selected Requests",        ft = "hurl", mode = "v", },
+    },
+    opts = {
+      debug = false,
+      show_notification = false,
+      mode = "popup",
+      formatters = {
+        json = { "jq", }, -- Make sure you have install jq in your system, e.g: brew install jq
+      },
+      mappings = {
+        close = "q",          -- Close the response popup or split view
+        next_panel = "<C-n>", -- Move to the next response popup window
+        prev_panel = "<C-p>", -- Move to the previous response popup window
+      },
+    },
   },
 }

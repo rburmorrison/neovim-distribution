@@ -1,8 +1,16 @@
+-------------------------
+-- General Keybindings --
+-------------------------
+
 vim.keymap.set("n", "<leader>L", "<cmd>set number!<cr>", { desc = "Toggle Line Numbers", })
+
+---------------------------------
+-- Language Server Keybindings --
+---------------------------------
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-  callback = function()
+  callback = function(ctx)
     ----------------------------
     -- Document Symbol Picker --
     ----------------------------
@@ -10,7 +18,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       "n",
       "<leader>ls",
       function() MiniExtra.pickers.lsp({ scope = "document_symbol", }) end,
-      { buffer = true, desc = "Document Symbols", }
+      { buffer = ctx.buf, desc = "Document Symbols", }
     )
 
     ---------------------------
@@ -20,7 +28,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       "n",
       "<leader>lS",
       function() MiniExtra.pickers.lsp({ scope = "workspace_symbol", }) end,
-      { buffer = true, desc = "Workspace Symbols", }
+      { buffer = ctx.buf, desc = "Workspace Symbols", }
     )
 
     ---------------------------
@@ -30,7 +38,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       "n",
       "<leader>li",
       function() MiniExtra.pickers.lsp({ scope = "implementation", }) end,
-      { buffer = true, desc = "Implementations", }
+      { buffer = ctx.buf, desc = "Implementations", }
     )
 
     -----------------------
@@ -40,7 +48,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       "n",
       "<leader>lR",
       function() MiniExtra.pickers.lsp({ scope = "references", }) end,
-      { buffer = true, desc = "References", }
+      { buffer = ctx.buf, desc = "References", }
     )
 
     -------------------------
@@ -50,7 +58,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       "n",
       "<leader>la",
       vim.lsp.buf.code_action,
-      { buffer = true, desc = "Code Action", }
+      { buffer = ctx.buf, desc = "Code Action", }
     )
 
     -------------------
@@ -60,7 +68,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       "n",
       "<leader>lr",
       vim.lsp.buf.rename,
-      { buffer = true, desc = "Rename", }
+      { buffer = ctx.buf, desc = "Rename", }
     )
 
     --------------------
@@ -70,7 +78,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       "n",
       "<leader>lf",
       vim.lsp.buf.format,
-      { buffer = true, desc = "Format", }
+      { buffer = ctx.buf, desc = "Format", }
     )
 
     --------------------------
@@ -80,7 +88,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       "n",
       "<leader>ld",
       function() MiniExtra.pickers.diagnostic({ scope = "current", }) end,
-      { buffer = true, desc = "Document Diagnostics", }
+      { buffer = ctx.buf, desc = "Document Diagnostics", }
     )
 
     ---------------------------
@@ -90,7 +98,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       "n",
       "<leader>lD",
       function() MiniExtra.pickers.diagnostic({ scope = "all", }) end,
-      { buffer = true, desc = "Workspace Diagnostics", }
+      { buffer = ctx.buf, desc = "Workspace Diagnostics", }
     )
   end,
 })
