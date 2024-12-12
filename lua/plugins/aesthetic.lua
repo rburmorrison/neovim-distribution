@@ -47,18 +47,12 @@ return {
     "utilyre/barbecue.nvim",
     name = "barbecue",
     version = "*",
-    dependencies = {
-      "SmiteshP/nvim-navic",
-      "nvim-tree/nvim-web-devicons",
-    },
+    dependencies = { "SmiteshP/nvim-navic", },
     opts = {},
   },
 
   {
     "nvim-lualine/lualine.nvim",
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-    },
     opts = {
       options = { theme = "catppuccin", },
       sections = {
