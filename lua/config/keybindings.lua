@@ -3,6 +3,9 @@ vim.keymap.set("n", "<leader>L", "<cmd>set number!<cr>", { desc = "Toggle Line N
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
   callback = function()
+    ----------------------------
+    -- Document Symbol Picker --
+    ----------------------------
     vim.keymap.set(
       "n",
       "<leader>ls",
@@ -10,6 +13,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
       { buffer = true, desc = "Document Symbols", }
     )
 
+    ---------------------------
+    -- Workspace Symbol List --
+    ---------------------------
     vim.keymap.set(
       "n",
       "<leader>lS",
@@ -17,6 +23,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
       { buffer = true, desc = "Workspace Symbols", }
     )
 
+    ---------------------------
+    -- Implementation Finder --
+    ---------------------------
     vim.keymap.set(
       "n",
       "<leader>li",
@@ -24,6 +33,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
       { buffer = true, desc = "Implementations", }
     )
 
+    -----------------------
+    -- References Finder --
+    -----------------------
     vim.keymap.set(
       "n",
       "<leader>lR",
@@ -31,6 +43,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
       { buffer = true, desc = "References", }
     )
 
+    -------------------------
+    -- Code Action Trigger --
+    -------------------------
     vim.keymap.set(
       "n",
       "<leader>la",
@@ -38,6 +53,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
       { buffer = true, desc = "Code Action", }
     )
 
+    -------------------
+    -- Symbol Rename --
+    -------------------
     vim.keymap.set(
       "n",
       "<leader>lr",
@@ -45,6 +63,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
       { buffer = true, desc = "Rename", }
     )
 
+    --------------------
+    -- Code Formatter --
+    --------------------
     vim.keymap.set(
       "n",
       "<leader>lf",
@@ -52,6 +73,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
       { buffer = true, desc = "Format", }
     )
 
+    --------------------------
+    -- Document Diagnostics --
+    --------------------------
     vim.keymap.set(
       "n",
       "<leader>ld",
@@ -59,6 +83,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
       { buffer = true, desc = "Document Diagnostics", }
     )
 
+    ---------------------------
+    -- Workspace Diagnostics --
+    ---------------------------
     vim.keymap.set(
       "n",
       "<leader>lD",
@@ -67,4 +94,3 @@ vim.api.nvim_create_autocmd("LspAttach", {
     )
   end,
 })
-
