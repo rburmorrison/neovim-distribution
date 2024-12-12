@@ -11,7 +11,7 @@ return {
       { "<leader>fb", function() MiniPick.builtin.buffers() end,    desc = "Buffers", },
       { "<leader>fh", function() MiniPick.builtin.help() end,       desc = "Help Tags", },
       { "<leader>go", function() MiniDiff.toggle_overlay(0) end,    desc = "Git Diff Overlay", },
-      { "<leader>gA", "<cmd>Git add --all --verbose<cr>",           desc = "Git Add All", },
+      { "<leader>ga", "<cmd>Git add --all --verbose<cr>",           desc = "Git Add All", },
       { "<leader>gc", "<cmd>Git commit<cr>",                        desc = "Git Commit", },
       { "<leader>gl", "<cmd>Git log<cr>",                           desc = "Git Log", },
       { "<leader>gr", "<cmd>Git reset<cr>",                         desc = "Git Reset", },
