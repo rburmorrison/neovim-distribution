@@ -45,11 +45,17 @@ return {
       require("mini.icons").setup()
       require("mini.jump2d").setup()
       require("mini.move").setup()
-      require("mini.notify").setup()
       require("mini.operators").setup()
       require("mini.pick").setup()
       require("mini.splitjoin").setup()
       require("mini.surround").setup()
+
+      -- Round the notification borders
+      require("mini.notify").setup({
+        window = {
+          config = { border = "rounded", },
+        },
+      })
 
       -- Start screen configuration
       require("mini.starter").setup({
@@ -63,7 +69,18 @@ return {
         options = {
           indent_at_cursor = false,
           try_as_border = true,
+          symbol = "│",
         },
+      })
+
+      -- Disable indentscope for buffers that aren't regular text buffers
+      vim.api.nvim_create_autocmd("FileType", {
+        group = vim.api.nvim_create_augroup("IndentscopeAutoDisable", {}),
+        callback = function(ctx)
+          if vim.bo.buftype ~= "" then
+            vim.b[ctx.buf].miniindentscope_disable = true
+          end
+        end,
       })
 
       -- Add some integrations for Mini Map
