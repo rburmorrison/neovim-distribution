@@ -6,7 +6,6 @@ return {
     config = function()
       require("catppuccin").setup({
         integrations = {
-          beacon = true,
           cmp = true,
           colorful_winsep = { enabled = true, color = "mauve", },
           mason = true,
@@ -20,8 +19,6 @@ return {
       vim.cmd("colorscheme catppuccin")
     end,
   },
-
-  { "danilamihailov/beacon.nvim", },
 
   { "HiPhish/rainbow-delimiters.nvim", },
 

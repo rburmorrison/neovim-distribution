@@ -30,7 +30,7 @@ return {
       { "<leader>mf", function() MiniMap.toggle_focus() end,        desc = "Toggle Mini Map Focus", },
       { "<leader>mo", function() MiniMap.toggle() end,              desc = "Toggle Mini Map", },
       { "<leader>n",  function() MiniNotify.show_history() end,     desc = "Notification History", },
-      { "<leader>of", function() MiniFiles.open() end,              desc = "MiniFiles", },
+      { "<leader>of", function() MiniFiles.open() end,              desc = "Mini Files", },
     },
     config = function()
       require("mini.align").setup()
@@ -168,14 +168,15 @@ return {
         clues = {
           -- Custom Clues
           { mode = "n", keys = "<leader>b", desc = "+buffer", },
-          { mode = "n", keys = "<leader>x", desc = "+emmet", },
           { mode = "n", keys = "<leader>f", desc = "+find", },
           { mode = "n", keys = "<leader>g", desc = "+git", },
           { mode = "n", keys = "<leader>h", desc = "+hurl", },
           { mode = "n", keys = "<leader>l", desc = "+lsp", },
+          { mode = "n", keys = "<leader>m", desc = "+minimap", },
           { mode = "n", keys = "<leader>o", desc = "+open", },
           { mode = "n", keys = "<leader>p", desc = "+parrot", },
           { mode = "n", keys = "<leader>s", desc = "+search", },
+          { mode = "n", keys = "<leader>x", desc = "+emmet", },
 
           -- Builtin Clues
           miniclue.gen_clues.builtin_completion(),
@@ -185,6 +186,8 @@ return {
           miniclue.gen_clues.windows(),
           miniclue.gen_clues.z(),
         },
+
+        window = { delay = 250, },
       })
 
       vim.ui.select = MiniPick.ui_select
