@@ -49,21 +49,6 @@ return {
   },
 
   {
-    "nvim-lualine/lualine.nvim",
-    opts = {
-      options = { theme = "catppuccin", },
-      sections = {
-        lualine_x = {
-          "encoding",
-          "fileformat",
-          "filetype",
-          "filename",
-        },
-      },
-    },
-  },
-
-  {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     main = "nvim-treesitter.configs",
