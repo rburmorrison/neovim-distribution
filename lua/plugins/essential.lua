@@ -1,38 +1,83 @@
+local header = [[
+███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
+████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
+██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
+██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
+██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
+╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
+]]
+
 return {
   {
     "echasnovski/mini.nvim",
     version = false,
     lazy = false,
     keys = {
-      { "<leader>of", function() MiniFiles.open() end,              desc = "MiniFiles", },
-      { "<leader>ff", function() MiniPick.builtin.files() end,      desc = "Find Files", },
-      { "<leader>fr", function() MiniExtra.pickers.registers() end, desc = "Find Register", },
-      { "<leader>fg", function() MiniPick.builtin.grep_live() end,  desc = "Live Grep", },
+      { "<leader>bd", function() MiniBufremove.delete() end,        desc = "Remove Buffer", },
       { "<leader>fb", function() MiniPick.builtin.buffers() end,    desc = "Buffers", },
+      { "<leader>ff", function() MiniPick.builtin.files() end,      desc = "Find Files", },
+      { "<leader>fg", function() MiniPick.builtin.grep_live() end,  desc = "Live Grep", },
       { "<leader>fh", function() MiniPick.builtin.help() end,       desc = "Help Tags", },
-      { "<leader>go", function() MiniDiff.toggle_overlay(0) end,    desc = "Git Diff Overlay", },
+      { "<leader>fr", function() MiniExtra.pickers.registers() end, desc = "Find Register", },
+      { "<leader>gP", "<cmd>Git push<cr>",                          desc = "Git Push", },
       { "<leader>ga", "<cmd>Git add --all --verbose<cr>",           desc = "Git Add All", },
       { "<leader>gc", "<cmd>Git commit<cr>",                        desc = "Git Commit", },
       { "<leader>gl", "<cmd>Git log<cr>",                           desc = "Git Log", },
-      { "<leader>gr", "<cmd>Git reset<cr>",                         desc = "Git Reset", },
-      { "<leader>gP", "<cmd>Git push<cr>",                          desc = "Git Push", },
+      { "<leader>go", function() MiniDiff.toggle_overlay(0) end,    desc = "Git Diff Overlay", },
       { "<leader>gp", "<cmd>Git pull<cr>",                          desc = "Git Pull", },
+      { "<leader>gr", "<cmd>Git reset<cr>",                         desc = "Git Reset", },
       { "<leader>gs", "<cmd>Git status<cr>",                        desc = "Git Status", },
+      { "<leader>mf", function() MiniMap.toggle_focus() end,        desc = "Toggle Mini Map Focus", },
+      { "<leader>mo", function() MiniMap.toggle() end,              desc = "Toggle Mini Map", },
+      { "<leader>n",  function() MiniNotify.show_history() end,     desc = "Notification History", },
+      { "<leader>of", function() MiniFiles.open() end,              desc = "MiniFiles", },
     },
     config = function()
       require("mini.align").setup()
+      require("mini.animate").setup()
       require("mini.bracketed").setup()
+      require("mini.bufremove").setup()
       require("mini.comment").setup()
+      require("mini.cursorword").setup()
       require("mini.diff").setup()
       require("mini.extra").setup()
       require("mini.git").setup()
       require("mini.icons").setup()
       require("mini.jump2d").setup()
       require("mini.move").setup()
+      require("mini.notify").setup()
       require("mini.operators").setup()
       require("mini.pick").setup()
       require("mini.splitjoin").setup()
       require("mini.surround").setup()
+
+      -- Start screen configuration
+      require("mini.starter").setup({
+        header = vim.trim(header),
+        evaluate_single = true,
+        footer = "",
+      })
+
+      -- Include border lines as scope and disable cursor-dependency
+      require("mini.indentscope").setup({
+        options = {
+          indent_at_cursor = false,
+          try_as_border = true,
+        },
+      })
+
+      -- Add some integrations for Mini Map
+      local minimap = require("mini.map")
+      minimap.setup({
+        integrations = {
+          minimap.gen_integration.builtin_search(),
+          minimap.gen_integration.diff(),
+          minimap.gen_integration.diagnostic(),
+        },
+        symbols = {
+          encode = minimap.gen_encode_symbols.dot("3x2"),
+        },
+      })
 
       -- Alaways Use Go In/Out Plus
       require("mini.files").setup({
@@ -42,14 +87,6 @@ return {
           go_out = "H",
           go_out_plus = "h",
         },
-      })
-
-      -- Hook Snacks Rename to Mini Files
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "MiniFilesActionRename",
-        callback = function(event)
-          Snacks.rename.on_rename_file(event.data.from, event.data.to)
-        end,
       })
 
       -- Extra AI Textobjects
@@ -119,7 +156,6 @@ return {
           { mode = "n", keys = "<leader>g", desc = "+git", },
           { mode = "n", keys = "<leader>h", desc = "+hurl", },
           { mode = "n", keys = "<leader>l", desc = "+lsp", },
-          { mode = "n", keys = "<leader>t", desc = "+neotest", },
           { mode = "n", keys = "<leader>o", desc = "+open", },
           { mode = "n", keys = "<leader>p", desc = "+parrot", },
           { mode = "n", keys = "<leader>s", desc = "+search", },
@@ -135,105 +171,18 @@ return {
       })
 
       vim.ui.select = MiniPick.ui_select
-    end,
-  },
-
-  -- Configured according to the documentation from snacks.nvim.
-  {
-    "folke/edgy.nvim",
-    ---@module 'edgy'
-    ---@param opts Edgy.Config
-    opts = function(_, opts)
-      for _, pos in ipairs({ "top", "bottom", "left", "right", }) do
-        opts[pos] = opts[pos] or {}
-        table.insert(opts[pos], {
-          ft = "snacks_terminal",
-          size = { height = 0.4, },
-          title = "%{b:snacks_terminal.id}: %{b:term_title}",
-          filter = function(_, win)
-            return vim.w[win].snacks_win
-                and vim.w[win].snacks_win.position == pos
-                and vim.w[win].snacks_win.relative == "editor"
-                and not vim.w[win].trouble_preview
-          end,
-        })
-      end
+      vim.notify = MiniNotify.make_notify()
     end,
   },
 
   {
-    "folke/snacks.nvim",
-    priority = 1000,
-    lazy = false,
-    keys = {
-      { "<leader>n",  function() Snacks.notifier.show_history() end, desc = "Notification History", },
-      { "<leader>gO", function() Snacks.gitbrowse() end,             desc = "Git Browse",           mode = { "n", "v", }, },
-      { "<leader>gb", function() Snacks.git.blame_line() end,        desc = "Git Blame Line", },
-      { "<C-t>",      function() Snacks.terminal.toggle() end,       desc = "Toggle Terminal",      mode = { "n", "t", }, },
-      { "<leader>z",  function() Snacks.zen.zen() end,               desc = "Zen Mode", },
-      { "<leader>bd", function() Snacks.bufdelete() end,             desc = "Buffer Delete", },
-      { "<leader>S",  function() Snacks.scratch() end,               desc = "Scratch", },
-      { "<leader>os", function() Snacks.scratch.select() end,        desc = "Open Scratch", },
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    opts = {
+      open_mapping = "<C-t>",
+      direction = "float",
+      float_opts = { border = "rounded", },
     },
-    config = function()
-      require("snacks").setup({
-        bigfile = { enabled = true, },
-        dashboard = { enabled = true, },
-        indent = { enabled = true, },
-        input = { enabled = true, },
-        notifier = { enabled = true, },
-        quickfile = { enabled = true, },
-        scroll = { enabled = true, },
-        statuscolumn = { enabled = true, },
-        words = { enabled = true, },
-      })
-
-      -- LSP Progress
-      ---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
-      local progress = vim.defaulttable()
-      vim.api.nvim_create_autocmd("LspProgress", {
-        ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
-        callback = function(ev)
-          local client = vim.lsp.get_client_by_id(ev.data.client_id)
-          local value = ev.data.params
-              .value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
-          if not client or type(value) ~= "table" then
-            return
-          end
-          local p = progress[client.id]
-
-          for i = 1, #p + 1 do
-            if i == #p + 1 or p[i].token == ev.data.params.token then
-              p[i] = {
-                token = ev.data.params.token,
-                msg = ("[%3d%%] %s%s"):format(
-                  value.kind == "end" and 100 or value.percentage or 100,
-                  value.title or "",
-                  value.message and (" **%s**"):format(value.message) or ""
-                ),
-                done = value.kind == "end",
-              }
-              break
-            end
-          end
-
-          local msg = {} ---@type string[]
-          progress[client.id] = vim.tbl_filter(function(v)
-            return table.insert(msg, v.msg) or not v.done
-          end, p)
-
-          local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏", }
-          vim.notify(table.concat(msg, "\n"), "info", {
-            id = "lsp_progress",
-            title = client.name,
-            opts = function(notif)
-              notif.icon = #progress[client.id] == 0 and " "
-                  or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
-            end,
-          })
-        end,
-      })
-    end,
   },
 
   {

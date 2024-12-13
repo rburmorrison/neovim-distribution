@@ -9,7 +9,6 @@
   "cmp-path": { "branch": "main", "commit": "91ff86cd9c29299a64f968ebb45846c485725f23" },
   "cmp_luasnip": { "branch": "master", "commit": "98d9cb5c2c38532bd9bdb481067b20fea8f32e90" },
   "colorful-winsep.nvim": { "branch": "alpha", "commit": "0070484536ea55ec64a8453d41e3badace04a61a" },
-  "edgy.nvim": { "branch": "main", "commit": "7e8dedc39abebe40c289b8012cc89b11c69aa7a0" },
   "fzf-lua": { "branch": "main", "commit": "545e789b461ad6c155b35677ad6933a720e43696" },
   "hurl.nvim": { "branch": "main", "commit": "bc8d748a3754f63d50ee8dfd54e20de80f22754c" },
   "lazy.nvim": { "branch": "main", "commit": "7c493713bc2cb392706866eeba53aaef6c8e9fc6" },
@@ -33,5 +32,5 @@
   "reactive.nvim": { "branch": "master", "commit": "a81b12322a2343d5f6530bebf3a844141d378550" },
   "render-markdown.nvim": { "branch": "main", "commit": "e41b0002fe4196825450ab5a6343300c40791d51" },
   "rustaceanvim": { "branch": "master", "commit": "a244210b28f9055c2b4cfa85c92c8a71c13671c9" },
-  "snacks.nvim": { "branch": "main", "commit": "52086010d3f72949a30c45c2cc4faa0b0286d097" }
+  "toggleterm.nvim": { "branch": "main", "commit": "022ff5594acccc8d90d2e46dc43994f7722ebdf7" }
 }
