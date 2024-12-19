@@ -7,61 +7,6 @@ local handlers = {
 
 return {
   {
-    "mrcjkb/rustaceanvim",
-    version = "^5",
-    lazy = false,
-    config = function()
-      vim.g.rustaceanvim = {
-        server = {
-          handlers = handlers,
-          default_settings = {
-            ["rust-analyzer"] = {
-              check = { command = "clippy", },
-            },
-          },
-          on_attach = function(_, bufnr)
-            vim.lsp.inlay_hint.enable(true, { bufnr = bufnr, })
-          end,
-        },
-      }
-    end,
-  },
-
-  {
-    "olrtg/nvim-emmet",
-    ft = { "html", "htmldjango", },
-    keys = {
-      {
-        "<leader>xe",
-        function() require("nvim-emmet").wrap_with_abbreviation() end,
-        desc = "Expand Emmet Expression",
-        mode = { "n", "v", },
-        ft = { "html", "htmldjango", },
-      },
-    },
-    config = false,
-  },
-
-  {
-    "folke/lazydev.nvim",
-    ft = "lua",
-    opts = {
-      library = {
-        { path = "luvit-meta/library", words = { "vim%.uv", }, },
-      },
-    },
-  },
-
-  { "Bilal2453/luvit-meta", lazy = true, },
-
-  {
-    "MeanderingProgrammer/render-markdown.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter", },
-    ft = { "markdown", "codecompanion", },
-    opts = {},
-  },
-
-  {
     "neovim/nvim-lspconfig",
     lazy = false,
     dependencies = {
