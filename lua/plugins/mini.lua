@@ -59,9 +59,16 @@ return {
       })
 
       -- Start screen configuration
-      require("mini.starter").setup({
+      local ministarter = require("mini.starter")
+      ministarter.setup({
         header = vim.trim(header),
         evaluate_single = true,
+        items = {
+          ministarter.sections.recent_files(10, true),
+          ministarter.sections.builtin_actions(),
+          { name = "Lazy", action = "Lazy", section = "Management actions", },
+          { name = "Mason", action = "Mason", section = "Management actions", },
+        },
         footer = "",
       })
 
