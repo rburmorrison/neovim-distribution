@@ -6,6 +6,7 @@ return {
     config = function()
       require("catppuccin").setup({
         integrations = {
+          blink_cmp = true,
           cmp = true,
           colorful_winsep = { enabled = true, color = "mauve", },
           mason = true,
