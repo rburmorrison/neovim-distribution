@@ -50,6 +50,7 @@ return {
       require("mini.splitjoin").setup()
       require("mini.statusline").setup()
       require("mini.surround").setup()
+      require("mini.visits").setup()
 
       -- Round the notification borders
       require("mini.notify").setup({
@@ -64,8 +65,8 @@ return {
         header = vim.trim(header),
         evaluate_single = true,
         items = {
-          ministarter.sections.recent_files(10, true),
           ministarter.sections.builtin_actions(),
+          ministarter.sections.pick(),
           { name = "Lazy", action = "Lazy", section = "Management actions", },
           { name = "Mason", action = "Mason", section = "Management actions", },
         },
