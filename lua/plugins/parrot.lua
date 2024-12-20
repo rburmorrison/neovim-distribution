@@ -4,14 +4,15 @@ return {
     dependencies = { "ibhagwan/fzf-lua", "nvim-lua/plenary.nvim", },
     lazy = false,
     keys = {
-      { "<leader>pa", ":PrtAppend<CR>",     mode = { "n", "v", }, desc = "Parrot Append", },
-      { "<leader>pb", ":PrtPrepend<CR>",    mode = { "n", "v", }, desc = "Parrot Prepend", },
-      { "<leader>pi", ":PrtImplement<CR>",  mode = { "n", "v", }, desc = "Parrot Implement", },
-      { "<leader>pr", ":PrtRewrite<CR>",    mode = { "n", "v", }, desc = "Parrot Rewrite", },
-      { "<leader>pc", ":PrtChatToggle<CR>", mode = { "n", "v", }, desc = "Parrot Chat Toggle", },
-      { "<leader>py", ":PrtRetry<CR>",      mode = { "n", "v", }, desc = "Parrot Retry", },
-      { "<leader>pp", ":PrtChatPaste<CR>",  mode = { "n", "v", }, desc = "Parrot Chat Paste", },
-      { "<leader>pC", ":PrtCommit<CR>",     mode = { "n", },      desc = "Parrot Generate Commit Message", },
+      { "<leader>pC", "<cmd>PrtCommit<cr>", mode = "n",           desc = "Parrot Generate Commit Message", },
+      { "<leader>pY", ":PrtEdit<cr>",       mode = { "n", "v", }, desc = "Parrot Edit", },
+      { "<leader>pa", ":PrtAppend<cr>",     mode = { "n", "v", }, desc = "Parrot Append", },
+      { "<leader>pb", ":PrtPrepend<cr>",    mode = { "n", "v", }, desc = "Parrot Prepend", },
+      { "<leader>pc", ":PrtChatToggle<cr>", mode = { "n", "v", }, desc = "Parrot Chat Toggle", },
+      { "<leader>pi", ":PrtImplement<cr>",  mode = { "n", "v", }, desc = "Parrot Implement", },
+      { "<leader>pp", ":PrtChatPaste<cr>",  mode = { "n", "v", }, desc = "Parrot Chat Paste", },
+      { "<leader>pr", ":PrtRewrite<cr>",    mode = { "n", "v", }, desc = "Parrot Rewrite", },
+      { "<leader>py", ":PrtRetry<cr>",      mode = { "n", "v", }, desc = "Parrot Retry", },
     },
     config = function()
       require("parrot").setup({

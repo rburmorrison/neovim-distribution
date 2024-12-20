@@ -1,7 +1,7 @@
 return {
   {
     "saghen/blink.cmp",
-    dependencies = "rafamadriz/friendly-snippets",
+    dependencies = { "rafamadriz/friendly-snippets", },
 
     version = "v0.*",
 
@@ -21,14 +21,16 @@ return {
           auto_show = true,
           window = { border = "rounded", },
         },
-        signature = { window = { border = "rounded", }, },
       },
 
       sources = {
         default = { "lsp", "path", "snippets", "buffer", },
       },
 
-      signature = { enabled = true, },
+      signature = {
+        enabled = true,
+        window = { border = "rounded", },
+      },
     },
 
     opts_extend = { "sources.default", },

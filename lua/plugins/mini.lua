@@ -183,7 +183,7 @@ return {
           { mode = "n", keys = "<leader>l", desc = "+lsp", },
           { mode = "n", keys = "<leader>m", desc = "+minimap", },
           { mode = "n", keys = "<leader>o", desc = "+open", },
-          { mode = "n", keys = "<leader>p", desc = "+parrot", },
+          { mode = "n", keys = "<leader>p", desc = "+prompt", },
           { mode = "n", keys = "<leader>s", desc = "+search", },
           { mode = "n", keys = "<leader>x", desc = "+emmet", },
 
