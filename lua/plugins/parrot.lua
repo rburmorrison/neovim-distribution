@@ -18,8 +18,8 @@ return {
       require("parrot").setup({
         user_input_ui = "buffer",
         providers = {
-          anthropic = {
-            api_key = os.getenv("ANTHROPIC_API_KEY"),
+          openai = {
+            api_key = os.getenv("OPENAI_API_KEY"),
           },
         },
         hooks = {
