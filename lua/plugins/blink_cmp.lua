@@ -16,10 +16,15 @@ return {
       },
 
       completion = {
-        menu = { border = "rounded", },
+        menu = {
+          border = "rounded",
+        },
         documentation = {
           auto_show = true,
           window = { border = "rounded", },
+        },
+        accept = {
+          auto_brackets = { enabled = false, },
         },
       },
 
