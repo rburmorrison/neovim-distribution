@@ -19,14 +19,7 @@ return {
       { "<leader>fg", function() MiniPick.builtin.grep_live() end,  desc = "Live Grep", },
       { "<leader>fh", function() MiniPick.builtin.help() end,       desc = "Help Tags", },
       { "<leader>fr", function() MiniExtra.pickers.registers() end, desc = "Find Register", },
-      { "<leader>gP", "<cmd>Git push<cr>",                          desc = "Git Push", },
-      { "<leader>ga", "<cmd>Git add --all --verbose<cr>",           desc = "Git Add All", },
-      { "<leader>gc", "<cmd>Git commit<cr>",                        desc = "Git Commit", },
-      { "<leader>gl", "<cmd>Git log<cr>",                           desc = "Git Log", },
       { "<leader>go", function() MiniDiff.toggle_overlay(0) end,    desc = "Git Diff Overlay", },
-      { "<leader>gp", "<cmd>Git pull<cr>",                          desc = "Git Pull", },
-      { "<leader>gr", "<cmd>Git reset<cr>",                         desc = "Git Reset", },
-      { "<leader>gs", "<cmd>Git status<cr>",                        desc = "Git Status", },
       { "<leader>mf", function() MiniMap.toggle_focus() end,        desc = "Toggle Mini Map Focus", },
       { "<leader>mo", function() MiniMap.toggle() end,              desc = "Toggle Mini Map", },
       { "<leader>n",  function() MiniNotify.show_history() end,     desc = "Notification History", },
@@ -35,7 +28,6 @@ return {
     config = function()
       require("mini.align").setup()
       require("mini.animate").setup()
-      require("mini.bracketed").setup()
       require("mini.bufremove").setup()
       require("mini.comment").setup()
       require("mini.cursorword").setup()
@@ -52,6 +44,11 @@ return {
       require("mini.surround").setup()
       require("mini.visits").setup()
 
+      -- Round the diagnostic borders
+      require("mini.bracketed").setup({
+        diagnostic = { options = { float = { border = "rounded", }, }, },
+      })
+
       -- Round the notification borders
       require("mini.notify").setup({
         window = {
@@ -67,7 +64,7 @@ return {
         items = {
           ministarter.sections.builtin_actions(),
           ministarter.sections.pick(),
-          { name = "Lazy", action = "Lazy", section = "Management actions", },
+          { name = "Lazy",  action = "Lazy",  section = "Management actions", },
           { name = "Mason", action = "Mason", section = "Management actions", },
         },
         footer = "",
