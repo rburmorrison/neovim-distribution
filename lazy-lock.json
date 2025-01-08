@@ -1,6 +1,6 @@
 {
   "barbecue": { "branch": "main", "commit": "cd7e7da622d68136e13721865b4d919efd6325ed" },
-  "blink.cmp": { "branch": "main", "commit": "5b0f52d42ecbb374695da1a93fa40eca4dc7a7ff" },
+  "blink.cmp": { "branch": "main", "commit": "1cc3b1a908fbcfd15451c4772759549724f38524" },
   "catppuccin": { "branch": "main", "commit": "f67b886d65a029f12ffa298701fb8f1efd89295d" },
   "colorful-winsep.nvim": { "branch": "alpha", "commit": "0070484536ea55ec64a8453d41e3badace04a61a" },
   "friendly-snippets": { "branch": "main", "commit": "efff286dd74c22f731cdec26a70b46e5b203c619" },
@@ -20,8 +20,8 @@
   "parrot.nvim": { "branch": "main", "commit": "048a77d00ff427ce01c32a381ecff7f94a455643" },
   "plenary.nvim": { "branch": "master", "commit": "2d9b06177a975543726ce5c73fca176cedbffe9d" },
   "rainbow-delimiters.nvim": { "branch": "master", "commit": "5578ca6709e0e9a0c76fc7c484b9951b428cbb71" },
-  "reactive.nvim": { "branch": "master", "commit": "a81b12322a2343d5f6530bebf3a844141d378550" },
-  "render-markdown.nvim": { "branch": "main", "commit": "bab0663ecdb06b0ff846969764d6c67719ab0fcb" },
+  "reactive.nvim": { "branch": "master", "commit": "39b676e4f806ef00fadd807f6d73ae89caef0357" },
+  "render-markdown.nvim": { "branch": "main", "commit": "786d643ac7a691515d401930b8850f596992725d" },
   "rustaceanvim": { "branch": "master", "commit": "0a1876b970ab946be3f4d341e9d743a5d62d646a" },
   "toggleterm.nvim": { "branch": "main", "commit": "50ea089fc548917cc3cc16b46a8211833b9e3c7c" }
 }
