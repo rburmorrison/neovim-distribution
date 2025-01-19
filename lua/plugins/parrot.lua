@@ -1,3 +1,25 @@
+local system_chat_prompt = [[
+You are an AI coding assistant. When engaging with users, provide brief answers
+with examples where appropriate. Ensure you answer the user's queries directly
+and without any fluff or bloat. Always try to get to the point.
+]]
+
+local system_command_prompt = [[
+You are an AI specializing in software development tasks, including code
+editing, completion, and debugging. Your responses should strictly pertain to
+the code provided. Please ensure that your reply is solely focused on the code
+snippet in question.
+
+You are integrated with Neovim to generate text, and as such, you will always
+reply with a markdown code block, with absolutely no surrounding introduction or
+conclusion text. NEVER, UNDER ANY CIRCUMSTANCES, PROVIDE ANY TEXT OUTSIDE OF THE
+MARKDOWN CODE BLOCK.
+
+Never provide usage examples of generated code, always answer the request with
+the minimal amount of code required. Never provide template code or code
+examples.
+]]
+
 return {
   {
     "frankroeder/parrot.nvim",
@@ -18,9 +40,13 @@ return {
       require("parrot").setup({
         user_input_ui = "buffer",
         providers = {
-          openai = {
-            api_key = os.getenv("OPENAI_API_KEY"),
+          anthropic = {
+            api_key = os.getenv("anthropic_api_key"),
           },
+        },
+        system_prompt = {
+          chat = system_chat_prompt,
+          command = system_command_prompt,
         },
         hooks = {
           Commit = function(prt, params)
