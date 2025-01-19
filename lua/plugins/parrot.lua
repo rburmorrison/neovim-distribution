@@ -41,7 +41,7 @@ return {
         user_input_ui = "buffer",
         providers = {
           anthropic = {
-            api_key = os.getenv("anthropic_api_key"),
+            api_key = os.getenv("ANTHROPIC_API_KEY"),
           },
         },
         system_prompt = {
