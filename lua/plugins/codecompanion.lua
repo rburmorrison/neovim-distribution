@@ -16,11 +16,22 @@ return {
     },
     opts = {
       strategies = {
-        chat = { adapter = adapter, },
+        chat = {
+          adapter = adapter,
+          slash_commands = {
+            ["buffer"] = { opts = { provider = "mini_pick", }, },
+            ["file"] = { opts = { provider = "mini_pick", }, },
+            ["help"] = { opts = { provider = "mini_pick", }, },
+            ["symbols"] = { opts = { provider = "mini_pick", }, },
+          },
+        },
         inline = { adapter = adapter, },
         cmd = { adapter = adapter, },
       },
       display = {
+        action_palette = {
+          provider = "mini_pick",
+        },
         diff = {
           provider = "mini_diff",
         },
