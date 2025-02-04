@@ -47,7 +47,7 @@ return {
               ["X-Title"] = "Neovim - CodeCompanion",
             },
             schema = {
-              model = { default = "mistralai/mistral-small-24b-instruct-2501", },
+              model = { default = "google/gemini-flash-1.5", },
             },
           })
         end,
