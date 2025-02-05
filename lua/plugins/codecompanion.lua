@@ -73,58 +73,76 @@ return {
           },
           prompts = {
             {
-              role = constants.SYSTEM_ROLE,
-              content = function()
-                return string.format(
-                  [[You are an expert at the Conventional Commit format. When
-the user gives you a diff, output a text block of the suggested conventional
-commit block. Give no additional output other than the resulting block. If there
-should be a body, format in a markdown list with no additional header. The only
-time you should add any extra words is if the diff is empty. In that case,
-provide a short message for the user so they know what happened and suggest they
-should stage their changes first.
-
-An example output would be in the form of:
-
-```
-<CATEGORY>: <SUMMARY>
-
-- <DETAIL_ONE>
-- <DETAIL_TWO>
-```
-
-Don't include the markdown code block syntax.
-
-Both `<CATEGORY>` and `<SUMMARY>` should be all lowercase, while each
-`<DETAIL_X>` should start with a captital letter and end with a period. Add as
-many detail bullets as required to get a full picture of the diff.
-
-Valid categories are:
-
-- fix (a bug fix)
-- feat (a new feature)
-- chore (an update to the environment, updating dependencies, etc.)
-- refactor (organization changes that neither fix bugs nor add features)
-- build (updates to the build system)
-- test (changes or additions to tests)
-- doc (documentation changes)
-
-Dont include scopes, and don't include text in the body outside of the details
-list.
-]],
-                  vim.fn.system("git diff --no-color --no-ext-diff --staged")
-                )
-              end,
-              opts = {
-                contains_code = true,
-              },
-            },
-            {
               role = constants.USER_ROLE,
               content = function()
                 return string.format(
-                  [[Here is my diff:
+                  [[You are an expert at the Conventional Commit format.
 
+Given a diff, output a conventional commit block. Output *ONLY* the commit block, and nothing else.
+
+Example 1:
+
+Diff:
+```diff
+--- a/README.md
++++ b/README.md
+@@ -1,4 +1,4 @@
+-# My Project
++# My Awesome Project
+
+ This is a sample project.
+```
+
+Output:
+```
+doc: update project name in readme
+
+- Change project name from "My Project" to "My Awesome Project".
+```
+
+Example 3:
+
+Diff:
+```diff
+--- a/src/main.py
++++ b/src/main.py
+@@ -1,3 +1,5 @@
+ def main():
+-    pass
++    print("Hello, world!")
++    x = 1 + 1
++    print(f"The value of x is: {x}")
+```
+
+Output:
+```
+feat: add hello world message and calculate a value
+
+- Print "Hello, world!" in the main function.
+- Calculate the value of 1 + 1 and store it in the variable 'x'.
+- Print the value of 'x' using an f-string.
+```
+
+Example 3:
+
+Diff:
+
+Output:
+```
+Empty diff. Stage your changes first.
+```
+
+Instructions:
+
+*   Category and summary should be lowercase.
+*   Details in the body should be a markdown list.
+*   Detail bullets should start with a capital letter and end with a period. Include as many as needed. No extra text outside the list.
+*   Don't use scopes.
+*   Valid categories: fix, feat, chore, refactor, build, test, doc.
+*   If the diff is empty, output "Empty diff. Stage your changes first.".
+*   Output **ONLY** the commit block. Do not add any follow-up text.
+
+Now, generate a commit message for the following diff:
 `````diff
 %s
 `````
