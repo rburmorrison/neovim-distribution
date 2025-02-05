@@ -47,7 +47,7 @@ return {
               ["X-Title"] = "Neovim - CodeCompanion",
             },
             schema = {
-              model = { default = "google/gemini-flash-1.5", },
+              model = { default = "google/gemini-2.0-flash-001", },
             },
           })
         end,
