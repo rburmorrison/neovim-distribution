@@ -113,6 +113,7 @@ return {
             },
             schema = {
               model = { default = "google/gemini-2.0-flash-001", },
+              temperature = { default = 0.3, },
             },
           })
         end,
@@ -138,7 +139,7 @@ return {
           },
           prompts = {
             {
-              role = constants.USER_ROLE,
+              role = constants.SYSTEM_ROLE,
               content = function()
                 return git_commit_system_prompt
               end,
