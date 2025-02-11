@@ -112,7 +112,7 @@ return {
               ["X-Title"] = "Neovim - CodeCompanion",
             },
             schema = {
-              model = { default = "google/gemini-2.0-flash-001", },
+              model = { default = "qwen/qwen-2.5-coder-32b-instruct", },
               temperature = { default = 0.3, },
             },
           })
