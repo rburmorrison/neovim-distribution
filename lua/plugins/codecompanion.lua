@@ -6,6 +6,71 @@ local constants = {
   SYSTEM_ROLE = "system",
 }
 
+local git_commit_system_prompt = [[
+Analyze the provided Git diff and generate a conventional commit message using ONLY these types: `fix`, `feat`, `chore`, `refactor`, `build`, `test`, `doc`. Do NOT use scopes. Follow these examples:
+
+**Example 1:**
+```
+Diff:
+```diff
+--- a/utils/error_handler.py
++++ b/utils/error_handler.py
+@@ -5,4 +5,4 @@ def handle_error(e):
+         "error": str(e),
+         "timestamp": datetime.now().isoformat()
+     }
+-    logger.eror(response)  # Typo here
++    logger.error(response)
+```
+
+Output:
+```plaintext
+fix: correct logger method name typo
+
+- Change 'eror' to 'error' in logger call
+```
+
+**Example 2:**
+```
+Diff:
+```diff
+--- a/tests/test_api.py
++++ b/tests/test_api.py
+@@ -12,3 +12,7 @@ def test_get_users(client):
+     response = client.get('/users')
+     assert response.status_code == 200
+     assert isinstance(response.json(), list)
++
++def test_create_user(client):
++    response = client.post('/users', json={'name': 'test'})
++    assert response.status_code == 201
+```
+
+Output:
+```plaintext
+test: add user creation endpoint test
+
+- Implement test for POST /users endpoint
+- Verify 201 status code on successful creation
+```
+
+**Rules:**
+1. Begin with type prefix followed by colon and space
+2. Keep description under 50 characters
+3. Use bullet points for key changes (markdown hyphen syntax)
+4. Focus on user impact for `fix`/`feat`, implementation details for others
+5. Output ONLY this format:
+
+```
+[type]: [brief description]
+
+- [Change detail 1]
+- [Change detail 2]
+```
+
+Respond with JUST the formatted commit message in plain text within ```
+]]
+
 return {
   {
     "olimorris/codecompanion.nvim",
@@ -47,7 +112,7 @@ return {
               ["X-Title"] = "Neovim - CodeCompanion",
             },
             schema = {
-              model = { default = "mistralai/mistral-small-24b-instruct-2501", },
+              model = { default = "google/gemini-2.0-flash-001", },
             },
           })
         end,
@@ -75,78 +140,17 @@ return {
             {
               role = constants.USER_ROLE,
               content = function()
+                return git_commit_system_prompt
+              end,
+              opts = {
+                contains_code = true,
+              },
+            },
+            {
+              role = constants.USER_ROLE,
+              content = function()
                 return string.format(
-                  [[You are an expert at the Conventional Commit format.
-
-Given a diff, output a conventional commit block. Output *ONLY* the commit block, and nothing else.
-
-Example 1:
-
-Diff:
-```diff
---- a/README.md
-+++ b/README.md
-@@ -1,4 +1,4 @@
--# My Project
-+# My Awesome Project
-
- This is a sample project.
-```
-
-Output:
-```
-doc: update project name in readme
-
-- Change project name from "My Project" to "My Awesome Project".
-```
-
-Example 3:
-
-Diff:
-```diff
---- a/src/main.py
-+++ b/src/main.py
-@@ -1,3 +1,5 @@
- def main():
--    pass
-+    print("Hello, world!")
-+    x = 1 + 1
-+    print(f"The value of x is: {x}")
-```
-
-Output:
-```
-feat: add hello world message and calculate a value
-
-- Print "Hello, world!" in the main function.
-- Calculate the value of 1 + 1 and store it in the variable 'x'.
-- Print the value of 'x' using an f-string.
-```
-
-Example 3:
-
-Diff:
-
-Output:
-```
-Empty diff. Stage your changes first.
-```
-
-Instructions:
-
-*   Category and summary should be lowercase.
-*   Details in the body should be a markdown list.
-*   Detail bullets should start with a capital letter and end with a period. Include as many as needed. No extra text outside the list.
-*   Don't use scopes.
-*   Valid categories: fix, feat, chore, refactor, build, test, doc.
-*   If the diff is empty, output "Empty diff. Stage your changes first.".
-*   Output **ONLY** the commit block. Do not add any follow-up text.
-
-Now, generate a commit message for the following diff:
-`````diff
-%s
-`````
-]],
+                  "```diff\n%s\n```",
                   vim.fn.system("git diff --no-color --no-ext-diff --staged")
                 )
               end,
