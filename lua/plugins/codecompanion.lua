@@ -113,7 +113,6 @@ return {
             },
             schema = {
               model = { default = "openai/gpt-4o-mini", },
-              temperature = { default = 0.3, },
             },
           })
         end,
