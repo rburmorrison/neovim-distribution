@@ -112,7 +112,7 @@ return {
               ["X-Title"] = "Neovim - CodeCompanion",
             },
             schema = {
-              model = { default = "qwen/qwen-2.5-coder-32b-instruct", },
+              model = { default = "openai/gpt-4o-mini", },
               temperature = { default = 0.3, },
             },
           })
