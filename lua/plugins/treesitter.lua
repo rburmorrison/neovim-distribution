@@ -17,6 +17,7 @@ return {
         "javascript",
         "json",
         "just",
+        "kdl",
         "lua",
         "make",
         "markdown",
