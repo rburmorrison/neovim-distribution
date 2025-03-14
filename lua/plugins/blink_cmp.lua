@@ -3,7 +3,7 @@ return {
     "saghen/blink.cmp",
     dependencies = { "rafamadriz/friendly-snippets", },
 
-    version = "v0.*",
+    version = "*",
 
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
@@ -15,29 +15,36 @@ return {
         nerd_font_variant = "mono",
       },
 
+      -- Default list of enabled providers defined so that you can extend it
+      -- elsewhere in your config, without redefining it, due to `opts_extend`
+      sources = {
+        default = { "lsp", "path", "snippets", "buffer", },
+      },
+
       completion = {
-        menu = {
-          border = "rounded",
-        },
+        menu = { border = "rounded", },
+
         documentation = {
           auto_show = true,
           window = { border = "rounded", },
         },
+
         accept = {
-          auto_brackets = { enabled = false, },
+          auto_brackets = { enabled = true, },
         },
       },
 
-      sources = {
-        default = { "lsp", "path", "snippets", "buffer", },
+      cmdline = {
+        completion = { menu = { auto_show = true, }, },
       },
 
       signature = {
         enabled = true,
         window = { border = "rounded", },
       },
-    },
 
+      fuzzy = { implementation = "prefer_rust_with_warning", },
+    },
     opts_extend = { "sources.default", },
   },
 }
