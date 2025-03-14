@@ -23,6 +23,13 @@ return {
       -- LSP Configuration --
       -----------------------
 
+      -- Manually activate `fish_lsp`
+
+      local lspconfig = require("lspconfig")
+      lspconfig.fish_lsp.setup({})
+
+      -- Configure Mason
+
       require("mason").setup({
         ui = { border = border, },
       })
