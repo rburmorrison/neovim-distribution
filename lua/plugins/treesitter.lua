@@ -10,6 +10,7 @@ return {
         "cpp",
         "css",
         "dockerfile",
+        "fish",
         "gitignore",
         "html",
         "htmldjango",
