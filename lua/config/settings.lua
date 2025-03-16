@@ -82,6 +82,7 @@ vim.api.nvim_create_autocmd("FileType", {
 local large_indent_settings_languages = {
   "c",
   "cpp",
+  "fish",
   "just",
   "python",
   "rust",
