@@ -8,6 +8,13 @@ return {
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
       "echasnovski/mini.nvim",
+      {
+        "stevearc/dressing.nvim",
+        opts = {
+          select = { enabled = false, },
+          input = { enabled = false, },
+        },
+      },
     },
     build = "make",
     opts = {
