@@ -26,7 +26,10 @@ return {
       -- Manually activate `fish_lsp`
 
       local lspconfig = require("lspconfig")
-      lspconfig.fish_lsp.setup({})
+      lspconfig.fish_lsp.setup({
+        capabilities = capabilities,
+        handlers = handlers,
+      })
 
       -- Configure Mason
 
