@@ -23,10 +23,19 @@ return {
       -- LSP Configuration --
       -----------------------
 
+      local capabilities = require("blink.cmp").get_lsp_capabilities()
+      local lspconfig = require("lspconfig")
+
       -- Manually activate `fish_lsp`
 
-      local lspconfig = require("lspconfig")
       lspconfig.fish_lsp.setup({
+        capabilities = capabilities,
+        handlers = handlers,
+      })
+
+      -- Manually activate `nushell`
+
+      lspconfig.nushell.setup({
         capabilities = capabilities,
         handlers = handlers,
       })
@@ -63,7 +72,6 @@ return {
         border = border,
       }
 
-      local capabilities = require("blink.cmp").get_lsp_capabilities()
       require("mason-lspconfig").setup_handlers({
         function(server_name)
           require("lspconfig")[server_name].setup({
