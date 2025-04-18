@@ -5,6 +5,10 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
+if vim.g.vscode then
+  return
+end
+
 vim.opt.undofile = true
 vim.opt.expandtab = true
 vim.opt.tabstop = 2

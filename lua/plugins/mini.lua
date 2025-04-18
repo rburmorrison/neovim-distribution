@@ -1,3 +1,37 @@
+--[[
+This file configures plugins from the mini.nvim suite.
+
+Available in both VSCode and Neovim:
+- mini.align
+- mini.comment
+- mini.move
+- mini.operators
+- mini.jump2d
+- mini.surround
+- mini.splitjoin
+- mini.ai (with custom textobjects)
+- mini.indentscope
+
+Available only in Neovim:
+- mini.animate
+- mini.bufremove
+- mini.cursorword
+- mini.diff
+- mini.extra
+- mini.git
+- mini.icons
+- mini.pick
+- mini.statusline
+- mini.visits
+- mini.bracketed
+- mini.starter
+- mini.notify
+- mini.map
+- mini.files
+- mini.hipatterns
+- mini.clue
+--]]
+
 local header = [[
 ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
 ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
@@ -12,48 +46,76 @@ return {
     "echasnovski/mini.nvim",
     version = false,
     lazy = false,
-    keys = {
-      { "<leader>bd", function() MiniBufremove.delete() end,        desc = "Remove Buffer", },
-      { "<leader>fb", function() MiniPick.builtin.buffers() end,    desc = "Buffers", },
-      { "<leader>ff", function() MiniPick.builtin.files() end,      desc = "Find Files", },
-      { "<leader>fg", function() MiniPick.builtin.grep_live() end,  desc = "Live Grep", },
-      { "<leader>fh", function() MiniPick.builtin.help() end,       desc = "Help Tags", },
-      { "<leader>fr", function() MiniExtra.pickers.registers() end, desc = "Find Register", },
-      { "<leader>go", function() MiniDiff.toggle_overlay(0) end,    desc = "Git Diff Overlay", },
-      { "<leader>mf", function() MiniMap.toggle_focus() end,        desc = "Toggle Mini Map Focus", },
-      { "<leader>mo", function() MiniMap.toggle() end,              desc = "Toggle Mini Map", },
-      { "<leader>n",  function() MiniNotify.show_history() end,     desc = "Notification History", },
-      { "<leader>of", function() MiniFiles.open() end,              desc = "Mini Files", },
-    },
+    keys = function()
+      local keys = {}
+
+      if vim.g.vscode then
+        return keys
+      end
+
+      table.insert(keys, { "<leader>bd", function() MiniBufremove.delete() end,        desc = "Remove Buffer", })
+      table.insert(keys, { "<leader>fb", function() MiniPick.builtin.buffers() end,    desc = "Buffers", })
+      table.insert(keys, { "<leader>ff", function() MiniPick.builtin.files() end,      desc = "Find Files", })
+      table.insert(keys, { "<leader>fg", function() MiniPick.builtin.grep_live() end,  desc = "Live Grep", })
+      table.insert(keys, { "<leader>fh", function() MiniPick.builtin.help() end,       desc = "Help Tags", })
+      table.insert(keys, { "<leader>fr", function() MiniExtra.pickers.registers() end, desc = "Find Register", })
+      table.insert(keys, { "<leader>go", function() MiniDiff.toggle_overlay(0) end,    desc = "Git Diff Overlay", })
+      table.insert(keys, { "<leader>mf", function() MiniMap.toggle_focus() end,        desc = "Toggle Mini Map Focus", })
+      table.insert(keys, { "<leader>mo", function() MiniMap.toggle() end,              desc = "Toggle Mini Map", })
+      table.insert(keys, { "<leader>n",  function() MiniNotify.show_history() end,     desc = "Notification History", })
+      table.insert(keys, { "<leader>of", function() MiniFiles.open() end,              desc = "Mini Files", })
+
+      return keys
+    end,
     config = function()
       require("mini.align").setup()
+      require("mini.comment").setup()
+      require("mini.move").setup()
+      require("mini.operators").setup()
+      require("mini.jump2d").setup()
+      require("mini.surround").setup()
+      require("mini.splitjoin").setup()
+
+      -- Extra AI Textobjects
+      local gen_ai_spec = require("mini.extra").gen_ai_spec
+      require("mini.ai").setup({
+        custom_textobjects = {
+          B = gen_ai_spec.buffer(),
+          D = gen_ai_spec.diagnostic(),
+          I = gen_ai_spec.indent(),
+          L = gen_ai_spec.line(),
+          N = gen_ai_spec.number(),
+        },
+      })
+
+      -- Include border lines as scope and disable cursor-dependency
+      require("mini.indentscope").setup({
+        options = {
+          indent_at_cursor = false,
+          try_as_border = true,
+          symbol = "│",
+        },
+      })
+
+      -- End shared plugins.The rest are Neovim-only.
+      if vim.g.vscode then
+        return
+      end
+
       require("mini.animate").setup()
       require("mini.bufremove").setup()
-      require("mini.comment").setup()
       require("mini.cursorword").setup()
       require("mini.diff").setup()
       require("mini.extra").setup()
       require("mini.git").setup()
       require("mini.icons").setup()
-      require("mini.jump2d").setup()
-      require("mini.move").setup()
-      require("mini.operators").setup()
       require("mini.pick").setup()
-      require("mini.splitjoin").setup()
       require("mini.statusline").setup()
-      require("mini.surround").setup()
       require("mini.visits").setup()
 
       -- Round the diagnostic borders
       require("mini.bracketed").setup({
         diagnostic = { options = { float = { border = "rounded", }, }, },
-      })
-
-      -- Round the notification borders
-      require("mini.notify").setup({
-        window = {
-          config = { border = "rounded", },
-        },
       })
 
       -- Start screen configuration
@@ -70,12 +132,10 @@ return {
         footer = "",
       })
 
-      -- Include border lines as scope and disable cursor-dependency
-      require("mini.indentscope").setup({
-        options = {
-          indent_at_cursor = false,
-          try_as_border = true,
-          symbol = "│",
+      -- Round the notification borders
+      require("mini.notify").setup({
+        window = {
+          config = { border = "rounded", },
         },
       })
 
@@ -109,18 +169,6 @@ return {
           go_in_plus = "l",
           go_out = "H",
           go_out_plus = "h",
-        },
-      })
-
-      -- Extra AI Textobjects
-      local gen_ai_spec = require("mini.extra").gen_ai_spec
-      require("mini.ai").setup({
-        custom_textobjects = {
-          B = gen_ai_spec.buffer(),
-          D = gen_ai_spec.diagnostic(),
-          I = gen_ai_spec.indent(),
-          L = gen_ai_spec.line(),
-          N = gen_ai_spec.number(),
         },
       })
 
