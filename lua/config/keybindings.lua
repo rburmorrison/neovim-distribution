@@ -1,45 +1,57 @@
 if vim.g.vscode then
+  local vscode = require("vscode")
+
+  -------------------------
+  -- Copilot Keybindings --
+  -------------------------
+
+  vim.keymap.set({ "n", "v", }, "<leader>pi", function()
+    vscode.call("inlineChat.start")
+  end, { desc = "Inline Edit", })
+
+  vim.keymap.set("n", "<leader>po", function()
+    vscode.call("workbench.action.chat.openEditSession")
+  end, { desc = "Open Chat Edit Session", })
+
   ---------------------------------
   -- Language Server Keybindings --
   ---------------------------------
 
-  local vscode = require('vscode')
-
   vim.keymap.set("n", "<leader>ls", function()
-    vscode.call('workbench.action.gotoSymbol')
-  end, { desc = "Document Symbols" })
+    vscode.call("workbench.action.gotoSymbol")
+  end, { desc = "Document Symbols", })
 
   vim.keymap.set("n", "<leader>lS", function()
-    vscode.call('workbench.action.showAllSymbols')
-  end, { desc = "Workspace Symbols" })
+    vscode.call("workbench.action.showAllSymbols")
+  end, { desc = "Workspace Symbols", })
 
   vim.keymap.set("n", "<leader>li", function()
-    vscode.call('editor.action.goToImplementation')
-  end, { desc = "Implementations" })
+    vscode.call("editor.action.goToImplementation")
+  end, { desc = "Implementations", })
 
   vim.keymap.set("n", "<leader>lR", function()
-    vscode.call('editor.action.referenceSearch.trigger')
-  end, { desc = "References" })
+    vscode.call("editor.action.referenceSearch.trigger")
+  end, { desc = "References", })
 
   vim.keymap.set("n", "<leader>la", function()
-    vscode.call('editor.action.quickFix')
-  end, { desc = "Code Action" })
+    vscode.call("editor.action.quickFix")
+  end, { desc = "Code Action", })
 
   vim.keymap.set("n", "<leader>lr", function()
-    vscode.call('editor.action.rename')
-  end, { desc = "Rename" })
+    vscode.call("editor.action.rename")
+  end, { desc = "Rename", })
 
   vim.keymap.set("n", "<leader>lf", function()
-    vscode.call('editor.action.formatDocument')
-  end, { desc = "Format" })
+    vscode.call("editor.action.formatDocument")
+  end, { desc = "Format", })
 
   vim.keymap.set("n", "<leader>ld", function()
-    vscode.call('workbench.action.problems.focus')
-  end, { desc = "Document Diagnostics" })
+    vscode.call("workbench.action.problems.focus")
+  end, { desc = "Document Diagnostics", })
 
   vim.keymap.set("n", "<leader>lD", function()
-    vscode.call('workbench.action.problems.focus')
-  end, { desc = "Workspace Diagnostics" })
+    vscode.call("workbench.action.problems.focus")
+  end, { desc = "Workspace Diagnostics", })
 else
   -------------------------
   -- General Keybindings --
