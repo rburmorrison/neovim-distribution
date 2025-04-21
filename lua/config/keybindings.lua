@@ -13,7 +13,7 @@ if vim.g.vscode then
     vscode.call("inlineChat.start")
   end, { desc = "Inline Edit", })
 
-  vim.keymap.set("n", "<leader>po", function()
+  vim.keymap.set({ "n", "v" }, "<leader>po", function()
     vscode.call("workbench.action.chat.openEditSession")
   end, { desc = "Open Chat Edit Session", })
 
