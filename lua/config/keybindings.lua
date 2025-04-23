@@ -4,7 +4,7 @@ if vim.g.vscode then
   -------------------------
   -- Copilot Keybindings --
   -------------------------
-  
+
   vim.keymap.set("n", "<leader>ff", function()
     vscode.call("workbench.action.quickOpen")
   end, { desc = "Quick Open", })
