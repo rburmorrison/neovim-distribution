@@ -1,6 +1,6 @@
 # Vim/Neovim Configuration
 
-**Note:** Last tested with Neovim v0.11.1.
+> **Note:** This configuration was last tested with **Neovim v0.11.1**.
 
 ## Overview
 
@@ -78,7 +78,7 @@ This configuration is also designed to work with the [VSCode Neovim extension](h
   - `mini.ai` (with custom textobjects)
   - `mini.indentscope`
 
-Other plugins and advanced UI features are only available when running in native Neovim. See `lua/plugins/mini.lua` for details on which modules are loaded in each environment.
+Other plugins and advanced UI features are only available when running in native Neovim. See the individual files under `lua/plugins/` for details on which plugins and modules are loaded in each environment.
 
 ---
 
