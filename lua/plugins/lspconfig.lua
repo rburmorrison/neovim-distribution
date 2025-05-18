@@ -18,8 +18,8 @@ return {
 
       "folke/lazydev.nvim",
 
-      { "mason-org/mason.nvim",           version = "^1.0.0", },
-      { "mason-org/mason-lspconfig.nvim", version = "^1.0.0", },
+      "mason-org/mason.nvim",
+      "mason-org/mason-lspconfig.nvim",
 
       "mrcjkb/rustaceanvim",
     },
@@ -28,25 +28,53 @@ return {
       -- LSP Configuration --
       -----------------------
 
+      require("lspconfig.ui.windows").default_options = {
+        border = border,
+      }
+
       local capabilities = require("blink.cmp").get_lsp_capabilities()
       local lspconfig = require("lspconfig")
 
       -- Manually activate `fish_lsp`
-
-      lspconfig.fish_lsp.setup({
+      vim.lsp.config("fish_lsp", {
         capabilities = capabilities,
         handlers = handlers,
       })
+      vim.lsp.enable("fish_lsp")
 
-      -- Manually activate `nushell`
-
-      lspconfig.nushell.setup({
+      -- Define configs for Mason-managed servers using vim.lsp.config()
+      vim.lsp.config("lua_ls", {
         capabilities = capabilities,
         handlers = handlers,
+        settings = {
+          Lua = {
+            diagnostics = { globals = { "vim", }, },
+          },
+        },
+      })
+      
+      vim.lsp.config("html", {
+        capabilities = capabilities,
+        filetypes = { "html", "htmldjango", },
+        handlers = handlers,
+      })
+
+      vim.lsp.config("basedpyright", {
+        capabilities = capabilities,
+        handlers = handlers,
+        on_attach = function(_, bufnr)
+          vim.lsp.inlay_hint.enable(true, { bufnr = bufnr, })
+        end,
+        settings = {
+          basedpyright = {
+            analysis = {
+              typeCheckingMode = "standard",
+            },
+          },
+        },
       })
 
       -- Configure Mason
-
       require("mason").setup({
         ui = { border = border, },
       })
@@ -67,60 +95,7 @@ return {
           "taplo",
           "ts_ls",
         },
-      })
-
-      ----------------------------
-      -- Automatic Server Setup --
-      ----------------------------
-
-      require("lspconfig.ui.windows").default_options = {
-        border = border,
-      }
-
-      require("mason-lspconfig").setup_handlers({
-        function(server_name)
-          require("lspconfig")[server_name].setup({
-            capabilities = capabilities,
-            handlers = handlers,
-          })
-        end,
-        ["lua_ls"] = function()
-          require("lspconfig").lua_ls.setup({
-            capabilities = capabilities,
-            handlers = handlers,
-            settings = {
-              Lua = {
-                diagnostics = { globals = { "vim", }, },
-              },
-            },
-          })
-        end,
-        ["rust_analyzer"] = function()
-          -- Disabled in favor of rustaceanvim.
-        end,
-        ["html"] = function()
-          require("lspconfig").html.setup({
-            capabilities = capabilities,
-            filetypes = { "html", "htmldjango", },
-            handlers = handlers,
-          })
-        end,
-        ["basedpyright"] = function()
-          require("lspconfig").basedpyright.setup({
-            capabilities = capabilities,
-            handlers = handlers,
-            on_attach = function(_, bufnr)
-              vim.lsp.inlay_hint.enable(true, { bufnr = bufnr, })
-            end,
-            settings = {
-              basedpyright = {
-                analysis = {
-                  typeCheckingMode = "standard",
-                },
-              },
-            },
-          })
-        end,
+        automatic_enable = true,
       })
     end,
   },
